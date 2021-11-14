@@ -4,12 +4,14 @@ import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import NProgress from 'nprogress';
 
-import './index.css';
-// import AppTest from './App';
-import reportWebVitals from './reportWebVitals';
 // import store from "src/redux/store";
 import Routes from "./routes";
 
+import "bootstrap/dist/css/bootstrap.min.css";
+import "nprogress/nprogress.css";
+import "react-notifications/lib/notifications.css";
+import "react-datepicker/dist/react-datepicker.css";
+import './styles/index.scss';
 
 NProgress.configure({ minimum: 1 });
 
@@ -37,4 +39,3 @@ ReactDOM.render(<App />, ROOT);
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals(console.log);

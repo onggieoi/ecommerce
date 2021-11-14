@@ -1,14 +1,16 @@
 import React, { lazy, Suspense, useEffect } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 
 import { HOME } from '../constants/pages';
-// import InLineLoader from "../components/InlineLoader";
 // import { useAppDispatch, useAppSelector } from "../hooks/redux";
 import LayoutRoute from "./LayoutRoute";
+import InlineLoader from "../components/InlineLoader";
+import ClientLayout from "src/components/layouts/ClientLayout";
+import Product from "src/features/product";
 // import Roles from "src/constants/roles";
 // import { me } from "src/containers/Authorize/reducer";
 
-const Home = lazy(() => import('../App'));
+const Home = lazy(() => import('../features/home'));
 // const User = lazy(() => import('../containers/User'));
 // const Asset = lazy(() => import('../containers/Asset'));
 // const Assignment = lazy(() => import('../containers/Assignment'));
@@ -18,7 +20,7 @@ const Home = lazy(() => import('../App'));
 // const NotFound = lazy(() => import("../containers/NotFound"));
 
 const SusspenseLoading = ({ children }) => (
-  <Suspense fallback={<div>Loading ...</div>}>
+  <Suspense fallback={InlineLoader}>
     {children}
   </Suspense>
 );
@@ -82,16 +84,23 @@ const ApplicationRoutes = () => {
 
   // return (<></>);
   return (
-    <Routes>
-      <Route path={HOME} element={
-        <SusspenseLoading>
-          <Home />
-        </SusspenseLoading>
-      }>
-      </Route>
-    </Routes >
-  )
+    <SusspenseLoading>
+      <Switch>
+        <LayoutRoute exact path={HOME}>
+          <ClientLayout>
+            <Home />
+          </ClientLayout>
+        </LayoutRoute>
 
+        <LayoutRoute exact path='/product'>
+          <ClientLayout>
+            <Product />
+          </ClientLayout>
+        </LayoutRoute>
+
+      </Switch>
+    </SusspenseLoading>
+  );
 };
 
 export default ApplicationRoutes;

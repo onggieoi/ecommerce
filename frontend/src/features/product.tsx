@@ -1,4 +1,6 @@
-import React from 'react'
+import React from 'react';
+// import 'jquery';
+// import '/asset'
 
 const Product = () => {
 

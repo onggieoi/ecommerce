@@ -1,0 +1,1122 @@
+[
+  {
+    "oldId": 1,
+    "title": "Banana",
+    "slug": "banana",
+    "unit": "8 pc(s)",
+    "price": 10,
+    "salePrice": 8,
+    "discountInPercent": 0,
+    "description": "A banana is an edible fruit – botanically a berry – produced by several kinds of large herbaceous flowering plants in the genus Musa. In some countries, bananas used for cooking may be called plantains distinguishing them from dessert bananas.",
+    "type": "grocery",
+    "image": "http://s3.amazonaws.com/redqteam.com/pickbazar/banana_thumb.png",
+    "gallery": [
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/banana.jpg"
+      },
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/banana.jpg"
+      },
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/banana.jpg"
+      },
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/banana.jpg"
+      }
+    ],
+    "categories": [
+      {
+        "oldId": 1,
+        "name": "Fruits Vegetables",
+        "slug": "fruits-and-vegetables",
+        "icon": "FruitsVegetable"
+      },
+      {
+        "oldId": 2,
+        "name": "Fruits",
+        "slug": "fruits-and-vegetables",
+        "icon": "FruitsVegetable"
+      }
+    ]
+  },
+  {
+    "oldId": 2,
+    "title": "Onions",
+    "slug": "onions",
+    "unit": "10 lb",
+    "price": 8,
+    "salePrice": 7,
+    "discountInPercent": 10,
+    "description": "The onion, also known as the bulb onion or common onion, is a vegetable that is the most widely cultivated species of the genus Allium. Its close relatives include the garlic, shallot, leek, chive, and Chinese onion.",
+    "type": "grocery",
+    "image": "http://s3.amazonaws.com/redqteam.com/pickbazar/onions_thumb.png",
+    "gallery": [
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/onions.jpg"
+      },
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/onions.jpg"
+      },
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/onions.jpg"
+      },
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/onions.jpg"
+      }
+    ],
+    "categories": [
+      {
+        "oldId": 1,
+        "name": "Fruits Vegetables",
+        "slug": "fruits-and-vegetables",
+        "icon": "FruitsVegetable"
+      },
+      {
+        "oldId": 3,
+        "name": "Vegetables",
+        "slug": "fruits-and-vegetables",
+        "icon": "FruitsVegetable"
+      }
+    ]
+  },
+  {
+    "oldId": 3,
+    "title": "Blue Grapes",
+    "slug": "blue-grapes",
+    "unit": "10 lb",
+    "price": 12,
+    "salePrice": 10,
+    "discountInPercent": 10,
+    "description": "he Concord grape is a cultivar derived from the grape species Vitis labrusca (also called fox grape) that are used as table grapes, wine grapes and juice grapes. ... The skin of a Concord grape is typically dark blue or purple, and often is covered with a lighter-coloured epicuticular wax bloom that can be rubbed off.",
+    "type": "grocery",
+    "image": "http://s3.amazonaws.com/redqteam.com/pickbazar/blue_grapes_thumb.png",
+    "gallery": [
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/blue_grapes.jpg"
+      },
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/blue_grapes.jpg"
+      },
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/blue_grapes.jpg"
+      },
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/blue_grapes.jpg"
+      }
+    ],
+    "categories": [
+      {
+        "oldId": 1,
+        "name": "Fruits Vegetables",
+        "slug": "fruits-and-vegetables",
+        "icon": "FruitsVegetable"
+      },
+      {
+        "oldId": 2,
+        "name": "Fruits",
+        "slug": "fruits-and-vegetables",
+        "icon": "FruitsVegetable"
+      }
+    ]
+  },
+  {
+    "oldId": 4,
+    "title": "Coconut",
+    "slug": "coconut",
+    "unit": "1 pc(s)",
+    "price": 8,
+    "salePrice": 0,
+    "discountInPercent": 0,
+    "description": "The coconut tree is a member of the palm tree family and the only known living species of the genus Cocos. The term coconut can refer to the whole coconut palm, the seed, or the fruit, which botanically is a drupe, not a nut.",
+    "type": "grocery",
+    "image": "http://s3.amazonaws.com/redqteam.com/pickbazar/cocnut_thumb.png",
+    "gallery": [
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/cocnut.jpg"
+      },
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/cocnut.jpg"
+      },
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/cocnut.jpg"
+      },
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/cocnut.jpg"
+      }
+    ],
+    "categories": [
+      {
+        "oldId": 1,
+        "name": "Fruits Vegetables",
+        "slug": "fruits-and-vegetables",
+        "icon": "FruitsVegetable"
+      },
+      {
+        "oldId": 2,
+        "name": "Fruits",
+        "slug": "fruits-and-vegetables",
+        "icon": "FruitsVegetable"
+      }
+    ]
+  },
+  {
+    "oldId": 5,
+    "title": "Garlic",
+    "slug": "garlic",
+    "unit": "15 lb",
+    "price": 5,
+    "salePrice": 4,
+    "discountInPercent": 25,
+    "description": "Garlic is a species in the onion genus, Allium. Its close relatives include the onion, shallot, leek, chive, and Chinese onion. Garlic is native to Central Asia and northeastern Iran, and has long been a common seasoning worldwide, with a history of several thousand years of human consumption and use.",
+    "type": "grocery",
+    "image": "http://s3.amazonaws.com/redqteam.com/pickbazar/garlic_thumb.png",
+    "gallery": [
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/garlic.jpg"
+      },
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/garlic.jpg"
+      },
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/garlic.jpg"
+      },
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/garlic.jpg"
+      }
+    ],
+    "categories": [
+      {
+        "oldId": 1,
+        "name": "Fruits Vegetables",
+        "slug": "fruits-and-vegetables",
+        "icon": "FruitsVegetable"
+      },
+      {
+        "oldId": 3,
+        "name": "Vegetables",
+        "slug": "fruits-and-vegetables",
+        "icon": "FruitsVegetable"
+      }
+    ]
+  },
+  {
+    "oldId": 6,
+    "title": "Green Apple",
+    "slug": "green-apple",
+    "unit": "20 lb",
+    "price": 11,
+    "salePrice": 8,
+    "discountInPercent": 20,
+    "description": "An apple is a sweet, edible fruit produced by an apple tree (Malus domestica). Apple trees are ... The skin of ripe apples is generally red, yellow, green, pink, or russetted, though many bi- or tri-colored cultivars may be found. ",
+    "type": "grocery",
+    "image": "http://s3.amazonaws.com/redqteam.com/pickbazar/Green_Apple_thumb.png",
+    "gallery": [
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/Green_Apple.jpg"
+      },
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/Green_Apple.jpg"
+      },
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/Green_Apple.jpg"
+      },
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/Green_Apple.jpg"
+      }
+    ],
+    "categories": [
+      {
+        "oldId": 1,
+        "name": "Fruits Vegetables",
+        "slug": "fruits-and-vegetables",
+        "icon": "FruitsVegetable"
+      },
+      {
+        "oldId": 2,
+        "name": "Fruits",
+        "slug": "fruits-and-vegetables",
+        "icon": "FruitsVegetable"
+      }
+    ]
+  },
+  {
+    "oldId": 7,
+    "title": "Guava",
+    "slug": "guava",
+    "unit": "20 lb",
+    "price": 18,
+    "salePrice": 16,
+    "discountInPercent": 10,
+    "description": "Guava is a common tropical fruit cultivated in many tropical and subtropical regions. Psidium guajava is a small tree in the myrtle family, native to Mexico, Central America, the Caribbean and northern South America. ",
+    "type": "grocery",
+    "image": "http://s3.amazonaws.com/redqteam.com/pickbazar/guava_thumb.png",
+    "gallery": [
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/guava.jpg"
+      },
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/guava.jpg"
+      },
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/guava.jpg"
+      },
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/guava.jpg"
+      }
+    ],
+    "categories": [
+      {
+        "oldId": 1,
+        "name": "Fruits Vegetables",
+        "slug": "fruits-and-vegetables",
+        "icon": "FruitsVegetable"
+      },
+      {
+        "oldId": 2,
+        "name": "Fruits",
+        "slug": "fruits-and-vegetables",
+        "icon": "FruitsVegetable"
+      }
+    ]
+  },
+  {
+    "oldId": 8,
+    "title": "Lemon",
+    "slug": "lemon",
+    "unit": "4 pc(s)",
+    "price": 15,
+    "salePrice": 12,
+    "discountInPercent": 20,
+    "description": "The lemon, Citrus limon Osbeck, is a species of small evergreen tree in the flowering plant family Rutaceae, native to South Asia, primarily North eastern India.",
+    "type": "grocery",
+    "image": "http://s3.amazonaws.com/redqteam.com/pickbazar/lemon_thumb.png",
+    "gallery": [
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/lemon.jpg"
+      },
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/lemon.jpg"
+      },
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/lemon.jpg"
+      },
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/lemon.jpg"
+      }
+    ],
+    "categories": [
+      {
+        "oldId": 1,
+        "name": "Fruits Vegetables",
+        "slug": "fruits-and-vegetables",
+        "icon": "FruitsVegetable"
+      },
+      {
+        "oldId": 3,
+        "name": "Vegetables",
+        "slug": "fruits-and-vegetables",
+        "icon": "FruitsVegetable"
+      }
+    ]
+  },
+  {
+    "oldId": 9,
+    "title": "Oranges",
+    "slug": "oranges",
+    "unit": "20 lb",
+    "price": 20,
+    "salePrice": 0,
+    "discountInPercent": 0,
+    "description": "The orange is the fruit of the citrus species Citrus × sinensis in the family Rutaceae. It is also called sweet orange, to distinguish it from the related Citrus × aurantium, referred to as bitter orange. The sweet orange reproduces asexually; varieties of sweet orange arise through mutations.",
+    "type": "grocery",
+    "image": "http://s3.amazonaws.com/redqteam.com/pickbazar/oranges_thumb.png",
+    "gallery": [
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/oranges.jpg"
+      },
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/oranges.jpg"
+      },
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/oranges.jpg"
+      },
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/oranges.jpg"
+      }
+    ],
+    "categories": [
+      {
+        "oldId": 1,
+        "name": "Fruits Vegetables",
+        "slug": "fruits-and-vegetables",
+        "icon": "FruitsVegetable"
+      },
+      {
+        "oldId": 2,
+        "name": "Fruits",
+        "slug": "fruits-and-vegetables",
+        "icon": "FruitsVegetablefruits"
+      }
+    ]
+  },
+  {
+    "oldId": 10,
+    "title": "Pepper",
+    "slug": "pepper",
+    "unit": "15 lb",
+    "price": 10,
+    "salePrice": 8,
+    "discountInPercent": 20,
+    "description": "Black pepper is a flowering vine in the family Piperaceae, cultivated for its fruit, known as a peppercorn, which is usually dried and used as a spice and seasoning. When fresh and fully mature, it is about 5 mm in diameter and dark red, and contains a single seed, like all drupes",
+    "type": "grocery",
+    "image": "http://s3.amazonaws.com/redqteam.com/pickbazar/pepper_thumb.png",
+    "gallery": [
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/pepper.jpg"
+      },
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/pepper.jpg"
+      },
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/pepper.jpg"
+      },
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/pepper.jpg"
+      }
+    ],
+    "categories": [
+      {
+        "oldId": 1,
+        "name": "Fruits Vegetables",
+        "slug": "fruits-and-vegetables",
+        "icon": "FruitsVegetablefruits-and-vegetables"
+      },
+      {
+        "oldId": 3,
+        "name": "Vegetables",
+        "slug": "fruits-and-vegetables",
+        "icon": "FruitsVegetablevegetables"
+      }
+    ]
+  },
+  {
+    "oldId": 11,
+    "title": "Pineapple",
+    "slug": "pineapple",
+    "unit": "1 pc(s)",
+    "price": 25,
+    "salePrice": 20,
+    "discountInPercent": 20,
+    "description": "The pineapple is a tropical plant with an edible fruit, also called pineapples, and the most economically significant plant in the family Bromeliaceae. Pineapples may be cultivated from the offset produced at the top of the fruit, possibly flowering in five to ten months and fruiting in the following six months",
+    "type": "grocery",
+    "image": "http://s3.amazonaws.com/redqteam.com/pickbazar/apineapple_thumb.png",
+    "gallery": [
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/pineapple.jpg"
+      },
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/pineapple.jpg"
+      },
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/pineapple.jpg"
+      },
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/pineapple.jpg"
+      }
+    ],
+    "categories": [
+      {
+        "oldId": 1,
+        "name": "Fruits Vegetables",
+        "slug": "fruits-and-vegetables",
+        "icon": "FruitsVegetablefruits-and-vegetables"
+      },
+      {
+        "oldId": 2,
+        "name": "Fruits",
+        "slug": "fruits-and-vegetables",
+        "icon": "FruitsVegetablefruits"
+      }
+    ]
+  },
+  {
+    "oldId": 12,
+    "title": "Pomegranate",
+    "slug": "pomegranate",
+    "unit": "20 lb",
+    "price": 30,
+    "salePrice": 21,
+    "discountInPercent": 30,
+    "description": "The pomegranate is a fruit-bearing deciduous shrub in the family Lythraceae, subfamily Punicoideae, that grows between 5 and 10 m tall. The fruit is typically in season in the Northern Hemisphere from September to February, and in the Southern Hemisphere from March to May.",
+    "type": "grocery",
+    "image": "http://s3.amazonaws.com/redqteam.com/pickbazar/pomegranate_thumb.png",
+    "gallery": [
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/pomegranate.jpg"
+      },
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/pomegranate.jpg"
+      },
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/pomegranate.jpg"
+      },
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/pomegranate.jpg"
+      }
+    ],
+    "categories": [
+      {
+        "oldId": 1,
+        "name": "Fruits Vegetables",
+        "slug": "fruits-and-vegetables",
+        "icon": "FruitsVegetablefruits-and-vegetables"
+      },
+      {
+        "oldId": 2,
+        "name": "Fruits",
+        "slug": "fruits-and-vegetables",
+        "icon": "FruitsVegetablefruits"
+      }
+    ]
+  },
+  {
+    "oldId": 13,
+    "title": "Red Apple",
+    "slug": "red-apple",
+    "unit": "10 lb",
+    "price": 30,
+    "salePrice": 0,
+    "discountInPercent": 0,
+    "description": "An apple is a sweet, edible fruit produced by an apple tree. Apple trees are cultivated worldwide and are the most widely grown species in the genus Malus. The tree originated in Central Asia, where its wild ancestor, Malus sieversii, is still found today. ",
+    "type": "grocery",
+    "image": "http://s3.amazonaws.com/redqteam.com/pickbazar/red_apple_thumb.png",
+    "gallery": [
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/red_apple.jpg"
+      },
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/red_apple.jpg"
+      },
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/red_apple.jpg"
+      },
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/red_apple.jpg"
+      }
+    ],
+    "categories": [
+      {
+        "oldId": 1,
+        "name": "Fruits Vegetables",
+        "slug": "fruits-and-vegetables",
+        "icon": "FruitsVegetablefruits-and-vegetables"
+      },
+      {
+        "oldId": 2,
+        "name": "Fruits",
+        "slug": "fruits-and-vegetables",
+        "icon": "FruitsVegetablefruits"
+      }
+    ]
+  },
+  {
+    "oldId": 14,
+    "title": "Red Grapes",
+    "slug": "red-grapes",
+    "unit": "10 lb",
+    "price": 10,
+    "salePrice": 8,
+    "discountInPercent": 20,
+    "description": "A grape is a fruit, botanically a berry, of the deciduous woody vines of the flowering plant genus Vitis. Grapes can be eaten fresh as table grapes or they can be used for making wine, jam, juice, jelly, grape seed extract, raisins, vinegar, and grape seed oil.",
+    "type": "grocery",
+    "image": "http://s3.amazonaws.com/redqteam.com/pickbazar/red_grapes_thumb.png",
+    "gallery": [
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/red_grapes.jpg"
+      },
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/red_grapes.jpg"
+      },
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/red_grapes.jpg"
+      },
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/red_grapes.jpg"
+      }
+    ],
+    "categories": [
+      {
+        "oldId": 1,
+        "name": "Fruits Vegetables",
+        "slug": "fruits-and-vegetables",
+        "icon": "FruitsVegetablefruits-and-vegetables"
+      },
+      {
+        "oldId": 2,
+        "name": "Fruits",
+        "slug": "fruits-and-vegetables",
+        "icon": "FruitsVegetablefruits"
+      }
+    ]
+  },
+  {
+    "oldId": 15,
+    "title": "Strawberry",
+    "slug": "strawbery",
+    "unit": "10 lb",
+    "price": 40,
+    "salePrice": 20,
+    "discountInPercent": 50,
+    "description": "The garden strawberry is a widely grown hybrid species of the genus Fragaria, collectively known as the strawberries, which are cultivated worldwide for their fruit. The fruit is widely appreciated for its characteristic aroma, bright red color, juicy texture, and sweetness.",
+    "type": "grocery",
+    "image": "http://s3.amazonaws.com/redqteam.com/pickbazar/strawberry_thumb.png",
+    "gallery": [
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/strawberry.jpg"
+      },
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/strawberry.jpg"
+      },
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/strawberry.jpg"
+      },
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/strawberry.jpg"
+      }
+    ],
+    "categories": [
+      {
+        "oldId": 1,
+        "name": "Fruits Vegetables",
+        "slug": "fruits-and-vegetables",
+        "icon": "FruitsVegetablefruits-and-vegetables"
+      },
+      {
+        "oldId": 2,
+        "name": "Fruits",
+        "slug": "fruits-and-vegetables",
+        "icon": "FruitsVegetablefruits"
+      }
+    ]
+  },
+  {
+    "oldId": 16,
+    "title": "Tomatoes",
+    "slug": "tomatoes",
+    "unit": "10 lb",
+    "price": 5,
+    "salePrice": 0,
+    "discountInPercent": 0,
+    "description": "The tomato is the edible, often red, berry of the plant Solanum lycopersicum, commonly known as a tomato plant. The species originated in western South America. The Nahuatl word tomatl gave rise to the Spanish word tomate, from which the English word tomato derived.",
+    "type": "grocery",
+    "image": "http://s3.amazonaws.com/redqteam.com/pickbazar/tomatoes_thumb.png",
+    "gallery": [
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/tomatoes.jpg"
+      },
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/tomatoes.jpg"
+      },
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/tomatoes.jpg"
+      },
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/tomatoes.jpg"
+      }
+    ],
+    "categories": [
+      {
+        "oldId": 1,
+        "name": "Fruits Vegetables",
+        "slug": "fruits-and-vegetables",
+        "icon": "FruitsVegetablefruits-and-vegetables"
+      },
+      {
+        "oldId": 3,
+        "name": "Vegetables",
+        "slug": "fruits-and-vegetables",
+        "icon": "FruitsVegetablevegetables"
+      }
+    ]
+  },
+  {
+    "oldId": 17,
+    "title": "Watermelon",
+    "slug": "watermelon",
+    "unit": "10 lb",
+    "price": 30,
+    "salePrice": 24,
+    "discountInPercent": 20,
+    "description": "Citrullus lanatus is a plant species in the family Cucurbitaceae, a vine-like flowering plant originating in West Africa. It is cultivated for its fruit.",
+    "type": "grocery",
+    "image": "http://s3.amazonaws.com/redqteam.com/pickbazar/watermelon.jpg",
+    "gallery": [
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/watermelon.jpg"
+      },
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/watermelon.jpg"
+      },
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/watermelon.jpg"
+      },
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/watermelon.jpg"
+      }
+    ],
+    "categories": [
+      {
+        "oldId": 1,
+        "name": "Fruits Vegetables",
+        "slug": "fruits-and-vegetables",
+        "icon": "FruitsVegetablefruits-and-vegetables"
+      },
+      {
+        "oldId": 2,
+        "name": "Fruits",
+        "slug": "fruits-and-vegetables",
+        "icon": "FruitsVegetablefruits"
+      }
+    ]
+  },
+  {
+    "oldId": 18,
+    "title": "Sardine",
+    "slug": "sardine",
+    "unit": "1 pc(s)",
+    "price": 25,
+    "salePrice": 22,
+    "discountInPercent": 10,
+    "description": "Sardine and pilchard are common names used to refer to various small, oily fish in the herring family Clupeidae. The term sardine was first used in English during the early 15th century and may come from the Mediterranean island of Sardinia, around which sardines were once abundant",
+    "type": "grocery",
+    "image": "http://s3.amazonaws.com/redqteam.com/pickbazar/sardine.jpg",
+    "gallery": [
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/sardine.jpg"
+      },
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/sardine.jpg"
+      },
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/sardine.jpg"
+      },
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/sardine.jpg"
+      }
+    ],
+    "categories": [
+      {
+        "oldId": 9,
+        "name": "Meat Fish",
+        "slug": "fruits-and-vegetables",
+        "icon": "FruitsVegetablemeat-and-fish"
+      },
+      {
+        "oldId": 10,
+        "name": "Frozen Fish",
+        "slug": "fruits-and-vegetables",
+        "icon": "FruitsVegetablefrozen-fish"
+      }
+    ]
+  },
+  {
+    "oldId": 19,
+    "title": "Salmon",
+    "slug": "salmon",
+    "unit": "1 pc(s)",
+    "price": 35,
+    "salePrice": 0,
+    "discountInPercent": 0,
+    "description": "Salmon is the common name for several species of ray-finned fish in the family Salmonidae. Other fish in the same family include trout, char, grayling and whitefish. Salmon are native to tributaries of the North Atlantic and Pacific Ocean",
+    "type": "grocery",
+    "image": "http://s3.amazonaws.com/redqteam.com/pickbazar/snapper.jpg",
+    "gallery": [
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/snapper.jpg"
+      },
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/snapper.jpg"
+      },
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/snapper.jpg"
+      },
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/snapper.jpg"
+      }
+    ],
+    "categories": [
+      {
+        "oldId": 9,
+        "name": "Meat Fish",
+        "slug": "fruits-and-vegetables",
+        "icon": "FruitsVegetablemeat-and-fish"
+      },
+      {
+        "oldId": 10,
+        "name": "Frozen Fish",
+        "slug": "fruits-and-vegetables",
+        "icon": "FruitsVegetablefrozen-fish"
+      }
+    ]
+  },
+  {
+    "oldId": 20,
+    "title": "Tuna",
+    "slug": "tuna",
+    "unit": "1 pc(s)",
+    "price": 15,
+    "salePrice": 12,
+    "discountInPercent": 20,
+    "description": "A tuna is a saltwater fish that belongs to the tribe Thunnini, a subgrouping of the Scombridae family. The Thunnini comprise 15 species across five genera, the sizes of which vary greatly, ranging from the bullet tuna up to the Atlantic bluefin tuna. The bluefin averages 2 m, and is believed to live up to 50 years.",
+    "type": "grocery",
+    "image": "http://s3.amazonaws.com/redqteam.com/pickbazar/tuna.jpg",
+    "gallery": [
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/tuna.jpg"
+      },
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/tuna.jpg"
+      },
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/tuna.jpg"
+      },
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/tuna.jpg"
+      }
+    ],
+    "categories": [
+      {
+        "oldId": 9,
+        "name": "Meat Fish",
+        "slug": "fruits-and-vegetables",
+        "icon": "FruitsVegetablemeat-and-fish"
+      },
+      {
+        "oldId": 10,
+        "name": "Frozen Fish",
+        "slug": "fruits-and-vegetables",
+        "icon": "FruitsVegetablefrozen-fish"
+      }
+    ]
+  },
+  {
+    "oldId": 21,
+    "title": "Cod",
+    "slug": "cod",
+    "unit": "1 pc(s)",
+    "price": 20,
+    "salePrice": 0,
+    "discountInPercent": 0,
+    "description": "Cod is the common name for the demersal fish genus Gadus, belonging to the family Gadidae. Cod is also used as part of the common name for a number of other fish species, and some species suggested to belong to genus Gadus are not called cod.",
+    "type": "grocery",
+    "image": "http://s3.amazonaws.com/redqteam.com/pickbazar/cod.jpg",
+    "gallery": [
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/cod.jpg"
+      },
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/cod.jpg"
+      },
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/cod.jpg"
+      },
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/cod.jpg"
+      }
+    ],
+    "categories": [
+      {
+        "oldId": 9,
+        "name": "Meat Fish",
+        "slug": "fruits-and-vegetables",
+        "icon": "FruitsVegetablemeat-and-fish"
+      },
+      {
+        "oldId": 10,
+        "name": "Frozen Fish",
+        "slug": "fruits-and-vegetables",
+        "icon": "FruitsVegetablefrozen-fish"
+      }
+    ]
+  },
+  {
+    "oldId": 22,
+    "title": "Trout",
+    "slug": "trout",
+    "unit": "1 pc(s)",
+    "price": 30,
+    "salePrice": 0,
+    "discountInPercent": 0,
+    "description": "Trout is the common name for a number of species of freshwater fish belonging to the genera Oncorhynchus, Salmo and Salvelinus, all of the subfamily Salmoninae of the family Salmonidae.",
+    "type": "grocery",
+    "image": "http://s3.amazonaws.com/redqteam.com/pickbazar/trout.jpg",
+    "gallery": [
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/cod.jpg"
+      },
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/cod.jpg"
+      },
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/cod.jpg"
+      },
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/cod.jpg"
+      }
+    ],
+    "categories": [
+      {
+        "oldId": 9,
+        "name": "Meat Fish",
+        "slug": "fruits-and-vegetables",
+        "icon": "FruitsVegetablemeat-and-fish"
+      },
+      {
+        "oldId": 11,
+        "name": "Dried Fish",
+        "slug": "fruits-and-vegetables",
+        "icon": "FruitsVegetabledried-fish"
+      }
+    ]
+  },
+  {
+    "oldId": 23,
+    "title": "Snapper",
+    "slug": "snapper",
+    "unit": "1 pc(s)",
+    "price": 40,
+    "salePrice": 0,
+    "discountInPercent": 0,
+    "description": "The northern red snapper is a species of snapper native to the western Atlantic Ocean including the Gulf of Mexico, where it inhabits environments associated with reefs. This species is commercially important and is also sought-after as a game fish.",
+    "type": "grocery",
+    "image": "http://s3.amazonaws.com/redqteam.com/pickbazar/snapper.jpg",
+    "gallery": [
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/snapper.jpg"
+      },
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/snapper.jpg"
+      },
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/snapper.jpg"
+      },
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/snapper.jpg"
+      }
+    ],
+    "categories": [
+      {
+        "oldId": 9,
+        "name": "Meat Fish",
+        "slug": "fruits-and-vegetables",
+        "icon": "FruitsVegetablemeat-and-fish"
+      },
+      {
+        "oldId": 11,
+        "name": "Dried Fish",
+        "slug": "fruits-and-vegetables",
+        "icon": "FruitsVegetabledried-fish"
+      }
+    ]
+  },
+  {
+    "oldId": 24,
+    "title": "Tilapia",
+    "slug": "tilapia",
+    "unit": "1 pc(s)",
+    "price": 45,
+    "salePrice": 36,
+    "discountInPercent": 20,
+    "description": "Tilapia is the common name for nearly a hundred species of cichlid fish from the tilapiine cichlid tribe. Tilapia are mainly freshwater fish inhabiting shallow streams, ponds, rivers, and lakes, and less commonly found living in brackish water.",
+    "type": "grocery",
+    "image": "http://s3.amazonaws.com/redqteam.com/pickbazar/talapia.jpg",
+    "gallery": [
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/talapia.jpg"
+      },
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/talapia.jpg"
+      },
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/talapia.jpg"
+      },
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/talapia.jpg"
+      }
+    ],
+    "categories": [
+      {
+        "oldId": 9,
+        "name": "Meat Fish",
+        "slug": "fruits-and-vegetables",
+        "icon": "FruitsVegetablemeat-and-fish"
+      },
+      {
+        "oldId": 11,
+        "name": "Dried Fish",
+        "slug": "fruits-and-vegetables",
+        "icon": "FruitsVegetabledried-fish"
+      }
+    ]
+  },
+  {
+    "oldId": 25,
+    "title": "Perch",
+    "slug": "perch",
+    "unit": "1 pc(s)",
+    "price": 40,
+    "salePrice": 0,
+    "discountInPercent": 0,
+    "description": "Perch is a common name for fish of the genus Perca, freshwater gamefish belonging to the family Percidae.",
+    "type": "grocery",
+    "image": "http://s3.amazonaws.com/redqteam.com/pickbazar/perch.jpg",
+    "gallery": [
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/perch.jpg"
+      },
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/perch.jpg"
+      },
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/perch.jpg"
+      },
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/perch.jpg"
+      }
+    ],
+    "categories": [
+      {
+        "oldId": 9,
+        "name": "Meat Fish",
+        "slug": "fruits-and-vegetables",
+        "icon": "FruitsVegetablemeat-and-fish"
+      },
+      {
+        "oldId": 11,
+        "name": "Dried Fish",
+        "slug": "fruits-and-vegetables",
+        "icon": "FruitsVegetabledried-fish"
+      }
+    ]
+  },
+  {
+    "oldId": 26,
+    "title": "Haddock",
+    "slug": "haddock",
+    "unit": "1 pc(s)",
+    "price": 40,
+    "salePrice": 36,
+    "discountInPercent": 10,
+    "description": "The haddock is a saltwater fish from the family Gadidae, the true cods, it is the only species in the monotypic genus Melanogrammus. It is found in the North Atlantic Ocean and associated seas where it is an important species for fisheries, especially in northern Europe.",
+    "type": "grocery",
+    "image": "http://s3.amazonaws.com/redqteam.com/pickbazar/haddock.jpg",
+    "gallery": [
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/haddock.jpg"
+      },
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/haddock.jpg"
+      },
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/haddock.jpg"
+      },
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/haddock.jpg"
+      }
+    ],
+    "categories": [
+      {
+        "oldId": 9,
+        "name": "Meat Fish",
+        "slug": "fruits-and-vegetables",
+        "icon": "FruitsVegetablemeat-and-fish"
+      },
+      {
+        "oldId": 12,
+        "name": "Fresh Fish",
+        "slug": "fruits-and-vegetables",
+        "icon": "FruitsVegetablefresh-fish"
+      }
+    ]
+  },
+  {
+    "oldId": 27,
+    "title": "Carp",
+    "slug": "carp",
+    "unit": "1 pc(s)",
+    "price": 20,
+    "salePrice": 18,
+    "discountInPercent": 5,
+    "description": "Carp are various species of oily freshwater fish from the family Cyprinidae, a very large group of fish native to Europe and Asia.",
+    "type": "grocery",
+    "image": "http://s3.amazonaws.com/redqteam.com/pickbazar/carp.jpg",
+    "gallery": [
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/carp.jpg"
+      },
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/carp.jpg"
+      },
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/carp.jpg"
+      },
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/carp.jpg"
+      }
+    ],
+    "categories": [
+      {
+        "oldId": 9,
+        "name": "Meat Fish",
+        "slug": "fruits-and-vegetables",
+        "icon": "FruitsVegetablemeat-and-fish"
+      },
+      {
+        "oldId": 12,
+        "name": "Fresh Fish",
+        "slug": "fruits-and-vegetables",
+        "icon": "FruitsVegetablefresh-fish"
+      }
+    ]
+  },
+  {
+    "oldId": 28,
+    "title": "Mackerel",
+    "slug": "mackerel",
+    "unit": "1 pc(s)",
+    "price": 35,
+    "salePrice": 0,
+    "discountInPercent": 0,
+    "description": "Mackerel is a common name applied to a number of different species of pelagic fish, mostly from the family Scombridae. They are found in both temperate and tropical seas, mostly living along the coast or offshore in the oceanic environment.",
+    "type": "grocery",
+    "image": "http://s3.amazonaws.com/redqteam.com/pickbazar/Mackerel.jpg",
+    "gallery": [
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/Mackerel.jpg"
+      },
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/Mackerel.jpg"
+      },
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/Mackerel.jpg"
+      },
+      {
+        "url": "http://s3.amazonaws.com/redqteam.com/pickbazar/Mackerel.jpg"
+      }
+    ],
+    "categories": [
+      {
+        "oldId": 9,
+        "name": "Meat Fish",
+        "slug": "fruits-and-vegetables",
+        "icon": "FruitsVegetablemeat-and-fish"
+      },
+      {
+        "oldId": 12,
+        "name": "Fresh Fish",
+        "slug": "fruits-and-vegetables",
+        "icon": "FruitsVegetablefresh-fish"
+      }
+    ]
+  }
+]

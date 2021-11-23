@@ -1,25 +1,49 @@
-var builder = WebApplication.CreateBuilder(args);
+using backend.ApplicationBuilders;
+using backend.Middlewares;
+using backend.ServiceConllection;
+using Serilog;
+using Serilog.Events;
+using Serilog.Sinks.SystemConsole.Themes;
 
-// Add services to the container.
+Log.Logger = new LoggerConfiguration()
+    .MinimumLevel.Debug()
+    .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
+    .MinimumLevel.Override("Microsoft.Hosting.Lifetime", LogEventLevel.Information)
+    .MinimumLevel.Override("System", LogEventLevel.Warning)
+    .MinimumLevel.Override("Microsoft.AspNetCore.Authentication", LogEventLevel.Information)
+    .Enrich.FromLogContext()
+    // uncomment to write to Azure diagnostics stream
+    .WriteTo.File(
+       @"D:\home\LogFiles\Application\identityserver.txt",
+       fileSizeLimitBytes: 1_000_000,
+       rollOnFileSizeLimit: true,
+       shared: true,
+       flushToDiskInterval: TimeSpan.FromSeconds(1))
+    .WriteTo.Console(
+        outputTemplate: "[{Timestamp} {Level}] {SourceContext}{NewLine}{Message:lj}{NewLine}{Exception}{NewLine}",
+        theme: AnsiConsoleTheme.Code)
+    .CreateLogger();
 
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
-var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+try
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+  Log.Information("Starting host...");
+
+  var builder = WebApplication.CreateBuilder(args);
+  var config = builder.Configuration;
+  builder.Services.AddServices(config);
+
+  var app = builder.Build();
+
+  // Configure the HTTP request pipeline.
+  app.UseMiddleware<ErrorHandler>();
+
+  app.UseApplicationBuilder(app.Environment.IsDevelopment());
+
+  app.MapControllers();
+
+  await app.RunAsync();
 }
-
-app.UseHttpsRedirection();
-
-app.UseAuthorization();
-
-app.MapControllers();
-
-app.Run();
+catch (Exception ex)
+{
+  Log.Fatal(ex, "Host terminated unexpectedly.");
+}

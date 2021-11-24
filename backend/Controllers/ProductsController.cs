@@ -18,7 +18,7 @@ public class ProductsController : BaseApiController<ProductsController>
   }
 
   [HttpGet]
-  [Authorize]
+  // [Authorize]
   public async Task<ActionResult> GetProducts([FromQuery] ProductQuery query)
   {
     var products = await _productService.GetProductsAsync(query);

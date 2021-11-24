@@ -20,6 +20,7 @@ import localEs from 'data/translation/es.json';
 import localDe from 'data/translation/de.json';
 import localCn from 'data/translation/zh.json';
 import localIl from 'data/translation/he.json';
+import localVi from 'data/translation/vi.json';
 
 // External CSS import here
 import 'rc-table/assets/index.css';
@@ -40,6 +41,7 @@ const messages = {
   de: localDe,
   zh: localCn,
   he: localIl,
+  vi: localVi,
 };
 
 export default function ExtendedApp({

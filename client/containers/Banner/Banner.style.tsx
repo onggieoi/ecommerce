@@ -12,6 +12,7 @@ const BannerWrapper = styled.div`
   background-repeat: no-repeat;
   background-color: #f7f7f7;
   background-size: cover;
+  background-position: bottom;
 
   @media (max-width: 1400px) {
     min-height: 100vh;
@@ -53,7 +54,7 @@ const BannerHeading = styled('h1')`
   font-family: ${themeGet('fontFamily.1', 'sans-serif')};
   font-size: ${themeGet('fontSizes.6', '45')}px;
   font-weight: 700;
-  color: ${themeGet('colors.darkBold', '#0D1136')};
+  color: '#0D1136';
   margin-bottom: 15px;
   text-align: center;
 
@@ -72,7 +73,7 @@ const BannerSubHeading = styled('span')`
   font-family: ${themeGet('fontFamily.0', 'sans-serif')};
   font-size: ${themeGet('fontSizes.3', '19')}px;
   font-weight: 400;
-  color: ${themeGet('colors.darkRegular', '#77798C')};
+  color: '#0D1136';
   margin-bottom: 60px;
   text-align: center;
 

@@ -72,7 +72,7 @@ function HomePage({ deviceType }) {
         <Banner
           intlTitleId='groceriesTitle'
           intlDescriptionId='groceriesSubTitle'
-          imageUrl='/image/grocery.png'
+          imageUrl='/image/sneak5.jpg'
         />
 
         {deviceType.desktop ? (

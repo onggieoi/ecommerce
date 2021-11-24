@@ -1,19 +1,16 @@
 {
-  "groceriesTitle": "Groceries Delivered in 90 Minute",
-  "groceriesSubTitle": "Get your healthy foods & snacks delivered at your doorsteps all day everyday",
+  "groceriesTitle": "Good Shoes Take You Good Places",
+  "groceriesSubTitle": "SNKR skrt is online",
   "makeupTitle": "Branded & imported makeups",
   "makeupSubTitle": "Easiest and cheapest way to get your branded & imported makeups",
   "bagsTitle": "Exclusive Branded bags",
   "bagsSubTitle": "Get your exclusive & branded bags delivered to you in no time",
   "womenClothsTitle": "Shop your designer dresses",
   "womenClothsSubTitle": "Ready to wear dresses tailored for you from online. Hurry up while stock lasts.",
-
   "furnitureTitle": "Exclusive furniture on cheap price",
   "furnitureSubTitle": "Make your house a home with our wide collection of beautiful furniture",
-
   "booksTitle": "Your own books store",
   "booksSubTitle": "Get your favourite books from our wide range of books.",
-
   "searchPlaceholder": "Search your products from here",
   "searchButtonText": "Search",
   "navlinkOffer": "Offer",
@@ -93,28 +90,21 @@
   "forgotPassText": "Forgot Password",
   "sendResetPassText": "We'll send you a link to reset your password",
   "resetPasswordBtn": "Reset Password",
-
   "intlCopyBtnId": "Copy",
   "intlCopySuccessId": "Copied",
-
   "locationModalheading": "Select Your Location",
   "locationModalSubHeading": "You have to select your location for deliver service perpous",
   "locationModalFooter": "Free Delivery For 1st Order",
   "saleText": "Sale",
   "offText": "Off",
-
   "faqNo1Title": "How to contact with Customer Service?",
   "faqNo1Desc": "Our Customer Experience Team is available 7 days a week and we offer 2 ways to get in contact.Email and Chat . We try to reply quickly, so you need not to wait too long for a response!.",
-
   "faqNo2Title": "App installation failed, how to update system information?",
   "faqNo2Desc": "Please read the documentation carefully . We also have some online video tutorials regarding this issue . If the problem remains, Please Open a ticket in the support forum",
-
   "faqNo3Title": "Website reponse taking time, how to improve?",
   "faqNo3Desc": "At first, Please check your internet connection . We also have some online video tutorials regarding this issue . If the problem remains, Please Open a ticket in the support forum .",
-
   "faqNo4Title": "How do I create a account?",
   "faqNo4Desc": "If you want to open an account for personal use you can do it over the phone or online. Opening an account online should only take a few minutes.",
-
   "intlOrderDetailsDiscount": "Discount",
   "intlOrderDetailsDelivery": "Delivery Fee",
   "intlOrderPageTitle": "My Order",

@@ -1,7 +1,5 @@
 import React, { useContext } from 'react';
 import { useRouter } from 'next/router';
-import { useQuery } from '@apollo/react-hooks';
-import gql from 'graphql-tag';
 import Sticky from 'react-stickynode';
 import { Scrollbars } from 'react-custom-scrollbars';
 import Popover from 'components/Popover/Popover';
@@ -54,22 +52,6 @@ import {
   WomenDress,
 } from 'components/AllSvgIcon';
 
-const GET_CATEGORIES = gql`
-  query getCategories($type: String!) {
-    categories(type: $type) {
-      id
-      title
-      slug
-      icon
-      children {
-        id
-        title
-        slug
-      }
-    }
-  }
-`;
-
 let iconTypes = {
   Accessories: Accessories,
   BathOil: BathOil,
@@ -119,9 +101,11 @@ const SidebarCategory: React.FC<SidebarCategoryProps> = ({
   const { state, dispatch } = useContext(SearchContext);
   const router = useRouter();
   const { pathname } = router;
-  const { data, loading } = useQuery(GET_CATEGORIES, {
-    variables: { type },
-  });
+
+  const { data, loading } = {} as any;
+  // const { data, loading } = useQuery(GET_CATEGORIES, {
+  //   variables: { type },
+  // });
 
   const selectedQueries = state && state.category && state.category.split(',');
   const handleCategorySelection = (slug: string) => {

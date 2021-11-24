@@ -1,12 +1,8 @@
 import React, { useContext } from 'react';
-import { useMutation } from '@apollo/react-hooks';
 import { Col } from 'react-styled-flexboxgrid';
 import { openModal } from '@redq/reuse-modal';
 import RadioCard from 'components/RadioCard/RadioCard';
 import { ProfileContext } from 'contexts/profile/profile.context';
-import { DELETE_ADDRESS } from 'graphql/mutation/address';
-import { DELETE_CARD } from 'graphql/mutation/card';
-import { DELETE_CONTACT } from 'graphql/mutation/contact';
 import StripePaymentForm from '../../Payment/StripePaymentForm';
 import {
   SettingsForm,
@@ -22,7 +18,6 @@ import PaymentGroup from 'components/PaymentGroup/PaymentGroup';
 import UpdateAddress from '../../Checkout/Update/UpdateAddress';
 import UpdateContact from '../../Checkout/Update/UpdateContact';
 import Button from 'components/Button/Button';
-import { UPDATE_ME } from 'graphql/mutation/me';
 import { FormattedMessage } from 'react-intl';
 
 type SettingsContentProps = {
@@ -35,10 +30,6 @@ type SettingsContentProps = {
 
 const SettingsContent: React.FC<SettingsContentProps> = ({ deviceType }) => {
   const { state, dispatch } = useContext(ProfileContext);
-  const [updateMeMutation] = useMutation(UPDATE_ME);
-  const [deleteContactMutation] = useMutation(DELETE_CONTACT);
-  const [deleteAddressMutation] = useMutation(DELETE_ADDRESS);
-  const [deletePaymentCardMutation] = useMutation(DELETE_CARD);
 
   const { address, contact, card } = state;
   // const addressList =
@@ -74,36 +65,36 @@ const SettingsContent: React.FC<SettingsContentProps> = ({ deviceType }) => {
       handleModal(modalComponent, item);
     } else {
       console.log(name, item, type, 'delete');
-      switch (name) {
-        case 'payment':
-          dispatch({ type: 'DELETE_CARD', payload: item.id });
+      // switch (name) {
+      //   case 'payment':
+      //     dispatch({ type: 'DELETE_CARD', payload: item.id });
 
-          return await deletePaymentCardMutation({
-            variables: { cardId: JSON.stringify(item.id) },
-          });
-        case 'contact':
-          dispatch({ type: 'DELETE_CONTACT', payload: item.id });
+      //     return await deletePaymentCardMutation({
+      //       variables: { cardId: JSON.stringify(item.id) },
+      //     });
+      //   case 'contact':
+      //     dispatch({ type: 'DELETE_CONTACT', payload: item.id });
 
-          return await deleteContactMutation({
-            variables: { contactId: JSON.stringify(item.id) },
-          });
-        case 'address':
-          dispatch({ type: 'DELETE_ADDRESS', payload: item.id });
+      //     return await deleteContactMutation({
+      //       variables: { contactId: JSON.stringify(item.id) },
+      //     });
+      //   case 'address':
+      //     dispatch({ type: 'DELETE_ADDRESS', payload: item.id });
 
-          return await deleteAddressMutation({
-            variables: { addressId: JSON.stringify(item.id) },
-          });
-        default:
-          return false;
-      }
+      //     return await deleteAddressMutation({
+      //       variables: { addressId: JSON.stringify(item.id) },
+      //     });
+      //   default:
+      //     return false;
+      // }
     }
   };
 
   const handleSave = async () => {
     const { name, email } = state;
-    await updateMeMutation({
-      variables: { meInput: JSON.stringify({ name, email }) },
-    });
+    // await updateMeMutation({
+    //   variables: { meInput: JSON.stringify({ name, email }) },
+    // });
   };
 
   const handleData = (data: any) => {

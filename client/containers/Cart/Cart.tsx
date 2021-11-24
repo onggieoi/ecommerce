@@ -1,7 +1,5 @@
 import React, { useContext, useState } from 'react';
 import Link from 'next/link';
-import gql from 'graphql-tag';
-import { useMutation } from '@apollo/react-hooks';
 import { CartContext } from 'contexts/cart/cart.context';
 import {
   CartPopupBody,
@@ -48,16 +46,6 @@ type CartPropsType = {
   scrollbarHeight?: string;
   onCloseBtnClick?: (e: any) => void;
 };
-
-const APPLY_COUPON = gql`
-  mutation applyCoupon($code: String!) {
-    applyCoupon(code: $code) {
-      id
-      code
-      discountInPercent
-    }
-  }
-`;
 
 const CartItem: React.FC<CartItemProps> = ({ product, update }) => {
   const itemPrice = calculateItemPrice(product);
@@ -113,21 +101,20 @@ const Cart: React.FC<CartPropsType> = ({
   const [couponText, setCoupon] = useState('');
   const [displayCoupon, showCoupon] = useState(false);
   const [error, setError] = useState('');
-  const [applyedCoupon] = useMutation(APPLY_COUPON);
 
   const handleApplyCoupon = async () => {
-    const {
-      data: { applyCoupon },
-    }: any = await applyedCoupon({
-      variables: { code: couponText },
-    });
-    if (applyCoupon && applyCoupon.discountInPercent) {
-      setError('');
-      addCoupon(applyCoupon);
-      setCoupon('');
-    } else {
-      setError('Invalid Coupon');
-    }
+    // const {
+    //   data: { applyCoupon },
+    // }: any = await applyedCoupon({
+    //   variables: { code: couponText },
+    // });
+    // if (applyCoupon && applyCoupon.discountInPercent) {
+    //   setError('');
+    //   addCoupon(applyCoupon);
+    //   setCoupon('');
+    // } else {
+    //   setError('Invalid Coupon');
+    // }
   };
 
   const handleChange = (value: string) => {

@@ -1,6 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
 import Router from 'next/router';
-import gql from 'graphql-tag';
 import Button from 'components/Button/Button';
 import RadioCard from 'components/RadioCard/RadioCard';
 import RadioGroup from 'components/RadioGroup/RadioGroup';
@@ -9,12 +8,8 @@ import Loader from 'components/Loader/Loader';
 import UpdateAddress from './Update/UpdateAddress';
 import UpdateContact from './Update/UpdateContact';
 import StripePaymentForm from '../Payment/StripePaymentForm';
-import { DELETE_ADDRESS } from 'graphql/mutation/address';
-import { DELETE_CARD } from 'graphql/mutation/card';
-import { DELETE_CONTACT } from 'graphql/mutation/contact';
 import { openModal } from '@redq/reuse-modal';
 import { Product } from 'interfaces';
-import { useMutation } from '@apollo/react-hooks';
 import { CartContext } from 'contexts/cart/cart.context';
 import CheckcoutWrapper, {
   CheckoutContainer,
@@ -56,16 +51,6 @@ interface MyFormProps {
   subTotalPrice: any;
 }
 
-const APPLY_COUPON = gql`
-  mutation applyCoupon($code: String!) {
-    applyCoupon(code: $code) {
-      id
-      code
-      discountInPercent
-    }
-  }
-`;
-
 const Checkout: React.FC<MyFormProps & any> = ({ token, deviceType }) => {
   const [couponCode, setCouponCode] = useState('');
   const [couponError, setError] = useState('');
@@ -82,10 +67,6 @@ const Checkout: React.FC<MyFormProps & any> = ({ token, deviceType }) => {
   const subTotalPrice = getSubTotalPrice();
   const totalPrice = getTotalPrice();
 
-  const [deleteContactMutation] = useMutation(DELETE_CONTACT);
-  const [deleteAddressMutation] = useMutation(DELETE_ADDRESS);
-  const [deletePaymentCardMutation] = useMutation(DELETE_CARD);
-  const [applyedCoupon] = useMutation(APPLY_COUPON);
 
   const handleSubmit = async () => {
     setLoading(true);
@@ -136,47 +117,47 @@ const Checkout: React.FC<MyFormProps & any> = ({ token, deviceType }) => {
   }
 
   const handleEditDelete = async (item: any, type: string, name: string) => {
-    if (type === 'edit') {
-      const modalComponent = name === 'address' ? UpdateAddress : UpdateContact;
-      handleModal(modalComponent, item);
-    } else {
-      switch (name) {
-        case 'payment':
-          dispatch({ type: 'DELETE_CARD', payload: item.id });
+    // if (type === 'edit') {
+    //   const modalComponent = name === 'address' ? UpdateAddress : UpdateContact;
+    //   handleModal(modalComponent, item);
+    // } else {
+    //   switch (name) {
+    //     case 'payment':
+    //       dispatch({ type: 'DELETE_CARD', payload: item.id });
 
-          return await deletePaymentCardMutation({
-            variables: { cardId: JSON.stringify(item.id) },
-          });
-        case 'contact':
-          dispatch({ type: 'DELETE_CONTACT', payload: item.id });
+    //       return await deletePaymentCardMutation({
+    //         variables: { cardId: JSON.stringify(item.id) },
+    //       });
+    //     case 'contact':
+    //       dispatch({ type: 'DELETE_CONTACT', payload: item.id });
 
-          return await deleteContactMutation({
-            variables: { contactId: JSON.stringify(item.id) },
-          });
-        case 'address':
-          dispatch({ type: 'DELETE_ADDRESS', payload: item.id });
+    //       return await deleteContactMutation({
+    //         variables: { contactId: JSON.stringify(item.id) },
+    //       });
+    //     case 'address':
+    //       dispatch({ type: 'DELETE_ADDRESS', payload: item.id });
 
-          return await deleteAddressMutation({
-            variables: { addressId: JSON.stringify(item.id) },
-          });
-        default:
-          return false;
-      }
-    }
+    //       return await deleteAddressMutation({
+    //         variables: { addressId: JSON.stringify(item.id) },
+    //       });
+    //     default:
+    //       return false;
+    //   }
+    // }
   };
 
   const handleApplyCoupon = async () => {
-    const {
-      data: { applyCoupon },
-    }: any = await applyedCoupon({
-      variables: { code: couponCode },
-    });
-    if (applyCoupon && applyCoupon.discountInPercent) {
-      addCoupon(applyCoupon);
-      setCouponCode('');
-    } else {
-      setError('Invalid Coupon');
-    }
+    // const {
+    //   data: { applyCoupon },
+    // }: any = await applyedCoupon({
+    //   variables: { code: couponCode },
+    // });
+    // if (applyCoupon && applyCoupon.discountInPercent) {
+    //   addCoupon(applyCoupon);
+    //   setCouponCode('');
+    // } else {
+    //   setError('Invalid Coupon');
+    // }
   };
 
   const handleOnUpdate = (couponCode: any) => {

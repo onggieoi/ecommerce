@@ -4,8 +4,6 @@ import { withFormik, FormikProps, Form } from 'formik';
 import { closeModal } from '@redq/reuse-modal';
 import TextField from 'components/TextField/TextField';
 import Button from 'components/Button/Button';
-import { useMutation } from '@apollo/react-hooks';
-import { UPDATE_ADDRESS } from 'graphql/mutation/address';
 import { FieldWrapper, Heading } from './Update.style';
 import { ProfileContext } from 'contexts/profile/profile.context';
 
@@ -63,16 +61,15 @@ const UpdateAddress = (props: FormikProps<FormValues> & MyFormProps) => {
   };
   const { state, dispatch } = useContext(ProfileContext);
 
-  const [addressMutation, { data }] = useMutation(UPDATE_ADDRESS);
 
   const handleSubmit = async () => {
     if (isValid) {
-      const addressData = await addressMutation({
-        variables: { addressInput: JSON.stringify(addressValue) },
-      });
-      console.log(addressData, 'address data');
-      dispatch({ type: 'ADD_OR_UPDATE_ADDRESS', payload: addressValue });
-      closeModal();
+      // const addressData = await addressMutation({
+      //   variables: { addressInput: JSON.stringify(addressValue) },
+      // });
+      // console.log(addressData, 'address data');
+      // dispatch({ type: 'ADD_OR_UPDATE_ADDRESS', payload: addressValue });
+      // closeModal();
     }
   };
   return (

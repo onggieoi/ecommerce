@@ -1,12 +1,9 @@
 import React from 'react';
 import { NextPage } from 'next';
 import Head from 'next/head';
-import gql from 'graphql-tag';
-import { useQuery } from '@apollo/react-hooks';
 
 import { FormattedMessage } from 'react-intl';
 import CartPopUp from 'containers/Cart/CartPopUp';
-import { withApollo } from 'helper/apollo';
 import { Modal } from '@redq/reuse-modal';
 
 import {
@@ -18,16 +15,6 @@ import {
 import GiftCard from 'components/GiftCard/GiftCard';
 import SiteFooter from 'components/SiteFooter/SiteFooter';
 
-const GET_COUPON = gql`
-  query {
-    coupons {
-      id
-      code
-      image
-      discountInPercent
-    }
-  }
-`;
 type GiftCardProps = {
   deviceType: {
     mobile: boolean;
@@ -37,7 +24,8 @@ type GiftCardProps = {
 };
 
 const GiftCardPage: NextPage<GiftCardProps> = ({ deviceType }) => {
-  const { data, error } = useQuery(GET_COUPON);
+  const { data, error } = {} as any;
+
   if (error) return <div>{error.message}</div>;
 
   return (
@@ -51,10 +39,10 @@ const GiftCardPage: NextPage<GiftCardProps> = ({ deviceType }) => {
             <ProductsRow>
               {data && data.coupons
                 ? data.coupons.map(coupon => (
-                    <ProductsCol key={coupon.id}>
-                      <GiftCard image={coupon.image} code={coupon.code} />
-                    </ProductsCol>
-                  ))
+                  <ProductsCol key={coupon.id}>
+                    <GiftCard image={coupon.image} code={coupon.code} />
+                  </ProductsCol>
+                ))
                 : null}
             </ProductsRow>
           </div>
@@ -72,4 +60,4 @@ const GiftCardPage: NextPage<GiftCardProps> = ({ deviceType }) => {
     </Modal>
   );
 };
-export default withApollo(GiftCardPage);
+export default GiftCardPage;

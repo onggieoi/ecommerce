@@ -2,9 +2,7 @@ import React from "react";
 import { NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
-import { useQuery } from "@apollo/react-hooks";
 import { Modal } from "@redq/reuse-modal";
-import { GET_LOGGED_IN_CUSTOMER } from "graphql/query/customer.query";
 import { ProfileProvider } from "contexts/profile/profile.provider";
 import SettingsContent from "containers/Profile/Settings/Settings";
 import {
@@ -15,7 +13,6 @@ import {
 import Sidebar from "containers/Profile/Sidebar/Sidebar";
 import SiteFooter from "components/SiteFooter/SiteFooter";
 import { FormattedMessage } from "react-intl";
-import { withApollo } from "helper/apollo";
 
 type Props = {
   deviceType?: {
@@ -25,7 +22,8 @@ type Props = {
   };
 };
 const ProfilePage: NextPage<Props> = ({ deviceType }) => {
-  const { data, error, loading } = useQuery(GET_LOGGED_IN_CUSTOMER);
+  const { data, error, loading } = {} as any;
+  // const { data, error, loading } = useQuery(GET_LOGGED_IN_CUSTOMER);
   if (!data || loading) {
     return <div>loading...</div>;
   }
@@ -59,4 +57,4 @@ const ProfilePage: NextPage<Props> = ({ deviceType }) => {
   );
 };
 
-export default withApollo(ProfilePage);
+export default ProfilePage;

@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import gql from 'graphql-tag';
 import { Scrollbars } from 'react-custom-scrollbars';
-import { useQuery } from '@apollo/react-hooks';
 import {
   OrderBox,
   OrderListWrapper,
@@ -24,31 +22,6 @@ import useComponentSize from 'helper/useComponentSize';
 import { FormattedMessage } from 'react-intl';
 
 const progressData = ['Order Received', 'Order On The Way', 'Order Delivered'];
-
-const GET_ORDERS = gql`
-  query getAllOrders($text: String, $user: Int!, $limit: Int) {
-    orders(text: $text, limit: $limit, user: $user) {
-      id
-      status
-      deliveryAddress
-      amount
-      date
-      subtotal
-      deliveryFee
-      discount
-      deliveryTime
-      products {
-        title
-        price
-        total
-        image
-        weight
-        quantity
-        id
-      }
-    }
-  }
-`;
 
 const orderTableColumns = [
   {
@@ -106,12 +79,13 @@ const OrdersContent: React.FC<OrderTableProps> = ({
 
   const [targetRef, size] = useComponentSize();
   const orderListHeight = size.height - 79;
-  const { data, error, loading } = useQuery(GET_ORDERS, {
-    variables: {
-      limit: 7,
-      user: 1,
-    },
-  });
+  const { data, error, loading } = {} as any;
+  //   const { data, error, loading } = useQuery(GET_ORDERS, {
+  //   variables: {
+  //     limit: 7,
+  //     user: 1,
+  //   },
+  // });
 
   useEffect(() => {
     if (data.orders && data.orders.length !== 0) {

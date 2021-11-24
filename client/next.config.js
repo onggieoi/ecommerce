@@ -6,8 +6,6 @@ const withCSS = require('@zeit/next-css');
 // next.js configuration
 const nextConfig = {
   env: {
-    STRIPE_PUBLIC_KEY: 'your_stripe_public_key_here',
-    API_URL: 'http://localhost:4000/shop/graphql',
     BACKEND_URL: 'https://localhost:7293',
   },
   webpack: config => {

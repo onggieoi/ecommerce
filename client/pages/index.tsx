@@ -1,7 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { withApollo } from 'helper/apollo';
 import Banner from 'containers/Banner/Banner';
 import StoreNav from 'components/StoreNav/StoreNav';
 import Carousel from 'components/Carousel/Carousel';
@@ -127,4 +126,4 @@ function HomePage({ deviceType }) {
   );
 }
 
-export default withApollo(HomePage);
+export default HomePage;

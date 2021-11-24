@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
-import gql from 'graphql-tag';
 import { openModal, closeModal } from '@redq/reuse-modal';
 import ProductCard from 'components/ProductCard/ProductCardFurniture';
 import {
@@ -13,7 +12,6 @@ import {
   ProductCardWrapper,
 } from './Products.style';
 import { CURRENCY } from 'helper/constant';
-import { useQuery } from '@apollo/react-hooks';
 import Button from 'components/Button/Button';
 import Loader from 'components/Loader/Loader';
 import Placeholder from 'components/Placeholder/Placeholder';
@@ -21,46 +19,6 @@ import Fade from 'react-reveal/Fade';
 import NoResultFound from 'components/NoResult/NoResult';
 
 const QuickView = dynamic(() => import('../QuickView/QuickView'));
-
-const GET_PRODUCTS = gql`
-  query getProducts(
-    $type: String
-    $text: String
-    $category: String
-    $offset: Int
-    $limit: Int
-  ) {
-    products(
-      type: $type
-      text: $text
-      category: $category
-      offset: $offset
-      limit: $limit
-    ) {
-      items {
-        id
-        title
-        slug
-        unit
-        price
-        salePrice
-        description
-        discountInPercent
-        type
-        image
-        gallery {
-          url
-        }
-        categories {
-          id
-          title
-          slug
-        }
-      }
-      hasMore
-    }
-  }
-`;
 
 type ProductsProps = {
   deviceType?: {
@@ -80,15 +38,16 @@ export const Products: React.FC<ProductsProps> = ({
 }) => {
   const router = useRouter();
   const [loadingMore, toggleLoading] = useState(false);
-  const { data, error, loading, fetchMore } = useQuery(GET_PRODUCTS, {
-    variables: {
-      type: type,
-      text: router.query.text,
-      category: router.query.category,
-      offset: 0,
-      limit: fetchLimit,
-    },
-  });
+  const { data, error, loading, fetchMore } = {} as any;
+  //   const { data, error, loading, fetchMore } = useQuery(GET_PRODUCTS, {
+  //   variables: {
+  //     type: type,
+  //     text: router.query.text,
+  //     category: router.query.category,
+  //     offset: 0,
+  //     limit: fetchLimit,
+  //   },
+  // });
 
   // Quick View Modal
   const handleModalClose = () => {

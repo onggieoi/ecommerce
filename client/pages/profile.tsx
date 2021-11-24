@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
@@ -13,6 +13,8 @@ import {
 import Sidebar from "containers/Profile/Sidebar/Sidebar";
 import SiteFooter from "components/SiteFooter/SiteFooter";
 import { FormattedMessage } from "react-intl";
+import { useAppDispatch, useAppSelector } from "helper/hooks";
+import { getMe } from "redux/account/accountReducer";
 
 type Props = {
   deviceType?: {
@@ -22,33 +24,37 @@ type Props = {
   };
 };
 const ProfilePage: NextPage<Props> = ({ deviceType }) => {
-  const { data, error, loading } = {} as any;
-  // const { data, error, loading } = useQuery(GET_LOGGED_IN_CUSTOMER);
-  if (!data || loading) {
+  const { me, loading } = useAppSelector(state => state.accountReducer);
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(getMe());
+  }, []);
+
+  if (loading && !me) {
     return <div>loading...</div>;
   }
-  if (error) return <div>{error.message}</div>;
+
+  // if (error) return <div>{error.message}</div>;
+
   return (
     <>
       <Head>
-        <title>Profile - PickBazar</title>
+        <title>Profile - SNKR</title>
       </Head>
-      <ProfileProvider initData={data.me}>
+      <ProfileProvider initData={me}>
         <Modal>
           <PageWrapper>
             <SidebarSection>
               <Sidebar />
             </SidebarSection>
             <ContentBox>
-              <SettingsContent deviceType={deviceType} />
+              {me && (<SettingsContent deviceType={deviceType} />)}
             </ContentBox>
 
             <SiteFooter style={{ marginTop: 50 }}>
-              <FormattedMessage
-                id="siteFooter"
-                defaultMessage="Pickbazar is a product of"
-              />
-              &nbsp; <Link href="#">Redq, Inc.</Link>
+              SNKR &nbsp; <Link href="https://www.instagram.com/onggieoi/">onggieoi, Inc.</Link>
             </SiteFooter>
           </PageWrapper>
         </Modal>

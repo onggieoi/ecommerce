@@ -9,7 +9,6 @@ import UpdateAddress from './Update/UpdateAddress';
 import UpdateContact from './Update/UpdateContact';
 import StripePaymentForm from '../Payment/StripePaymentForm';
 import { openModal } from '@redq/reuse-modal';
-import { Product } from 'interfaces';
 import { CartContext } from 'contexts/cart/cart.context';
 import CheckcoutWrapper, {
   CheckoutContainer,
@@ -38,6 +37,10 @@ import {
 import CouponBox, { CouponDisplay } from 'components/CouponBox/CouponBox';
 import { ProfileContext } from 'contexts/profile/profile.context';
 import { FormattedMessage } from 'react-intl';
+import { Product, ProductCart } from 'models/product';
+import { useAppDispatch } from 'helper/hooks';
+import { createOrder } from 'redux/order/orderReducer';
+import { Address, Card, Contact as ContactModel, Schedule } from 'models/account';
 
 // The type of props Checkout Form receives
 interface MyFormProps {
@@ -62,20 +65,50 @@ const Checkout: React.FC<MyFormProps & any> = ({ token, deviceType }) => {
   );
   const [loading, setLoading] = useState(false);
   const [isValid, setIsValid] = useState(false);
-  const { address, contact, card, schedules } = state;
-  const items = getCartProducts();
+
+  const reduxDispatch = useAppDispatch();
+
+  const { addresses, contacts, cards, schedules } = state as {
+    addresses: Address[],
+    contacts: ContactModel[],
+    cards: Card[],
+    schedules: Schedule[],
+  };
+  const items = getCartProducts() as ProductCart[];
   const subTotalPrice = getSubTotalPrice();
   const totalPrice = getTotalPrice();
-
 
   const handleSubmit = async () => {
     setLoading(true);
     if (isValid) {
-      clearCart();
-      Router.push('/order-recived');
+      reduxDispatch(createOrder({
+        request: {
+          contactId: contacts.find(c => c.type === 'primary').id,
+          addressId: addresses.find(a => a.type === 'primary').id,
+          cardId: cards.find(c => c.type === 'primary').id,
+          orderDetails: items.map(i => ({
+            quantity: i.quantity,
+            productId: i.id
+          }))
+        },
+        callback: createOrderCallback,
+      }));
+
+    } else {
+      setLoading(false);
     }
-    setLoading(false);
   };
+
+  const createOrderCallback = (orderId: string) => {
+    setLoading(false);
+    clearCart();
+
+    return Router.push({
+      pathname: '/order-recived',
+      query: { orderId },
+    });
+
+  }
 
   useEffect(() => {
     setProcessedDiscount(discount);
@@ -86,10 +119,9 @@ const Checkout: React.FC<MyFormProps & any> = ({ token, deviceType }) => {
     if (
       totalPrice > 0 &&
       items.length > 0 &&
-      address.length &&
-      contact.length &&
-      card.length &&
-      schedules.length
+      addresses.length &&
+      contacts.length &&
+      cards.length
     ) {
       setIsValid(true);
     }
@@ -169,6 +201,17 @@ const Checkout: React.FC<MyFormProps & any> = ({ token, deviceType }) => {
       <CheckcoutWrapper>
         <CheckoutContainer>
           <OrderSummary>
+            {
+              items.map((i) => (
+                <OrderSummaryItem style={{ marginBottom: 15 }}>
+                  <OrderLabel>
+                    <p>{i.title} x{i.quantity} - (${i.salePrice})</p>
+                  </OrderLabel>
+                  <OrderAmount>${i.quantity * i.salePrice}</OrderAmount>
+                </OrderSummaryItem>
+              ))
+            }
+
             <OrderSummaryItem style={{ marginBottom: 15 }}>
               <OrderLabel>
                 <FormattedMessage id='subTotal' defaultMessage='Subtotal' /> (
@@ -177,6 +220,7 @@ const Checkout: React.FC<MyFormProps & any> = ({ token, deviceType }) => {
               </OrderLabel>
               <OrderAmount>${subTotalPrice || 0}</OrderAmount>
             </OrderSummaryItem>
+
 
             <OrderSummaryItem style={{ marginBottom: 30 }}>
               <OrderLabel>
@@ -280,7 +324,7 @@ const Checkout: React.FC<MyFormProps & any> = ({ token, deviceType }) => {
             </Heading>
             <ButtonGroup>
               <RadioGroup
-                items={address}
+                items={addresses}
                 component={(item: any) => (
                   <RadioCard
                     id={item.id}
@@ -326,7 +370,7 @@ const Checkout: React.FC<MyFormProps & any> = ({ token, deviceType }) => {
             </Heading>
             <ButtonGroup>
               <RadioGroup
-                items={contact}
+                items={contacts}
                 component={(item: any) => (
                   <RadioCard
                     id={item.id}
@@ -373,7 +417,7 @@ const Checkout: React.FC<MyFormProps & any> = ({ token, deviceType }) => {
             <PaymentGroup
               name='payment'
               deviceType={deviceType}
-              items={card}
+              items={cards}
               onEditDeleteField={(item: any, type: string) =>
                 handleEditDelete(item, type, 'payment')
               }

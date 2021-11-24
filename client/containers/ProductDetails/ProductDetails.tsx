@@ -28,12 +28,12 @@ import Products from 'containers/Products/Products';
 import { CartContext } from 'contexts/cart/cart.context';
 import { CURRENCY } from 'helper/constant';
 import { findProductIndex, getProductQuantity } from 'helper/utility';
-import { Product } from 'interfaces';
 import { FormattedMessage } from 'react-intl';
 import LanguageContext from 'contexts/language/language.context';
+import { Product } from 'models/product';
 
 type ProdutDetailsProps = {
-  product: Product | any;
+  product: Product;
   deviceType: {
     mobile: boolean;
     tablet: boolean;
@@ -49,20 +49,21 @@ const ProductDetails: React.FunctionComponent<ProdutDetailsProps> = ({
     state: { lang },
   }: any = useContext(LanguageContext);
   const { add, update, products } = useContext(CartContext);
-  const data = product;
-  const index = findProductIndex(products, data.id);
+
+  const index = findProductIndex(products, product.id);
+
   const quantity = getProductQuantity(products, index);
 
   const handleClick = e => {
     e.stopPropagation();
-    add(e, data);
+    add(e, product);
   };
 
   const handleUpdate = (value: number, e: any) => {
     if (index === -1 && value === 1) {
-      add(e, data);
+      add(e, product);
     } else {
-      update(data.id, value);
+      update(product.id, value);
     }
   };
 
@@ -153,17 +154,17 @@ const ProductDetails: React.FunctionComponent<ProdutDetailsProps> = ({
             <MetaSingle>
               {product.categories
                 ? product.categories.map((item: any) => (
-                    <Link
-                      href={`/${product.type}?category=${item.slug}`}
-                      key={`link-${item.id}`}
-                    >
-                      {
-                        <a>
-                          <MetaItem>{item.title}</MetaItem>
-                        </a>
-                      }
-                    </Link>
-                  ))
+                  <Link
+                    href={`/${product.type}?category=${item.slug}`}
+                    key={`link-${item.id}`}
+                  >
+                    {
+                      <a>
+                        <MetaItem>{item.title}</MetaItem>
+                      </a>
+                    }
+                  </Link>
+                ))
                 : ''}
             </MetaSingle>
           </ProductMeta>

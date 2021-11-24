@@ -19,6 +19,7 @@ import UpdateAddress from '../../Checkout/Update/UpdateAddress';
 import UpdateContact from '../../Checkout/Update/UpdateContact';
 import Button from 'components/Button/Button';
 import { FormattedMessage } from 'react-intl';
+import { Account } from 'models/account';
 
 type SettingsContentProps = {
   deviceType?: {
@@ -31,7 +32,7 @@ type SettingsContentProps = {
 const SettingsContent: React.FC<SettingsContentProps> = ({ deviceType }) => {
   const { state, dispatch } = useContext(ProfileContext);
 
-  const { address, contact, card } = state;
+  const { addresses, contacts, cards, name, email } = state as Account;
   // const addressList =
   //   address && address.length ? modifyaddressData(address) : [];
 
@@ -117,7 +118,7 @@ const SettingsContent: React.FC<SettingsContentProps> = ({ deviceType }) => {
             <Input
               type='text'
               label='Name'
-              value={state.name}
+              value={name}
               onUpdate={(value: string) => handleChange(value, 'name')}
               style={{ backgroundColor: '#F7F7F7' }}
               intlInputLabelId='profileNameField'
@@ -128,7 +129,7 @@ const SettingsContent: React.FC<SettingsContentProps> = ({ deviceType }) => {
             <Input
               type='email'
               label='Email Address'
-              value={state.email}
+              value={email}
               onUpdate={(value: string) => handleChange(value, 'email')}
               style={{ backgroundColor: '#F7F7F7' }}
               intlInputLabelId='profileEmailField'
@@ -157,7 +158,7 @@ const SettingsContent: React.FC<SettingsContentProps> = ({ deviceType }) => {
               </HeadingSection>
               <ButtonGroup>
                 <RadioGroup
-                  items={contact}
+                  items={contacts}
                   component={(item: any) => (
                     <RadioCard
                       id={item.id}
@@ -210,7 +211,7 @@ const SettingsContent: React.FC<SettingsContentProps> = ({ deviceType }) => {
               </HeadingSection>
               <ButtonGroup>
                 <RadioGroup
-                  items={address}
+                  items={addresses}
                   component={(item: any) => (
                     <RadioCard
                       id={item.id}
@@ -265,7 +266,7 @@ const SettingsContent: React.FC<SettingsContentProps> = ({ deviceType }) => {
               <PaymentGroup
                 name='payment'
                 deviceType={deviceType}
-                items={card}
+                items={cards}
                 onEditDeleteField={(item: any, type: string) =>
                   handleEditDelete(item, type, 'payment')
                 }

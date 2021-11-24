@@ -7,6 +7,7 @@ import {
   RadioDataType,
   PaymentOptionType,
 } from '../interfaces';
+import { Product, ProductCart } from 'models/product';
 
 export const getCartProducts = () => {
   const products = getLocalState('cart');
@@ -91,8 +92,8 @@ export const getSubTotalPrice = () => {
 // };
 
 export const findProductIndex = (
-  cartProducts: CartProduct[],
-  dataId: number
+  cartProducts: ProductCart[],
+  dataId: string
 ): number => {
   let index = -1;
   if (cartProducts && cartProducts.length) {
@@ -102,7 +103,7 @@ export const findProductIndex = (
 };
 
 export const getProductQuantity = (
-  cartProducts: CartProduct[],
+  cartProducts: ProductCart[],
   index: number
 ): number => {
   let quantity = 0;
@@ -186,7 +187,7 @@ export const modifyCardData = (
 };
 
 export const cartAnimation = event => {
-  const getClosest = function(elem, selector) {
+  const getClosest = function (elem, selector) {
     for (; elem && elem !== document; elem = elem.parentNode) {
       if (elem.matches(selector)) return elem;
     }
@@ -213,13 +214,13 @@ export const cartAnimation = event => {
     disLeft +
     'px;transition: left 1s, top 1s, width 1s, opacity 1s cubic-bezier(1, 1, 1, 1);border-radius: 50px; overflow: hidden; box-shadow: 0 21px 36px rgba(0,0,0,0.1)';
   var rechange = document.body.appendChild(image);
-  setTimeout(function() {
+  setTimeout(function () {
     image.style.left = cartleft + 'px';
     image.style.top = carttop + 'px';
     image.style.width = '40px';
     image.style.opacity = '0';
   }, 200);
-  setTimeout(function() {
+  setTimeout(function () {
     rechange.parentNode.removeChild(rechange);
   }, 1000);
   // End Animation Block

@@ -31,7 +31,7 @@ const GiftCardPage: NextPage<GiftCardProps> = ({ deviceType }) => {
   return (
     <Modal>
       <Head>
-        <title>Offer - PickBazar</title>
+        <title>Offer - SNKR</title>
       </Head>
       <OfferPageWrapper>
         <MainContentArea>
@@ -49,11 +49,8 @@ const GiftCardPage: NextPage<GiftCardProps> = ({ deviceType }) => {
         </MainContentArea>
 
         <SiteFooter style={{ marginTop: 50 }}>
-          <FormattedMessage
-            id="siteFooter"
-            defaultMessage="Pickbazar is a product of"
-          />
-          &nbsp; <a href="/">Redq, Inc.</a>
+          SNKR &nbsp; <a href="https://www.instagram.com/onggieoi/">onggieoi, Inc.</a>
+
         </SiteFooter>
       </OfferPageWrapper>
       <CartPopUp deviceType={deviceType} />

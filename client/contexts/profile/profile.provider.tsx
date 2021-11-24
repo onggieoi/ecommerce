@@ -2,6 +2,7 @@ import React, { useReducer } from 'react';
 import uuidV4 from 'uuid/v4';
 import schedules from 'containers/Checkout/data';
 import { ProfileContext } from './profile.context';
+import { Account } from 'models/account';
 
 type Action =
   | { type: 'HANDLE_ON_INPUT_CHANGE'; payload: any }
@@ -15,7 +16,8 @@ type Action =
   | { type: 'SET_PRIMARY_ADDRESS'; payload: any }
   | { type: 'SET_PRIMARY_SCHEDULE'; payload: any }
   | { type: 'SET_PRIMARY_CARD'; payload: any };
-function reducer(state: any, action: Action): any {
+
+function reducer(state: Account, action: Action) {
   switch (action.type) {
     case 'HANDLE_ON_INPUT_CHANGE':
       return { ...state, [action.payload.field]: action.payload.value };
@@ -23,7 +25,7 @@ function reducer(state: any, action: Action): any {
       if (action.payload.id) {
         return {
           ...state,
-          contact: state.contact.map((item: any) =>
+          contacts: state.contacts.map((item: any) =>
             item.id === action.payload.id
               ? { ...item, ...action.payload }
               : item
@@ -33,17 +35,17 @@ function reducer(state: any, action: Action): any {
       const newContact = {
         ...action.payload,
         id: uuidV4(),
-        type: state.contact.length === '0' ? 'primary' : 'secondary',
+        type: state.contacts.length === 0 ? 'primary' : 'secondary',
       };
       return {
         ...state,
-        contact: [...state.contact, newContact],
+        contacts: [...state.contacts, newContact],
       };
 
     case 'DELETE_CONTACT':
       return {
         ...state,
-        contact: state.contact.filter(
+        contacts: state.contacts.filter(
           (item: any) => item.id !== action.payload
         ),
       };
@@ -51,7 +53,7 @@ function reducer(state: any, action: Action): any {
       if (action.payload.id) {
         return {
           ...state,
-          address: state.address.map((item: any) =>
+          addresses: state.addresses.map((item: any) =>
             item.id === action.payload.id
               ? { ...item, ...action.payload }
               : item
@@ -61,40 +63,40 @@ function reducer(state: any, action: Action): any {
       const newAdress = {
         ...action.payload,
         id: uuidV4(),
-        type: state.address.length === '0' ? 'primary' : 'secondary',
+        type: state.addresses.length === 0 ? 'primary' : 'secondary',
       };
       return {
         ...state,
-        address: [...state.address, newAdress],
+        addresses: [...state.addresses, newAdress],
       };
     case 'DELETE_ADDRESS':
       return {
         ...state,
-        address: state.address.filter(
+        addresses: state.addresses.filter(
           (item: any) => item.id !== action.payload
         ),
       };
     case 'ADD_CARD':
       const newCard = {
         id: action.payload.id,
-        type: state.card.length === '0' ? 'primary' : 'secondary',
+        type: state.cards.length === 0 ? 'primary' : 'secondary',
         cardType: action.payload.brand.toLowerCase(),
         name: state.name,
         lastFourDigit: action.payload.last4,
       };
       return {
         ...state,
-        card: [newCard, ...state.card],
+        cards: [newCard, ...state.cards],
       };
     case 'DELETE_CARD':
       return {
         ...state,
-        card: state.card.filter((item: any) => item.id !== action.payload),
+        cards: state.cards.filter((item: any) => item.id !== action.payload),
       };
     case 'SET_PRIMARY_CONTACT':
       return {
         ...state,
-        contact: state.contact.map((item: any) =>
+        contacts: state.contacts.map((item: any) =>
           item.id === action.payload
             ? { ...item, type: 'primary' }
             : { ...item, type: 'secondary' }
@@ -103,7 +105,7 @@ function reducer(state: any, action: Action): any {
     case 'SET_PRIMARY_ADDRESS':
       return {
         ...state,
-        address: state.address.map((item: any) =>
+        addresses: state.addresses.map((item: any) =>
           item.id === action.payload
             ? { ...item, type: 'primary' }
             : { ...item, type: 'secondary' }
@@ -121,7 +123,7 @@ function reducer(state: any, action: Action): any {
     case 'SET_PRIMARY_CARD':
       return {
         ...state,
-        card: state.card.map((item: any) =>
+        cards: state.cards.map((item: any) =>
           item.id === action.payload
             ? { ...item, type: 'primary' }
             : { ...item, type: 'secondary' }
@@ -133,7 +135,7 @@ function reducer(state: any, action: Action): any {
 }
 
 type ProfileProviderProps = {
-  initData: any;
+  initData: Account;
 };
 
 export const ProfileProvider: React.FunctionComponent<ProfileProviderProps> = ({
@@ -141,7 +143,6 @@ export const ProfileProvider: React.FunctionComponent<ProfileProviderProps> = ({
   initData,
 }) => {
   const [state, dispatch] = useReducer(reducer, { ...initData, schedules });
-  // console.log(state, 'profile provider state');
 
   return (
     <ProfileContext.Provider value={{ state, dispatch }}>

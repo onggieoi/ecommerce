@@ -15,8 +15,6 @@ import {
   Input,
 } from './LocationModal.style';
 import { GiftBox } from 'components/AllSvgIcon';
-import Image from 'components/Image/Image';
-import PickBazar from '../../image/PickBazar.png';
 
 export default function LocationModal() {
   const [zipcode, setZipcode] = useState('');

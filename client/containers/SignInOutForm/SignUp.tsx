@@ -16,8 +16,6 @@ import {
 import { Facebook, Google } from 'components/AllSvgIcon';
 import { AuthContext } from 'contexts/auth/auth.context';
 import { FormattedMessage } from 'react-intl';
-import Image from 'components/Image/Image';
-import PickBazar from '../../image/PickBazar.png';
 
 export default function SignOutModal() {
   const { authDispatch } = useContext<any>(AuthContext);
@@ -31,10 +29,6 @@ export default function SignOutModal() {
   return (
     <Wrapper>
       <Container>
-        {/* <LogoWrapper>
-          <Image url={PickBazar} />
-        </LogoWrapper> */}
-
         <Heading>
           <FormattedMessage id='signUpBtnText' defaultMessage='Sign Up' />
         </Heading>

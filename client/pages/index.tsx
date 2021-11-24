@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Banner from 'containers/Banner/Banner';
@@ -20,15 +20,16 @@ import {
 } from 'styled/pages.style';
 // Static Data Import Here
 import OFFERS from 'data/offers';
-import BannerImg from 'image/grocery.png';
 
 import storeType from 'constants/storeType';
+import { SearchContext } from 'contexts/search/search.context';
 
 const PAGE_TYPE = 'grocery';
 
 function HomePage({ deviceType }) {
   const targetRef = React.useRef(null);
   const { query } = useRouter();
+  const { state } = useContext(SearchContext);
 
   React.useEffect(() => {
     const modalTimer = setTimeout(() => {
@@ -54,13 +55,13 @@ function HomePage({ deviceType }) {
     };
   }, []);
   React.useEffect(() => {
-    if ((query.text || query.category) && targetRef.current) {
+    if ((query.search || query.category || state.search) && targetRef.current) {
       window.scrollTo({
         top: targetRef.current.offsetTop - 110,
         behavior: 'smooth',
       });
     }
-  }, [query]);
+  }, [query, state.search]);
 
   return (
     <>
@@ -78,7 +79,7 @@ function HomePage({ deviceType }) {
           <>
             <MobileCarouselDropdown>
               <StoreNav items={storeType} />
-              <Sidebar type={PAGE_TYPE} deviceType={deviceType} />
+              <Sidebar deviceType={deviceType} />
             </MobileCarouselDropdown>
 
             <OfferSection>
@@ -88,7 +89,7 @@ function HomePage({ deviceType }) {
             </OfferSection>
             <MainContentArea>
               <SidebarSection>
-                <Sidebar type={PAGE_TYPE} deviceType={deviceType} />
+                <Sidebar deviceType={deviceType} />
               </SidebarSection>
               <ContentSection>
                 <div ref={targetRef}>
@@ -104,7 +105,7 @@ function HomePage({ deviceType }) {
         ) : (
           <MainContentArea>
             <StoreNav items={storeType} />
-            <Sidebar type={PAGE_TYPE} deviceType={deviceType} />
+            <Sidebar deviceType={deviceType} />
             <OfferSection>
               <div style={{ margin: '0px' }}>
                 <Carousel data={OFFERS} />

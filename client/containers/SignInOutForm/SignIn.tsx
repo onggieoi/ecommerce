@@ -16,13 +16,16 @@ import { Facebook, Google } from 'components/AllSvgIcon';
 import { AuthContext } from 'contexts/auth/auth.context';
 import { FormattedMessage } from 'react-intl';
 import { closeModal } from '@redq/reuse-modal';
-import Image from 'components/Image/Image';
-import PickBazar from '../../image/PickBazar.png';
+import { useAppDispatch, useAppSelector } from 'helper/hooks';
+import { login } from 'redux/account/accountReducer';
+import axiosRequest from 'services/axiosRequest';
 
 export default function SignInModal() {
   const { authDispatch } = useContext<any>(AuthContext);
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
+
+  const dispatch = useAppDispatch();
 
   const toggleSignUpForm = () => {
     authDispatch({
@@ -36,21 +39,27 @@ export default function SignInModal() {
     });
   };
 
-  const loginCallback = () => {
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('access_token', `${email}.${password}`);
-      authDispatch({ type: 'SIGNIN_SUCCESS' });
-      closeModal();
-    }
+  const handleLogin = () => {
+    dispatch(login({
+      request: {
+        userName: email,
+        password,
+      },
+      callback: loginCallback,
+    }));
+  }
+
+  const loginCallback = (token: string) => {
+    localStorage.setItem('access_token', token);
+    authDispatch({ type: 'SIGNIN_SUCCESS' });
+    closeModal();
+
+    return axiosRequest.setAuthentication(token);
   };
 
   return (
     <Wrapper>
       <Container>
-        {/* <LogoWrapper>
-          <Image url={PickBazar} />
-        </LogoWrapper> */}
-
         <Heading>
           <FormattedMessage id='welcomeBack' defaultMessage='Welcome Back' />
         </Heading>
@@ -61,14 +70,14 @@ export default function SignInModal() {
             defaultMessage='Login with your email &amp; password'
           />
         </SubHeading>
-        <form onSubmit={loginCallback}>
+        <form onSubmit={handleLogin}>
           <FormattedMessage
             id='emailAddressPlaceholder'
-            defaultMessage='Email Address.'
+            defaultMessage='Username.'
           >
             {placeholder => (
               <Input
-                type='email'
+                type='text'
                 placeholder={placeholder}
                 value={email}
                 onChange={e => setEmail(e.target.value)}
@@ -106,7 +115,7 @@ export default function SignInModal() {
           </span>
         </Divider>
 
-        <Button
+        {/* <Button
           fullwidth
           title={'Continue with Facebook'}
           className='facebook'
@@ -128,7 +137,7 @@ export default function SignInModal() {
           intlButtonId='continueGoogleBtn'
           onClick={loginCallback}
           style={{ color: '#fff' }}
-        />
+        /> */}
 
         <Offer style={{ padding: '20px 0' }}>
           <FormattedMessage
@@ -141,7 +150,7 @@ export default function SignInModal() {
         </Offer>
       </Container>
 
-      <OfferSection>
+      {/* <OfferSection>
         <Offer>
           <FormattedMessage
             id='forgotPasswordText'
@@ -151,7 +160,7 @@ export default function SignInModal() {
             <FormattedMessage id='resetText' defaultMessage='Reset It' />
           </LinkButton>
         </Offer>
-      </OfferSection>
+      </OfferSection> */}
     </Wrapper>
   );
 }

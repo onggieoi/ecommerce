@@ -2,11 +2,17 @@ import { configureStore, getDefaultMiddleware, combineReducers } from '@reduxjs/
 import createSagaMiddleware from 'redux-saga';
 
 import productReducer from './product/productReducer';
+import categoryReducer from './category/categoryReducer';
+import orderReducer from './order/orderReducer';
+import accountReducer from './account/accountReducer';
 
 import rootSaga from './sagas';
 
 const reducer = combineReducers({
   productReducer,
+  categoryReducer,
+  orderReducer,
+  accountReducer,
 });
 
 const sagaMiddleware = createSagaMiddleware();

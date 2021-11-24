@@ -17,7 +17,7 @@ const OrderPage: NextPage<Props> = ({ deviceType }) => {
   return (
     <>
       <Head>
-        <title>Offer - PickBazar</title>
+        <title>Offer - SNKR</title>
       </Head>
       <Modal>
         <PageWrapper>

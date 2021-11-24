@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
 import { openModal, closeModal } from '@redq/reuse-modal';
@@ -18,8 +18,9 @@ import Placeholder from 'components/Placeholder/Placeholder';
 import Fade from 'react-reveal/Fade';
 import NoResultFound from 'components/NoResult/NoResult';
 import { useAppDispatch, useAppSelector } from 'helper/hooks';
-import { getMore, getProducts } from 'redux/product/productReducer';
-import { Product, ProductQuery } from 'models/product';
+import { getMore, getProducts, ProductQuery } from 'redux/product/productReducer';
+import { Product } from 'models/product';
+import { SearchContext } from 'contexts/search/search.context';
 
 const QuickView = dynamic(() => import('../QuickView/QuickView'));
 
@@ -41,16 +42,14 @@ export const Products: React.FC<ProductsProps> = ({
 }) => {
   const router = useRouter();
   const [loadingMore, toggleLoading] = useState(false);
-  const [query, setQuery] = useState({
-    page: 1,
-  } as ProductQuery);
+  const { state, dispatch: searchDispatch } = useContext(SearchContext);
 
   const dispatch = useAppDispatch();
-  const { data, loading: loading } = useAppSelector(state => state.productReducer);
+  const { data, loading } = useAppSelector(state => state.productReducer);
 
   useEffect(() => {
-    dispatch(getProducts(query));
-  }, []);
+    dispatch(getProducts(state));
+  }, [state]);
 
   // Quick View Modal
   const handleModalClose = () => {
@@ -63,14 +62,14 @@ export const Products: React.FC<ProductsProps> = ({
   const handleQuickViewModal = React.useCallback(
     (modalProps: any, deviceType: any, onModalClose: any) => {
       if (router.pathname === '/product/[slug]') {
-        const as = `/product/${modalProps.slug}`;
+        const as = `/product/${modalProps.title}`;
         router.push(router.pathname, as);
         return;
       }
       openModal({
         show: true,
         overlayClassName: 'quick-view-overlay',
-        closeOnClickOutside: false,
+        closeOnClickOutside: true,
         component: QuickView,
         componentProps: { modalProps, deviceType, onModalClose },
         closeComponent: 'div',
@@ -88,8 +87,8 @@ export const Products: React.FC<ProductsProps> = ({
           },
         },
       });
-      const href = `${router.pathname}?${modalProps.slug}`;
-      const as = `/product/${modalProps.slug}`;
+      const href = `${router.pathname}?${modalProps.title}`;
+      const as = `/product/${modalProps.title}`;
       router.push(href, as, { shallow: true });
     },
     []
@@ -119,16 +118,17 @@ export const Products: React.FC<ProductsProps> = ({
   const handleLoadMore = () => {
     toggleLoading(true);
 
-    const page = query.page + 1;
+    const payload: ProductQuery = {
+      ...state,
+      page: state.page + 1,
+    };
 
-    setQuery({
-      ...query,
-      page,
+    searchDispatch({
+      type: 'UPDATE',
+      payload,
     });
 
-    dispatch(getMore({
-      page,
-    }));
+    dispatch(getMore(payload));
 
     toggleLoading(false);
   };
@@ -164,7 +164,7 @@ export const Products: React.FC<ProductsProps> = ({
           </ProductsCol>
         ))}
       </ProductsRow>
-      {loadMore && data.hasMore && (
+      {data.hasMore && (
         <ButtonWrapper>
           <Button
             onClick={handleLoadMore}

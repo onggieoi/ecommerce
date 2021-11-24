@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
@@ -9,6 +9,8 @@ import ProductSingleWrapper, {
   ProductSingleContainer,
 } from 'styled/product-single.style';
 import CartPopUp from 'containers/Cart/CartPopUp';
+import { useAppDispatch, useAppSelector } from 'helper/hooks';
+import { getProductDetail } from 'redux/product/productReducer';
 
 type Props = {
   deviceType?: {
@@ -22,42 +24,36 @@ const ProductPage: NextPage<Props> = ({ deviceType }) => {
   const {
     query: { slug },
   } = useRouter();
+  const targetRef = React.useRef(null);
 
-  const { data, error, loading } = {} as any
-  //   const { data, error, loading } = useQuery(GET_PRODUCT_DETAILS, {
-  //   variables: { slug },
-  // });
+  const { loading, productDetail } = useAppSelector(state => state.productReducer);
 
-  if (loading) {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    window.scrollTo({
+      top: targetRef.current.offsetTop,
+      behavior: 'smooth',
+    });
+
+    dispatch(getProductDetail(slug.toString()));
+  }, [slug]);
+
+  if (loading && !productDetail) {
     return <div>loading...</div>;
-  }
-
-  if (error) return <div>Error: {error.message}</div>;
-
-  let content;
-  switch (data.product.type) {
-    case 'books': {
-      content = (
-        <ProductDetailsBook product={data.product} deviceType={deviceType} />
-      );
-      break;
-    }
-    default: {
-      content = (
-        <ProductDetails product={data.product} deviceType={deviceType} />
-      );
-    }
   }
 
   return (
     <>
       <Head>
-        <title>{data.product.title} - PickBazar</title>
+        <title>{productDetail?.title} - SNKR</title>
       </Head>
       <Modal>
-        <ProductSingleWrapper>
+        <ProductSingleWrapper ref={targetRef}>
           <ProductSingleContainer>
-            {content}
+            {productDetail && (
+              <ProductDetails product={productDetail} deviceType={deviceType} />
+            )}
             <CartPopUp deviceType={deviceType} />
           </ProductSingleContainer>
         </ProductSingleWrapper>

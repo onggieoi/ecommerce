@@ -25,7 +25,7 @@ const Banner: React.FC<BannerProps> = ({
 }) => {
   const { state, dispatch } = useContext(SearchContext);
   const router = useRouter();
-  const { text } = state;
+  const { search } = state;
 
   const { pathname } = router;
 
@@ -34,7 +34,7 @@ const Banner: React.FC<BannerProps> = ({
       type: 'UPDATE',
       payload: {
         ...state,
-        text,
+        search: text,
       },
     });
   };
@@ -45,11 +45,11 @@ const Banner: React.FC<BannerProps> = ({
     router.push(
       {
         pathname: pathname,
-        query: { ...urlState, text },
+        query: { ...urlState, search },
       },
       {
-        pathname: pathname === '/' ? `${pathname}grocery` : pathname,
-        query: { ...urlState, text },
+        pathname: pathname,
+        query: { ...urlState, search },
       },
       { shallow: true }
     );
@@ -97,7 +97,7 @@ const Banner: React.FC<BannerProps> = ({
             overflow: 'hidden',
           }}
           handleSearch={(value: string) => handleSearchInput(value)}
-          value={state.text || ''}
+          value={search || ''}
           onClick={handleClickSearchButton}
           className="banner-search"
           pathname={pathname}

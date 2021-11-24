@@ -1,5 +1,6 @@
 export type Paging<T> = {
   items: T[];
-  totalCount: number;
+  totalItems: number;
   hasMore: boolean;
+  currentPage: number;
 };

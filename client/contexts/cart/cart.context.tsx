@@ -1,8 +1,9 @@
+import { Coupon } from 'models/order';
+import { Product, ProductCart } from 'models/product';
 import { createContext } from 'react';
-import { Product, Coupon } from 'interfaces';
 
 interface Products {
-  products: Product[];
+  products: ProductCart[];
 }
 
 interface ContextProps extends Products {

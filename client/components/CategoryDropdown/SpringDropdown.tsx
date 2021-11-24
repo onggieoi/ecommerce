@@ -9,10 +9,11 @@ import {
   IconWrapper,
 } from './CategoryDropdown.style';
 import CategoryIcon from './CategoryIcon';
+import { Category } from 'models/category';
 
 type DropdownProps = {
   className?: string;
-  items: any[];
+  items: Category[];
   id?: number;
   handleCategorySelection?: any;
   selectedQueries?: any;
@@ -115,27 +116,21 @@ const CategoryDropdown: React.FC<DropdownProps> = ({
         items.map(dropdown => {
           return (
             <DropdownItem
-              key={dropdown.slug}
-              title={dropdown.title}
+              key={dropdown.id}
+              title={dropdown.name}
               iconArrays={iconList}
               categoryIcon={dropdown.icon}
               activeClass={
-                selectedQueries && selectedQueries.includes(dropdown.slug)
+                selectedQueries && selectedQueries.includes(dropdown.name)
                   ? 'active'
                   : ''
               }
-              isOpen={
-                selectedQueries &&
-                (selectedQueries.includes(dropdown.slug) ||
-                  dropdown.children.find(children =>
-                    selectedQueries.includes(children.slug)
-                  ))
-              }
+              isOpen={selectedQueries && (selectedQueries.includes(dropdown.name))}
               onClick={() => {
-                handleCategorySelection(dropdown.slug);
+                handleCategorySelection(dropdown.name);
               }}
             >
-              {dropdown.children.map((item: any) => {
+              {/* {dropdown.children.map((item: Category) => {
                 return (
                   <DropdownSubItem
                     key={item.slug}
@@ -150,7 +145,7 @@ const CategoryDropdown: React.FC<DropdownProps> = ({
                     }
                   />
                 );
-              })}
+              })} */}
             </DropdownItem>
           );
         })}

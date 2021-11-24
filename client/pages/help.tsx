@@ -70,11 +70,11 @@ export const HelpPageContainer = styled.div`
   }
 `;
 
-export default function() {
+export default function () {
   return (
     <Modal>
       <Head>
-        <title>PickBazar</title>
+        <title>SNKR</title>
       </Head>
       <HelpPageWrapper>
         <HelpPageContainer>
@@ -83,11 +83,7 @@ export default function() {
         </HelpPageContainer>
 
         <SiteFooter style={{ marginTop: 50 }}>
-          <FormattedMessage
-            id='siteFooter'
-            defaultMessage='Pickbazar is a product of'
-          />
-          &nbsp; <a href='#'>Redq, Inc.</a>
+          SNKR &nbsp; <a href='https://www.instagram.com/onggieoi/'>onggieoi, Inc.</a>
         </SiteFooter>
       </HelpPageWrapper>
     </Modal>

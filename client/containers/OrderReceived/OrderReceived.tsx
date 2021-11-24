@@ -14,10 +14,18 @@ import OrderRecivedWrapper, {
   ListDes,
 } from './OrderReceived.style';
 import { FormattedMessage } from 'react-intl';
+import { Order } from 'models/order';
+import moment from 'moment';
+import { DATETIME_FORMAT, DATE_FORMAT } from 'constants/date';
 
-type OrderRecivedProps = {};
+type OrderRecivedProps = {
+  orderDetail: Order,
+};
 
-const OrderRecived: React.FunctionComponent<OrderRecivedProps> = props => {
+const OrderRecived: React.FunctionComponent<OrderRecivedProps> = ({
+  orderDetail,
+}) => {
+
   return (
     <OrderRecivedWrapper>
       <OrderRecivedContainer>
@@ -50,21 +58,21 @@ const OrderRecived: React.FunctionComponent<OrderRecivedProps> = props => {
                   defaultMessage="Order Number"
                 />
               </Text>
-              <Text>1444</Text>
+              <Text>{orderDetail.id}</Text>
             </InfoBlock>
 
             <InfoBlock>
               <Text bold className="title">
                 <FormattedMessage id="orderDateText" defaultMessage="Date" />
               </Text>
-              <Text>March 14, 2019</Text>
+              <Text>{moment(orderDetail.createAt).format(DATETIME_FORMAT)}</Text>
             </InfoBlock>
 
             <InfoBlock>
               <Text bold className="title">
                 <FormattedMessage id="totalText" defaultMessage="Total" />
               </Text>
-              <Text>$10,944.00</Text>
+              <Text>${orderDetail.totalPrice}</Text>
             </InfoBlock>
 
             <InfoBlock>
@@ -75,10 +83,7 @@ const OrderRecived: React.FunctionComponent<OrderRecivedProps> = props => {
                 />
               </Text>
               <Text>
-                <FormattedMessage
-                  id="paymentMethodName"
-                  defaultMessage="Cash on delivery"
-                />
+                <p>Online payment</p>
               </Text>
             </InfoBlock>
           </InfoBlockWrapper>
@@ -102,7 +107,7 @@ const OrderRecived: React.FunctionComponent<OrderRecivedProps> = props => {
               </Text>
             </ListTitle>
             <ListDes>
-              <Text>6 Items</Text>
+              <Text>{orderDetail.orderDetails?.length} Items</Text>
             </ListDes>
           </ListItem>
 
@@ -116,7 +121,7 @@ const OrderRecived: React.FunctionComponent<OrderRecivedProps> = props => {
               </Text>
             </ListTitle>
             <ListDes>
-              <Text>1.00pm 10/12/19</Text>
+              <Text>{moment(orderDetail.createAt).format(DATE_FORMAT)} - {moment(orderDetail.createAt).add(7, 'day').format(DATE_FORMAT)}</Text>
             </ListDes>
           </ListItem>
 
@@ -130,7 +135,7 @@ const OrderRecived: React.FunctionComponent<OrderRecivedProps> = props => {
               </Text>
             </ListTitle>
             <ListDes>
-              <Text>90 Minute Express Delivery</Text>
+              <Text>Express Delivery</Text>
             </ListDes>
           </ListItem>
 
@@ -145,7 +150,7 @@ const OrderRecived: React.FunctionComponent<OrderRecivedProps> = props => {
             </ListTitle>
             <ListDes>
               <Text>
-                1st Floor, House 149, Road-22, Mohakhali DOHS, Dhaka - North
+                {orderDetail?.address?.info}
               </Text>
             </ListDes>
           </ListItem>
@@ -180,11 +185,11 @@ const OrderRecived: React.FunctionComponent<OrderRecivedProps> = props => {
               </Text>
             </ListTitle>
             <ListDes>
-              <Text>Cash On Delivery</Text>
+              {orderDetail.card && <Text>{orderDetail.card.name}: *** **** **** {orderDetail.card.lastFourDigit} - {orderDetail.card.cardType}</Text>}
             </ListDes>
           </ListItem>
 
-          <ListItem>
+          {/* <ListItem>
             <ListTitle>
               <Text bold>
                 <FormattedMessage
@@ -196,7 +201,7 @@ const OrderRecived: React.FunctionComponent<OrderRecivedProps> = props => {
             <ListDes>
               <Text>10</Text>
             </ListDes>
-          </ListItem>
+          </ListItem> */}
 
           <ListItem>
             <ListTitle>
@@ -205,7 +210,7 @@ const OrderRecived: React.FunctionComponent<OrderRecivedProps> = props => {
               </Text>
             </ListTitle>
             <ListDes>
-              <Text>$10,874.00</Text>
+              <Text>${orderDetail.totalPrice}</Text>
             </ListDes>
           </ListItem>
         </TotalAmount>

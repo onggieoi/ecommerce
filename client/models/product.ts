@@ -1,6 +1,6 @@
 import { Category } from "./category"
 
-export type Product = {
+export interface Product {
   id: string;
   title: string;
   description: string;
@@ -18,7 +18,6 @@ export type Gallery = {
   url: string;
 }
 
-export type ProductQuery = {
-  page?: number,
-  search?: string;
+export interface ProductCart extends Product {
+  quantity: number;
 }

@@ -1,94 +1,82 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+
 import { Paging } from "models/paging";
 import { Product } from "models/product";
-
-import { SetStatusType } from "src/constants/status";
-import IAccount from "src/interfaces/IAccount";
-import IChangePassword from "src/interfaces/IChangePassword";
-import IError from "src/interfaces/IError";
-import ILoginModel from "src/interfaces/ILoginModel";
-import ISubmitAction from "src/interfaces/ISubmitActions";
-import request from "src/services/request";
-import { getLocalStorage, removeLocalStorage, setLocalStorage } from "src/utils/localStorage";
 
 type ProductState = {
   loading: boolean;
   data: Paging<Product>;
+  productDetail?: Product;
 }
-
-const token = getLocalStorage('token');
 
 const initialState: ProductState = {
   loading: false,
+  data: {
+    totalItems: 0,
+    currentPage: 1,
+    items: [],
+    hasMore: false,
+  }
 };
 
-const AuthSlice = createSlice({
-  name: 'auth',
+export type ProductQuery = {
+  page: number;
+  category?: string;
+  search?: string;
+}
+
+const ProductSlice = createSlice({
+  name: 'product',
   initialState,
   reducers: {
-    setAccount: (state: AuthState, action: PayloadAction<IAccount>): AuthState => {
-      const account = action.payload;
-      if (account?.token) {
-        setLocalStorage('token', account.token);
-        request.setAuthentication(account.token);
-      }
-
-      return {
-        ...state,
-        // status: Status.Success,
-        account,
-        isAuth: true,
-        loading: false,
-      };
-    },
-    setStatus: (state: AuthState, action: PayloadAction<SetStatusType>) => {
-      const { status, error } = action.payload;
-
-      return {
-        ...state,
-        status,
-        error,
-        loading: false,
-      }
-    },
-    me: (state) => {
-      if (token) {
-        request.setAuthentication(token);
-      }
-    },
-    login: (state: AuthState, action: PayloadAction<ILoginModel>) => ({
+    getProducts: (state: ProductState, action: PayloadAction<ProductQuery>): ProductState => ({
       ...state,
       loading: true,
     }),
-    changePassword: (state: AuthState, action: PayloadAction<ISubmitAction<IChangePassword>>) => {
+    getMore: (state: ProductState, action: PayloadAction<ProductQuery>) => ({
+      ...state,
+    }),
+    getProductDetail: (state: ProductState, action: PayloadAction<string>): ProductState => ({
+      ...state,
+      loading: true,
+    }),
+    setProducts: (state: ProductState, action: PayloadAction<Paging<Product>>) => {
+      const data = action.payload;
+
+      if (data.currentPage > 1) {
+
+        return {
+          ...state,
+          loading: false,
+          data: {
+            ...data,
+            items: [...state.data.items, ...data.items],
+          },
+        }
+      }
+
       return {
         ...state,
-        loading: true,
+        loading: false,
+        data,
       }
     },
-    logout: (state: AuthState) => {
-
-      removeLocalStorage('token');
-      request.setAuthentication('')
+    setProductDetail: (state: ProductState, action: PayloadAction<Product>) => {
+      const productDetail = action.payload;
 
       return {
         ...state,
-        isAuth: false,
-        account: undefined,
-        status: undefined,
-      };
+        loading: false,
+        productDetail,
+      }
     },
-    cleanUp: (state) => ({
-      ...state,
-      loading: false,
-      status: undefined,
-      error: undefined,
-    }),
   }
 });
 
 export const {
-  setAccount, login, setStatus, me, changePassword, logout, cleanUp,
-} = AuthSlice.actions;
+  getProducts, getProductDetail, getMore, setProducts, setProductDetail,
+} = ProductSlice.actions;
 
-export default AuthSlice.reducer;
+
+const ProductReducer = ProductSlice.reducer
+export default ProductReducer;

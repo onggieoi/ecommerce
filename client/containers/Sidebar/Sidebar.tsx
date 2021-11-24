@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Sticky from 'react-stickynode';
 import { Scrollbars } from 'react-custom-scrollbars';
@@ -51,6 +51,8 @@ import {
   Wallet,
   WomenDress,
 } from 'components/AllSvgIcon';
+import { useAppDispatch, useAppSelector } from 'helper/hooks';
+import { getCategories } from 'redux/category/categoryReducer';
 
 let iconTypes = {
   Accessories: Accessories,
@@ -91,25 +93,27 @@ type SidebarCategoryProps = {
     tablet: string;
     desktop: boolean;
   };
-  type: string;
 };
 
 const SidebarCategory: React.FC<SidebarCategoryProps> = ({
   deviceType: { mobile, tablet, desktop },
-  type,
 }) => {
-  const { state, dispatch } = useContext(SearchContext);
+  const { state, dispatch: searchDispatch } = useContext(SearchContext);
   const router = useRouter();
   const { pathname } = router;
 
-  const { data, loading } = {} as any;
-  // const { data, loading } = useQuery(GET_CATEGORIES, {
-  //   variables: { type },
-  // });
+  const dispatch = useAppDispatch();
+
+  const { categories, loading } = useAppSelector(state => state.categoryReducer);
+
+  useEffect(() => {
+    dispatch(getCategories());
+  }, []);
 
   const selectedQueries = state && state.category && state.category.split(',');
+
   const handleCategorySelection = (slug: string) => {
-    dispatch({
+    searchDispatch({
       type: 'UPDATE',
       payload: {
         ...state,
@@ -124,15 +128,16 @@ const SidebarCategory: React.FC<SidebarCategoryProps> = ({
         query: { ...urlState, category: slug },
       },
       {
-        pathname: pathname === '/' ? `${pathname}${type}` : pathname,
+        pathname: pathname,
         query: { ...urlState, category: slug },
       },
       { shallow: true }
     );
   };
+
   const isSidebarSticky = useStickyState('isSidebarSticky');
 
-  if (!data || loading) {
+  if (!categories || loading) {
     if (mobile || tablet) {
       return <SidebarMobileLoader />;
     }
@@ -158,7 +163,7 @@ const SidebarCategory: React.FC<SidebarCategoryProps> = ({
           content={
             <>
               <CategoryDropdown
-                items={data.categories}
+                items={categories}
                 iconList={iconTypes}
                 handleCategorySelection={(slug: any) =>
                   handleCategorySelection(slug)
@@ -188,7 +193,7 @@ const SidebarCategory: React.FC<SidebarCategoryProps> = ({
               content={
                 <>
                   <CategoryDropdown
-                    items={data.categories}
+                    items={categories}
                     iconList={iconTypes}
                     handleCategorySelection={(slug: any) =>
                       handleCategorySelection(slug)
@@ -204,7 +209,7 @@ const SidebarCategory: React.FC<SidebarCategoryProps> = ({
             <Sticky enabled={isSidebarSticky} top={110}>
               <Scrollbars universal autoHide autoHeight autoHeightMax={688}>
                 <CategoryDropdown
-                  items={data.categories}
+                  items={categories}
                   iconList={iconTypes}
                   handleCategorySelection={(id: any) =>
                     handleCategorySelection(id)

@@ -1,14 +1,11 @@
 import React, { useReducer } from 'react';
+
+import axiosRequest from 'services/axiosRequest';
 import { AuthContext } from './auth.context';
+
 const isBrowser = typeof window !== 'undefined';
-const INITIAL_STATE = {
-  isAuthenticated: isBrowser && !!localStorage.getItem('access_token'),
-  currentForm: 'signIn',
-};
 
 function reducer(state: any, action: any) {
-  console.log(state, 'auth');
-
   switch (action.type) {
     case 'SIGNIN':
       return {
@@ -41,7 +38,21 @@ function reducer(state: any, action: any) {
 }
 
 export const AuthProvider: React.FunctionComponent = ({ children }) => {
-  const [authState, authDispatch] = useReducer(reducer, INITIAL_STATE);
+  let isAuthenticated = false;
+  if (isBrowser) {
+    const token = localStorage.getItem('access_token');
+
+    if (token) {
+      isAuthenticated = true;
+      axiosRequest.setAuthentication(token);
+    }
+  }
+
+  const [authState, authDispatch] = useReducer(reducer, {
+    isAuthenticated,
+    currentForm: 'signIn',
+  });
+
   return (
     <AuthContext.Provider value={{ authState, authDispatch }}>
       {children}

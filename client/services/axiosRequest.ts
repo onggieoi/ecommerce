@@ -1,7 +1,7 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from "axios";
 
 const config: AxiosRequestConfig = {
-  baseURL: process.env.REACT_APP_API_URL ?? 'https://localhost:7293/',
+  baseURL: process.env.BACKEND_URL ?? 'https://localhost:7293/api/',
 }
 
 class RequestService {

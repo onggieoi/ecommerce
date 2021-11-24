@@ -6,7 +6,7 @@ const withCSS = require('@zeit/next-css');
 // next.js configuration
 const nextConfig = {
   env: {
-    BACKEND_URL: 'https://localhost:7293',
+    BACKEND_URL: 'https://localhost:7293/api/',
   },
   webpack: config => {
     config.resolve.modules.push(__dirname);
@@ -20,7 +20,7 @@ const nextConfig = {
       use: {
         loader: 'url-loader',
         options: {
-          limit: false,
+          // limit: false,
           // name: '[name].[ext]'
         }
       }

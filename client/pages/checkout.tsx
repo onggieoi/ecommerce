@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Head from "next/head";
 import { NextPage } from "next";
 import { Modal } from "@redq/reuse-modal";
 import Checkout from "containers/Checkout/Checkout";
 
 import { ProfileProvider } from "contexts/profile/profile.provider";
+import { useAppDispatch, useAppSelector } from "helper/hooks";
+import { getMe } from "redux/account/accountReducer";
 
 type Props = {
   deviceType: {
@@ -14,22 +16,29 @@ type Props = {
   };
 };
 const CheckoutPage: NextPage<Props> = ({ deviceType }) => {
-  const { data, error, loading } = {} as any;
-  // const { data, error, loading } = useQuery(GET_LOGGED_IN_CUSTOMER);
-  if (loading) {
+  const { me, loading } = useAppSelector(state => state.accountReducer);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(getMe());
+  }, []);
+
+  if (loading && !me) {
     return <div>loading...</div>;
   }
-  if (error) return <div>{error.message}</div>;
-  const token = true;
+
+  // if (error) return <div>{error.message}</div>;
 
   return (
     <>
       <Head>
-        <title>Checkout - PickBazar</title>
+        <title>Checkout - SNKR</title>
       </Head>
-      <ProfileProvider initData={data.me}>
+      <ProfileProvider initData={me}>
         <Modal>
-          <Checkout token={token} deviceType={deviceType} />
+          {me &&
+            <Checkout token={true} deviceType={deviceType} />
+          }
         </Modal>
       </ProfileProvider>
     </>

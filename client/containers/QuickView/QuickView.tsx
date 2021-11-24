@@ -31,6 +31,7 @@ import { findProductIndex, getProductQuantity } from 'helper/utility';
 import ReadMore from 'components/Truncate/Truncate';
 import CarouselWithCustomDots from 'components/MultiCarousel/MultiCarousel';
 import LanguageContext from 'contexts/language/language.context';
+import Link from 'next/link';
 
 type QuickViewProps = {
   modalProps: any;
@@ -108,7 +109,11 @@ const QuickView: React.FunctionComponent<QuickViewProps> = ({
           >
             <Scrollbars universal autoHide autoHeight autoHeightMax='90vh'>
               <ProductInfo>
-                <ProductTitle>{title}</ProductTitle>
+                <ProductTitle>
+                  <Link href={`/product/${title}`}>
+                    {title}
+                  </Link>
+                </ProductTitle>
                 <ProductWeight>{unit}</ProductWeight>
                 <ProductDescription>
                   <ReadMore character={600}>{description}</ReadMore>
@@ -158,13 +163,13 @@ const QuickView: React.FunctionComponent<QuickViewProps> = ({
                   <MetaSingle>
                     {categories
                       ? categories.map((item: any) => (
-                          <MetaItem
-                            onClick={() => onCategoryClick(item.slug)}
-                            key={item.id}
-                          >
-                            {item.title}
-                          </MetaItem>
-                        ))
+                        <MetaItem
+                          onClick={() => onCategoryClick(item.slug)}
+                          key={item.id}
+                        >
+                          {item.title}
+                        </MetaItem>
+                      ))
                       : ''}
                   </MetaSingle>
                 </ProductMeta>

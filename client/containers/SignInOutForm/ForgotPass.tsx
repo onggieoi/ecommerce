@@ -12,8 +12,6 @@ import {
 } from './SignInOutForm.style';
 import { FormattedMessage } from 'react-intl';
 import { AuthContext } from 'contexts/auth/auth.context';
-import Image from 'components/Image/Image';
-import PickBazar from '../../image/PickBazar.png';
 
 export default function ForgotPassModal() {
   const { authDispatch } = useContext<any>(AuthContext);
@@ -25,9 +23,6 @@ export default function ForgotPassModal() {
   return (
     <Wrapper>
       <Container style={{ paddingBottom: 30 }}>
-        {/* <LogoWrapper>
-          <Image url={PickBazar} />
-        </LogoWrapper> */}
 
         <Heading>
           <FormattedMessage

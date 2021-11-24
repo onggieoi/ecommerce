@@ -46,7 +46,7 @@ const Search: React.FC<SearchBoxProps> = ({
   minimal,
   pathname,
 }) => {
-  const [searchValue, setSearchValue] = useState();
+  const [searchValue, setSearchValue] = useState('');
   const [toggleSuggestion, setToggleSuggestion] = useState(false);
   const [toggleSearch, setToggleSearch] = useState(false);
 
@@ -68,7 +68,7 @@ const Search: React.FC<SearchBoxProps> = ({
   const ucwords = (str: string) => {
     const newString = str.replace(/\//g, '');
     const humanString = newString.replace(/-/g, ' ');
-    return (humanString + '').replace(/^([a-z])|\s+([a-z])/g, function($1) {
+    return (humanString + '').replace(/^([a-z])|\s+([a-z])/g, function ($1) {
       return $1.toUpperCase();
     });
   };
@@ -99,15 +99,10 @@ const Search: React.FC<SearchBoxProps> = ({
       expand={expand}
     >
       <SearchBoxWrapper
-        className={`${hideType ? 'hideType' : ''} ${
-          expand === true ? (toggleSearch ? 'expanded' : 'collapsed') : ''
-        } ${minimal === true ? 'minimal' : ''}`}
+        className={`${hideType ? 'hideType' : ''} ${expand === true ? (toggleSearch ? 'expanded' : 'collapsed') : ''
+          } ${minimal === true ? 'minimal' : ''}`}
       >
-        {pathname && pathname !== '/' ? (
-          <CurrentType>{ucwords(pathname)}</CurrentType>
-        ) : (
-          <CurrentType>Grocery</CurrentType>
-        )}
+        <CurrentType>SNKR skrt!!!</CurrentType>
 
         <InputSearch
           type='text'

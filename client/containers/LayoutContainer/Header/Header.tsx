@@ -168,13 +168,15 @@ const Header: React.FC<HeaderProps> = ({
     }
   );
 
-  const { text } = state;
+  const { search } = state;
+
   const handleSearch = (text: any) => {
     dispatch({
       type: 'UPDATE',
       payload: {
         ...state,
-        text,
+        page: 1,
+        search: text,
       },
     });
   };
@@ -182,8 +184,8 @@ const Header: React.FC<HeaderProps> = ({
   const { page, ...urlState } = state;
   const handleClickSearchButton = () => {
     Router.push({
-      pathname: pathname === '/' ? '/grocery' : pathname,
-      query: { ...urlState, text },
+      pathname: pathname,
+      query: { ...urlState, search },
     });
   };
 
@@ -275,7 +277,7 @@ const Header: React.FC<HeaderProps> = ({
         >
           <Link href={HOME_PAGE}>
             <a>
-              <img src={Logoimage} alt='pickbazar-admin' />
+              <img src={Logoimage} alt='snkr-admin' />
             </a>
           </Link>
         </Logo>
@@ -307,7 +309,7 @@ const Header: React.FC<HeaderProps> = ({
           minimal={true}
           showSvg={true}
           style={{ width: '100%' }}
-          value={text || ''}
+          value={search || ''}
         />
       ) : null}
       <HeaderRightSide>

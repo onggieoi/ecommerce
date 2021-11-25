@@ -5,3 +5,4 @@ backend/obj
 
 
 */node_modules/*
+backend/appsettings.Development.json

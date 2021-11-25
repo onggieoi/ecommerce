@@ -1,0 +1,3 @@
+INSERT INTO public."Contacts" ("Id","Number","Type","UserId","CreateAt","UpdateAt") VALUES
+	 ('d0cb91ae-e858-4209-b7f2-837b866f0d3c'::uuid,'333-145-87451','primary','a72b7828-ae7d-4129-92e0-2f18217cc397'::uuid,'2021-11-21 16:56:05.712073+07','2021-11-21 16:56:05.712073+07'),
+	 ('f4529b6d-56e9-4ea7-a9c9-0512c3872f63'::uuid,'333-145-87451','primary','daf9ea3a-5c35-4fa9-a2a9-d1b0b4aea17f'::uuid,'2021-11-21 21:55:25.457439+07','2021-11-21 21:55:25.457439+07');

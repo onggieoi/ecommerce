@@ -1,0 +1,5 @@
+INSERT INTO public."Cards" ("Id","CardType","LastFourDigit","Name","Type","UserId","CreateAt","UpdateAt") VALUES
+	 ('3fa85f64-5717-4562-b3fc-2c963f66afa6'::uuid,'paypal',1234,'Jhon Doe Smith','primary','a72b7828-ae7d-4129-92e0-2f18217cc397'::uuid,'2021-11-21 16:27:23.041999+07','2021-11-21 16:27:23.042+07'),
+	 ('3fa85f64-5717-4562-b3fc-2c963f66afa7'::uuid,'master',4567,'Jhon Doe Smith','secondary','a72b7828-ae7d-4129-92e0-2f18217cc397'::uuid,'2021-11-21 16:27:23.041999+07','2021-11-21 16:27:23.042+07'),
+	 ('3fa85f64-5717-4562-b3fc-2c963f66afa8'::uuid,'visa',8910,'Jhon Doe Smith','secondary','a72b7828-ae7d-4129-92e0-2f18217cc397'::uuid,'2021-11-21 16:27:23.041999+07','2021-11-21 16:27:23.042+07'),
+	 ('0ff38291-b59d-4f22-9d1a-6fbc46374eba'::uuid,'visa',2485,'John Snow','primary','daf9ea3a-5c35-4fa9-a2a9-d1b0b4aea17f'::uuid,'2021-11-21 21:55:25.457438+07','2021-11-21 21:55:25.457438+07');

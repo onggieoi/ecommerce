@@ -1,0 +1,3 @@
+INSERT INTO public."Addresses" ("Id","Name","Type","Info","UserId","CreateAt","UpdateAt") VALUES
+	 ('3fa85f64-5717-4562-b3fc-2c963f66afa6'::uuid,'Home','primary','27 Street, 2569 Heritage Road Visalia, CA 93291','a72b7828-ae7d-4129-92e0-2f18217cc397'::uuid,'2021-11-21 16:27:23.041858+07','2021-11-21 16:27:23.041935+07'),
+	 ('7f831cbb-f555-41ed-af3c-ab25113076f8'::uuid,'Home','primary','27 Street, 2569 Heritage Road Visalia, CA 93291','daf9ea3a-5c35-4fa9-a2a9-d1b0b4aea17f'::uuid,'2021-11-21 21:55:25.457329+07','2021-11-21 21:55:25.457396+07');

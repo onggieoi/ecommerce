@@ -2,8 +2,9 @@ import Currency from 'currency.js';
 import React, { useState, useReducer } from 'react';
 import { getLocalState, setLocalState } from 'helper/localStorage';
 import { cartAnimation } from 'helper/utility';
-import { Product, Coupon } from 'interfaces';
 import { CartContext } from './cart.context';
+import { Coupon } from 'models/order';
+import { Product, ProductCart } from 'models/product';
 
 const initialState = {
   isOpen: false,
@@ -21,7 +22,7 @@ function reducer(cartState: any, action: any) {
   }
 }
 
-const getCartProducts = () => {
+const getCartProducts = (): ProductCart[] => {
   const products = getLocalState('cart');
   return products ? products : [];
 };
@@ -39,7 +40,7 @@ const getCoupon = () => {
   return {
     id: 0,
     code: 'DEFAULT_COUPON',
-    discountInPercent: 0,
+    discount: 0,
   };
 };
 
@@ -50,7 +51,7 @@ const getDiscount = () => {
 
 export const CartProvider = (props: any) => {
   const [cartState, dispatch] = useReducer(reducer, initialState);
-  const [products, setProducts] = useState(getCartProducts() as Product[]);
+  const [products, setProducts] = useState(getCartProducts());
   const [totalPrice, setTotalPrice] = useState(getTotalPrice() as number);
   const [subtotalPrice, setSubTotalPrice] = useState(getTotalPrice() as number);
   const [coupon, setCoupon] = useState(getCoupon() as Coupon);
@@ -60,7 +61,7 @@ export const CartProvider = (props: any) => {
     setLocalState('totalPrice', price);
     setTotalPrice(price);
   };
-  const calculateTotalPrice = (products: Product[], coupon: Coupon): number => {
+  const calculateTotalPrice = (products: ProductCart[], coupon: Coupon): number => {
     let total = Currency(0);
     let finalTotal;
     products.forEach(product => {
@@ -72,8 +73,8 @@ export const CartProvider = (props: any) => {
     finalTotal = Number(total.value);
     setLocalState('subTotalPrice', finalTotal);
     setSubTotalPrice(finalTotal);
-    if (coupon.discountInPercent) {
-      const discount = (finalTotal * Number(coupon.discountInPercent)) / 100;
+    if (coupon.discount) {
+      const discount = (finalTotal * Number(coupon.discount)) / 100;
       setLocalState('discount', discount);
       setDiscount(discount);
       finalTotal = finalTotal - discount;
@@ -113,20 +114,20 @@ export const CartProvider = (props: any) => {
 
   const removeCoupon = () => {
     setLocalState('coupon', {
-      id: 0,
+      id: "",
       code: 'DEFAULT_COUPON',
-      discountInPercent: 0,
+      discount: 0,
     });
     setLocalState('discount', 0);
     setCoupon({
-      id: 0,
+      id: "",
       code: 'DEFAULT_COUPON',
-      discountInPercent: 0,
+      discount: 0,
     });
     setPrice({
       id: 0,
       code: 'DEFAULT_COUPON',
-      discountInPercent: 0,
+      discount: 0,
     });
   };
 
@@ -147,14 +148,14 @@ export const CartProvider = (props: any) => {
       setLocalState('coupon', {
         id: 0,
         code: 'DEFAULT_COUPON',
-        discountInPercent: 0,
+        discount: 0,
       });
       setLocalState('discount', 0);
       setDiscount(0);
       setCoupon({
-        id: 0,
+        id: "",
         code: 'DEFAULT_COUPON',
-        discountInPercent: 0,
+        discount: 0,
       });
     }
     setPrice();
@@ -166,14 +167,14 @@ export const CartProvider = (props: any) => {
     setLocalState('discount', 0);
     setDiscount(0);
     setCoupon({
-      id: 0,
+      id: "",
       code: 'DEFAULT_COUPON',
-      discountInPercent: 0,
+      discount: 0,
     });
     setLocalState('coupon', {
       id: 0,
       code: 'DEFAULT_COUPON',
-      discountInPercent: 0,
+      discount: 0,
     });
     // setPrice();
     setLocalState('totalPrice', 0);

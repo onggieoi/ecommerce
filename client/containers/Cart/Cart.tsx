@@ -30,15 +30,15 @@ import { ShoppingBagLarge } from 'components/AllSvgIcon';
 import InputNumber from 'components/InputIncDec/InputIncDec';
 import { calculateItemPrice } from 'helper/utility';
 import { CURRENCY } from 'helper/constant';
-import { Product } from 'interfaces';
 import { FormattedMessage } from 'react-intl';
 
 import CouponBox from 'components/CouponBox/CouponBox';
 
 import { Scrollbars } from 'react-custom-scrollbars';
+import { Product, ProductCart } from 'models/product';
 
 type CartItemProps = {
-  product: Product;
+  product: ProductCart;
   update: Function;
 };
 
@@ -168,7 +168,7 @@ const Cart: React.FC<CartPropsType> = ({
 
       <CheckoutButtonWrapper>
         <PromoCode>
-          {!coupon.discountInPercent ? (
+          {!coupon.discount ? (
             <>
               {!displayCoupon ? (
                 <button onClick={toggleCoupon}>

@@ -2,14 +2,13 @@ import Currency from 'currency.js';
 import { getCookie } from './session';
 import { getLocalState } from './localStorage';
 import {
-  CartProduct,
   CardType,
   RadioDataType,
   PaymentOptionType,
 } from '../interfaces';
 import { Product, ProductCart } from 'models/product';
 
-export const getCartProducts = () => {
+export const getProductCards = (): ProductCart[] => {
   const products = getLocalState('cart');
   return products ? products : [];
 };
@@ -38,7 +37,8 @@ export const getSubTotalPrice = () => {
   const price = getLocalState('subTotalPrice');
   return price ? price : 0;
 };
-// export const getCartProducts = (context: any) => {
+
+// export const getProductCards = (context: any) => {
 //   try {
 //     const products = JSON.parse(getCookie('cart', context));
 //     if (products && products.length) {
@@ -92,28 +92,28 @@ export const getSubTotalPrice = () => {
 // };
 
 export const findProductIndex = (
-  cartProducts: ProductCart[],
+  ProductCards: ProductCart[],
   dataId: string
 ): number => {
   let index = -1;
-  if (cartProducts && cartProducts.length) {
-    index = cartProducts.findIndex(product => product.id === dataId);
+  if (ProductCards && ProductCards.length) {
+    index = ProductCards.findIndex(product => product.id === dataId);
   }
   return index;
 };
 
 export const getProductQuantity = (
-  cartProducts: ProductCart[],
+  ProductCards: ProductCart[],
   index: number
 ): number => {
   let quantity = 0;
   if (index !== -1) {
-    quantity = cartProducts[index].quantity;
+    quantity = ProductCards[index].quantity;
   }
   return quantity;
 };
 
-export const calculateItemPrice = (product: CartProduct): number => {
+export const calculateItemPrice = (product: ProductCart): number => {
   const quantity = product.quantity ? product.quantity : 1;
   const price = product.salePrice ? product.salePrice : product.price;
   const itemPrice = Currency(quantity).multiply(price);
@@ -121,7 +121,7 @@ export const calculateItemPrice = (product: CartProduct): number => {
   return itemPriceValue;
 };
 
-export const calculateTotalPrice = (products: CartProduct[]): number => {
+export const calculateTotalPrice = (products: ProductCart[]): number => {
   let total = Currency(0);
   products.forEach(product => {
     const quantity = product.quantity ? product.quantity : 1;

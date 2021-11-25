@@ -27,7 +27,7 @@ import CheckcoutWrapper, {
   ErrorMsg,
 } from './Checkout.style';
 import {
-  getCartProducts,
+  getProductCards,
   getSubTotalPrice,
   getTotalPrice,
   getDiscount,
@@ -74,7 +74,7 @@ const Checkout: React.FC<MyFormProps & any> = ({ token, deviceType }) => {
     cards: Card[],
     schedules: Schedule[],
   };
-  const items = getCartProducts() as ProductCart[];
+  const items = getProductCards();
   const subTotalPrice = getSubTotalPrice();
   const totalPrice = getTotalPrice();
 

@@ -1,11 +1,11 @@
 import Currency from 'currency.js';
 import { getCookie } from './session';
 import {
-  CartProduct,
   CardType,
   RadioDataType,
   PaymentOptionType,
 } from './interfaces';
+import { ProductCart } from 'models/product';
 
 export const getCartProducts = (context: any) => {
   try {
@@ -30,8 +30,8 @@ export const getTotalPrice = (context: any) => {
 };
 
 export const findProductIndex = (
-  cartProducts: CartProduct[],
-  dataId: number
+  cartProducts: ProductCart[],
+  dataId: string
 ): number => {
   let index = -1;
   if (cartProducts && cartProducts.length) {
@@ -41,7 +41,7 @@ export const findProductIndex = (
 };
 
 export const getProductQuantity = (
-  cartProducts: CartProduct[],
+  cartProducts: ProductCart[],
   index: number
 ): number => {
   let quantity = 0;
@@ -51,14 +51,14 @@ export const getProductQuantity = (
   return quantity;
 };
 
-export const calculateItemPrice = (product: CartProduct): number => {
+export const calculateItemPrice = (product: ProductCart): number => {
   const quantity = product.quantity ? product.quantity : 1;
   const itemPrice = Currency(quantity).multiply(product.price);
   const itemPriceValue: number = Number(itemPrice.value);
   return itemPriceValue;
 };
 
-export const calculateTotalPrice = (products: CartProduct[]): number => {
+export const calculateTotalPrice = (products: ProductCart[]): number => {
   let total = Currency(0);
   products.forEach(product => {
     const quantity = product.quantity ? product.quantity : 1;

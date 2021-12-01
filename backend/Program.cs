@@ -30,12 +30,12 @@ try
 
   var builder = WebApplication.CreateBuilder(args);
   var config = builder.Configuration;
-  builder.Services.AddServices(config);
+  var env = builder.Environment;
+  builder.Services.AddServices(config, env);
 
   var app = builder.Build();
 
   // Configure the HTTP request pipeline.
-  app.UseMiddleware<ErrorHandler>();
 
   app.UseApplicationBuilder(app.Environment.IsDevelopment());
 

@@ -4,6 +4,7 @@ public class Order : BaseModel
 {
   public int TotalPrice { get; set; }
   public Guid UserId { get; set; }
+  public User User { get; set; }
   public Guid? CouponId { get; set; }
   public Coupon Coupon { get; set; }
   public IEnumerable<OrderDetail> OrderDetails { get; set; }

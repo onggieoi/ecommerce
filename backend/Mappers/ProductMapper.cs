@@ -10,5 +10,6 @@ public class ProductMapper : Profile
     // CreateMap<CartOrderRequest, CartDetail>().ReverseMap();
     CreateMap<ProductResponse, Product>().ReverseMap();
     CreateMap<Paging<ProductResponse>, Paging<Product>>().ReverseMap();
+    CreateMap<ProductRequest, Product>().ReverseMap();
   }
 }

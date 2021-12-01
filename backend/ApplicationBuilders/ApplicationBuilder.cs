@@ -1,4 +1,6 @@
 
+using backend.Middlewares;
+
 namespace backend.ApplicationBuilders
 {
   public static class ApplicationBuilder
@@ -10,17 +12,15 @@ namespace backend.ApplicationBuilders
         applicationBuilder.UseSwagger();
         applicationBuilder.UseSwaggerUI();
       }
+      else
+      {
+        applicationBuilder.UseMiddleware<ErrorHandler>();
+      }
 
       applicationBuilder.UseStaticFiles();
       applicationBuilder.UseRouting();
 
       applicationBuilder.UseCors("cors_policy");
-      // builder =>
-      // {
-      //   builder.AllowAnyOrigin()
-      //       .AllowAnyMethod()
-      //       .AllowAnyHeader();
-      // });
 
       applicationBuilder.UseHttpsRedirection();
 

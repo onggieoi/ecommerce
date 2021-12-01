@@ -74,9 +74,9 @@ namespace backend.ServiceConllection
           });
 
       services.AddAuthorization(options =>
-          {
-            options.AddPolicy("Admin", policy => policy.RequireClaim(UserClaims.Role, Roles.Admin));
-          });
+      {
+        options.AddPolicy(RolePolicy.Admin, policy => policy.RequireClaim(UserClaims.Role, Roles.Admin));
+      });
     }
   }
 }

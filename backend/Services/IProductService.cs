@@ -7,6 +7,5 @@ public interface IProductService
 {
   Task<Paging<ProductResponse>> GetProductsAsync(ProductQuery query);
   Task<ProductResponse> GetProductAsync(string title);
-  Task SeedProducts(List<Product> products);
-
+  Task<ProductResponse> UpsertProductAsync(ProductRequest request);
 }

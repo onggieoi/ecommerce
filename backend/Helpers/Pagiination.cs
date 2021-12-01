@@ -20,13 +20,12 @@ public static class Pagination
     paged.CurrentPage = page;
     paged.PageSize = limit;
 
-    // var totalItemsCountTask = await query.CountAsync(cancellationToken);
-
     var startRow = (page - 1) * limit;
 
     paged.Items = await query
                 .Skip(startRow)
                 .Take(limit)
+                .AsNoTracking()
                 .ToListAsync(cancellationToken);
 
     paged.TotalItems = await query.CountAsync(cancellationToken);

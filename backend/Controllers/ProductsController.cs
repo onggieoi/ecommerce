@@ -1,10 +1,8 @@
+using backend.Constants;
 using backend.Contracts;
-using backend.Helpers;
-using backend.Models;
 using backend.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 
 namespace backend.Controllers;
 
@@ -18,7 +16,6 @@ public class ProductsController : BaseApiController<ProductsController>
   }
 
   [HttpGet]
-  // [Authorize]
   public async Task<ActionResult> GetProducts([FromQuery] ProductQuery query)
   {
     var products = await _productService.GetProductsAsync(query);
@@ -33,5 +30,14 @@ public class ProductsController : BaseApiController<ProductsController>
     var product = await _productService.GetProductAsync(title);
 
     return Ok(product);
+  }
+
+  [HttpPost]
+  // [Authorize(RolePolicy.Admin)]
+  public async Task<ActionResult> CreateProduct([FromForm] ProductRequest request)
+  {
+    var products = await _productService.UpsertProductAsync(request);
+
+    return Ok(products);
   }
 }

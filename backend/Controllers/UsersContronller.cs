@@ -1,3 +1,4 @@
+using backend.Constants;
 using backend.Contracts;
 using backend.Helpers;
 using backend.Services;
@@ -41,5 +42,13 @@ public class UsersController : BaseApiController<UsersController>
     var user = await _identityService.GetTokenAsync(account);
 
     return Ok(user);
+  }
+
+  [HttpGet]
+  [Authorize(RolePolicy.Admin)]
+  public async Task<ActionResult<UserResponse>> GetUsers()
+  {
+    var users = await _userService.GetCustomersAsync();
+    return Ok(users);
   }
 }

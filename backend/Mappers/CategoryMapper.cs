@@ -9,5 +9,6 @@ public class CategoryMapper : Profile
   {
     // CreateMap<CartOrderRequest, CartDetail>().ReverseMap();
     CreateMap<CategoryResponse, Category>().ReverseMap();
+    CreateMap<CategoryRequest, Category>().ReverseMap();
   }
 }

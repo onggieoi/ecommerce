@@ -34,7 +34,7 @@ public class OrderService : IOrderService
     order.UserId = _authenticatedUserService.Id;
 
     var orderDetails = new List<OrderDetail>();
-    int totalPrice = 0;
+    double totalPrice = 0;
 
     products.ForEach(p =>
     {
@@ -81,5 +81,19 @@ public class OrderService : IOrderService
     }
 
     return _mapper.Map<OrderResponse>(order);
+  }
+
+  public async Task<IEnumerable<OrderResponse>> GetOrdersAsync()
+  {
+    var orders = await _dbContext.Set<Order>()
+                                    .Include(o => o.Address)
+                                    .Include(o => o.Card)
+                                    .Include(o => o.Contact)
+                                    .Include(o => o.OrderDetails)
+                                      .ThenInclude(od => od.Product)
+                                    .Include(o => o.User)
+                                    .ToListAsync();
+
+    return _mapper.Map<IEnumerable<OrderResponse>>(orders);
   }
 }

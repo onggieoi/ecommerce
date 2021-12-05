@@ -33,7 +33,7 @@ public class ProductsController : BaseApiController<ProductsController>
   }
 
   [HttpPost]
-  // [Authorize(RolePolicy.Admin)]
+  [Authorize(RolePolicy.Admin)]
   public async Task<ActionResult> CreateProduct([FromForm] ProductRequest request)
   {
     var products = await _productService.UpsertProductAsync(request);

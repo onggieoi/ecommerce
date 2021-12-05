@@ -1,3 +1,4 @@
+using backend.Constants;
 using backend.Contracts;
 using backend.Helpers;
 using backend.Services;
@@ -35,5 +36,16 @@ public class OrdersController : BaseApiController<OrdersController>
     var order = await _orderService.GetOrderDetailAsync(id);
 
     return Ok(order);
+  }
+
+  [HttpGet]
+  [Authorize(RolePolicy.Admin)]
+  public async Task<ActionResult<string>> GetOrders()
+  {
+    _logger.LogInformation("Get orders");
+
+    var orders = await _orderService.GetOrdersAsync();
+
+    return Ok(orders);
   }
 }

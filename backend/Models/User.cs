@@ -13,4 +13,5 @@ public class User : IdentityUser<Guid>
   public IEnumerable<Address> Addresses { get; set; }
   public IEnumerable<Card> Cards { get; set; }
   public IEnumerable<Contact> Contacts { get; set; }
+  public IEnumerable<Order> Orders { get; set; }
 }

@@ -1,3 +1,5 @@
+using System.Globalization;
+using backend.Constants;
 using backend.Contracts;
 using backend.Data;
 using backend.Models;
@@ -17,6 +19,68 @@ public class ReportService : IReportService
   {
     _dbContext = dbContext;
   }
+
+  public async Task<DashboardReport> GetReportDashboradAsync()
+  {
+    var today = DateTime.UtcNow;
+
+    var orders = await _dbContext.Set<Order>().AsNoTracking()
+                                  .Where(o => o.CreateAt.Month > today.AddMonths(-11).Month)
+                                  .ToListAsync();
+
+    var test = orders.Where(o => o.CreateAt.Month == 11).ToList();
+
+
+    var revenueMonths = new List<RevenueMonth>();
+    for (int i = today.Month - 11; i <= today.Month; i++)
+    {
+      var ordersInMonth = orders.Where(o => o.CreateAt.Month == i).ToList();
+
+      revenueMonths.Add(new RevenueMonth
+      {
+        Month = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(i),
+        Revenue = (int)ordersInMonth.Select(o => o.TotalPrice).Sum(),
+      });
+    }
+
+    var revenueReport = new ReportStatus
+    {
+      Status = revenueMonths[11].Revenue > revenueMonths[10].Revenue ? "up" : "down",
+      Total = revenueMonths[11].Revenue,
+    };
+
+    var totalOrdersInMonth = orders.Where(c => c.CreateAt.Month.Equals(today.Month)).Count();
+    var ordersInPrevMonth = orders.Where(c => c.CreateAt.Month.Equals(today.Month - 1)).Count();
+
+    var orderReport = new ReportStatus
+    {
+      Status = totalOrdersInMonth > ordersInPrevMonth ? "up" : "down",
+      Total = totalOrdersInMonth,
+    };
+
+    var customers = await _dbContext.Set<User>().AsNoTracking()
+                              .Where(u => u.Role.Equals(Roles.Customer)
+                                        && u.CreateAt.Month < today.AddMonths(-1).Month)
+                              .ToListAsync();
+
+    var customersInMonth = customers.Where(c => c.CreateAt.Month.Equals(today.Month)).Count();
+    var customersInPreMonth = customers.Where(c => c.CreateAt.Month.Equals(today.Month - 1)).Count();
+
+    var customerReport = new ReportStatus
+    {
+      Status = customersInMonth > customersInPreMonth ? "up" : "down",
+      Total = customersInMonth,
+    };
+
+    return new DashboardReport
+    {
+      RevenueMonths = revenueMonths,
+      Revenue = revenueReport,
+      Order = orderReport,
+      Customer = customerReport,
+    };
+  }
+
   public async Task<byte[]> GetOrderExcelAsync(ReportQuery query)
   {
     var reports = await _dbContext.Set<Order>()

@@ -1,5 +1,7 @@
+using backend.Constants;
 using backend.Contracts;
 using backend.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace backend.Controllers;
@@ -14,6 +16,7 @@ public class ReportController : BaseApiController<ReportController>
   }
 
   [HttpGet]
+  [Authorize(RolePolicy.Admin)]
   public async Task<FileContentResult> Export([FromQuery] ReportQuery query)
   {
     var file = await _reportService.GetOrderExcelAsync(query);
@@ -22,5 +25,15 @@ public class ReportController : BaseApiController<ReportController>
     {
       FileDownloadName = $"report_{DateTime.UtcNow.ToString("yyyyMMdd")}.xlsx"
     };
+  }
+
+  [HttpGet]
+  [Route("dashboard")]
+  [Authorize(RolePolicy.Admin)]
+  public async Task<IActionResult> GetDashboardReport()
+  {
+    var data = await _reportService.GetReportDashboradAsync();
+
+    return Ok(data);
   }
 }

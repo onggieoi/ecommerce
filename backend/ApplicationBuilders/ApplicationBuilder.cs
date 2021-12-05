@@ -14,8 +14,8 @@ namespace backend.ApplicationBuilders
       }
       else
       {
-        applicationBuilder.UseMiddleware<ErrorHandler>();
       }
+      applicationBuilder.UseMiddleware<ErrorHandler>();
 
       applicationBuilder.UseStaticFiles();
       applicationBuilder.UseRouting();

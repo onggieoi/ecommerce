@@ -14,4 +14,5 @@ public class OrderResponse
   public Guid AddressId { get; set; }
   public AddressResponse Address { get; set; }
   public DateTime CreateAt { get; set; }
+  public UserResponse User { get; set; }
 }

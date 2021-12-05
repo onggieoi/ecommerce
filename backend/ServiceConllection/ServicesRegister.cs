@@ -31,6 +31,7 @@ namespace backend.ServiceConllection
       services.AddTransient<IUserService, UserService>();
       services.AddTransient<IOrderService, OrderService>();
       services.AddTransient<IReportService, ReportService>();
+      services.AddTransient<ICouponService, CouponService>();
 
       services.AddAutoMapper(Assembly.GetExecutingAssembly());
 

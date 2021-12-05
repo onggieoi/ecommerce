@@ -1,4 +1,5 @@
 using AutoMapper;
+using backend.Constants;
 using backend.Contracts;
 using backend.Data;
 using backend.Models;
@@ -49,5 +50,19 @@ public class UserService : IUserService
       .SingleOrDefaultAsync(u => u.Id.Equals(_authenticatedUser.Id));
 
     return _mapper.Map<UserResponse>(user);
+  }
+
+  public async Task<IEnumerable<CustomerResponse>> GetCustomersAsync()
+  {
+    var users = await _dbContext.Set<User>()
+      .AsNoTracking()
+      .Include(u => u.Contacts)
+      .Include(u => u.Cards)
+      .Include(u => u.Addresses)
+      .Include(u => u.Orders)
+      .Where(u => u.Role.Equals(Roles.Customer))
+      .ToListAsync();
+
+    return _mapper.Map<IEnumerable<CustomerResponse>>(users);
   }
 }

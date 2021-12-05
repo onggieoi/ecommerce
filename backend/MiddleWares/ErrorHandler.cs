@@ -33,6 +33,11 @@ public class ErrorHandler
           errMessage = error.Message;
           break;
 
+        case BadRequestException e:
+          response.StatusCode = (int)HttpStatusCode.BadRequest;
+          errMessage = error.Message;
+          break;
+
         default:
           response.StatusCode = (int)HttpStatusCode.InternalServerError;
           errMessage = "Something go wrong";

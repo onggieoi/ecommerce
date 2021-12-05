@@ -8,6 +8,7 @@ using backend.Exceptions;
 using backend.Helpers;
 using backend.Models;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 
 namespace backend.Services;
 
@@ -66,6 +67,18 @@ public class ProductService : IProductService
 
   public async Task<ProductResponse> UpsertProductAsync(ProductRequest request)
   {
+    if (!string.IsNullOrEmpty(request.GalleryString))
+    {
+      request.Gallery = JsonConvert.DeserializeObject<IEnumerable<GalleryResponse>>(request.GalleryString);
+    }
+
+    var productQuery = _dbContext.Set<Product>().Where(p => p.Title == request.Title).AsQueryable();
+
+    if (productQuery.Any())
+    {
+      throw new BadRequestException($"Product title {request.Title} already exists");
+    }
+
     var product = _mapper.Map<Product>(request);
 
     if (request.ImageFile is not null)
@@ -86,16 +99,13 @@ public class ProductService : IProductService
       product.CreateAt = existProduct.CreateAt;
 
       _dbContext.Entry<Product>(existProduct).CurrentValues.SetValues(product);
+
+      var holdedGalleryIds = product.Gallery.Select(g => g.Id);
+      _dbContext.Gallery.RemoveRange(_dbContext.Gallery.Where(g => !holdedGalleryIds.Contains(g.Id) && g.ProductId.Equals(product.Id)));
     }
     else
     {
       await _dbContext.Set<Product>().AddAsync(product);
-    }
-
-    var galleryIds = new List<Guid>();
-    if (request.Gallery is not null)
-    {
-      galleryIds.AddRange(request.Gallery.Select(g => g.Id).ToList());
     }
 
     if (request.GalleryImages is not null)
@@ -106,15 +116,12 @@ public class ProductService : IProductService
       {
         var img = await _blobService.UploadImageAsync(galleryImage, product.Title);
         var newGallery = new Gallery { Url = img, ProductId = product.Id };
-
         newGalleryImages.Add(newGallery);
-        galleryIds.Add(newGallery.Id);
       }
 
       await _dbContext.Set<Gallery>().AddRangeAsync(newGalleryImages);
     }
 
-    _dbContext.Gallery.RemoveRange(_dbContext.Gallery.Where(g => !galleryIds.Contains(g.Id) && g.ProductId.Equals(product.Id)));
 
     await _dbContext.SaveChangesAsync();
 

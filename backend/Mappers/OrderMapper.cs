@@ -10,9 +10,14 @@ namespace backend.Mappers
     {
       CreateMap<OrderResponse, Order>().ReverseMap();
       CreateMap<OrderDetailResponse, OrderDetail>().ReverseMap();
-      CreateMap<CouponResponse, Coupon>().ReverseMap();
       CreateMap<OrderRequest, Order>().ReverseMap();
       CreateMap<OrderDetailRequest, OrderDetail>().ReverseMap();
+
+      CreateMap<CouponRequest, Coupon>().ReverseMap();
+      CreateMap<Coupon, CouponResponse>()
+      .ForMember(cr => cr.TotalUsed, m => m.MapFrom(c => c.Orders.Count()))
+      .ReverseMap();
+
     }
   }
 }

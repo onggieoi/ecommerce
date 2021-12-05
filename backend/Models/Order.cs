@@ -2,7 +2,7 @@ namespace backend.Models;
 
 public class Order : BaseModel
 {
-  public int TotalPrice { get; set; }
+  public double TotalPrice { get; set; }
   public Guid UserId { get; set; }
   public User User { get; set; }
   public Guid? CouponId { get; set; }

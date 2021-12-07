@@ -40,11 +40,11 @@ public class OrdersController : BaseApiController<OrdersController>
 
   [HttpGet]
   [Authorize(RolePolicy.Admin)]
-  public async Task<ActionResult<string>> GetOrders()
+  public async Task<ActionResult<string>> GetOrders([FromQuery] string? search)
   {
     _logger.LogInformation("Get orders");
 
-    var orders = await _orderService.GetOrdersAsync();
+    var orders = await _orderService.GetOrdersAsync(search);
 
     return Ok(orders);
   }

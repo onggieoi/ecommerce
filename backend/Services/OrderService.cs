@@ -83,16 +83,26 @@ public class OrderService : IOrderService
     return _mapper.Map<OrderResponse>(order);
   }
 
-  public async Task<IEnumerable<OrderResponse>> GetOrdersAsync()
+  public async Task<IEnumerable<OrderResponse>> GetOrdersAsync(string? search)
   {
-    var orders = await _dbContext.Set<Order>()
+    var ordersQuery = _dbContext.Set<Order>()
+                                    .AsNoTracking()
                                     .Include(o => o.Address)
                                     .Include(o => o.Card)
                                     .Include(o => o.Contact)
                                     .Include(o => o.OrderDetails)
                                       .ThenInclude(od => od.Product)
                                     .Include(o => o.User)
-                                    .ToListAsync();
+                                    .AsQueryable();
+
+    if (search is not null)
+    {
+      ordersQuery = ordersQuery.Where(o => o.User.Name.ToLower().Contains(search.ToLower().Trim())
+                        || o.Address.Info.ToLower().Contains(search.ToLower().Trim())
+                        || o.Contact.Number.ToLower().Contains(search.ToLower().Trim()));
+    }
+
+    var orders = await ordersQuery.ToListAsync();
 
     return _mapper.Map<IEnumerable<OrderResponse>>(orders);
   }

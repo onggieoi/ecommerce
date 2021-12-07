@@ -15,8 +15,8 @@ export function getOrderDetail(orderId: string): Promise<AxiosResponse<Order>> {
   return axiosRequest.axios.get(endpoints.getOrderDetail(orderId));
 }
 
-
-
-export function getOrdersRequest(): Promise<AxiosResponse<Order>> {
-  return axiosRequest.axios.get(endpoints.order);
+export function getOrdersRequest(search?: string): Promise<AxiosResponse<Order>> {
+  return axiosRequest.axios.get(endpoints.order, {
+    params: { search },
+  });
 }

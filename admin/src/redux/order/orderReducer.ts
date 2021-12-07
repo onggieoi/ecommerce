@@ -42,7 +42,7 @@ const OrderSlice = createSlice({
       ...state,
       loading: true,
     }),
-    getOrders: (state: OrderState): OrderState => ({
+    getOrders: (state: OrderState, action?: PayloadAction<string>): OrderState => ({
       ...state,
       loading: true,
     }),

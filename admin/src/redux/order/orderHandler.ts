@@ -32,11 +32,11 @@ export function* handleGetOrder(action: PayloadAction<string>) {
   }
 }
 
-export function* handleGetOrders() {
-  // const orderId = action.payload;
+export function* handleGetOrders(action?: PayloadAction<string>) {
+  const search = action.payload;
 
   try {
-    const { data } = yield call(getOrdersRequest);
+    const { data } = yield call(getOrdersRequest, search);
 
     yield put(setOrders(data));
 

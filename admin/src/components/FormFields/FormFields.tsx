@@ -23,7 +23,12 @@ const Msg = styled("span", ({ $theme }) => ({
   marginLeft: "auto"
 }));
 
-export const FormFields = ({ children }) => {
+export type Props = {
+  children: any;
+  style?: any;
+}
+
+export const FormFields: React.FC<Props> = ({ children, style }) => {
   return (
     <Block
       overrides={{
@@ -44,7 +49,8 @@ export const FormFields = ({ children }) => {
 
             ":only-child": {
               margin: 0
-            }
+            },
+            ...style,
           }
         }
       }}

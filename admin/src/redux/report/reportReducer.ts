@@ -7,6 +7,16 @@ type ReportState = {
   data?: DashboardReport;
 }
 
+export type ReportPayload<T> = {
+  request: T,
+  callback: Function,
+}
+
+export type ReportQuery = {
+  createdFrom: Date;
+  createdTo: Date;
+}
+
 const initialState: ReportState = {
   loading: false,
 };
@@ -31,11 +41,23 @@ const ReportSlice = createSlice({
         data,
       }
     },
+    exportReport: (state: ReportState, action: PayloadAction<ReportPayload<ReportQuery>>) => ({
+      ...state,
+      loading: true,
+    }),
+    setLoading: (state: ReportState, action: PayloadAction<boolean>) => {
+      const loading = action.payload;
+
+      return {
+        ...state,
+        loading,
+      }
+    },
   }
 });
 
 export const {
-  getDashboardReport, setDashboardReport,
+  getDashboardReport, setDashboardReport, exportReport, setLoading,
 } = ReportSlice.actions;
 
 const ReportReducer = ReportSlice.reducer;

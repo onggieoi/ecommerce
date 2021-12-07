@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import Moment from 'react-moment';
 import { styled, withStyle } from 'baseui';
@@ -17,9 +18,10 @@ import {
 } from './Customers.style';
 import NoResult from '../../components/NoResult/NoResult';
 import { useAppDispatch, useAppSelector } from '../../helpers/hooks';
-import { getUsers } from '../../redux/user/userReducer';
+import { getUsers, setUsers } from '../../redux/user/userReducer';
 import { Customer } from '../../models/user';
 import InlineLoader from '../../components/InlineLoader';
+import { isEmptyOrUndefine } from '../../helpers';
 
 const Col = withStyle(Column, () => ({
   '@media only screen and (max-width: 767px)': {
@@ -39,18 +41,22 @@ const Row = withStyle(Rows, () => ({
 
 
 export default function Customers() {
-  const [search, setSearch] = useState([]);
+  const [search, setSearch] = useState('');
 
   const { loading, users } = useAppSelector(state => state.userReducer);
   const reduxDispatch = useAppDispatch();
 
   useEffect(() => {
-    reduxDispatch(getUsers());
-  }, [reduxDispatch]);
+    if (isEmptyOrUndefine(search)) {
+      reduxDispatch(getUsers());
+    } else {
+      const newUsers = users.filter(c => c.name.toLowerCase().includes((search.toString()).toLowerCase()));
+      reduxDispatch(setUsers(newUsers));
+    }
+  }, [search]);
 
   function handleSearch(event) {
     const value = event.currentTarget.value;
-
     setSearch(value);
   }
 

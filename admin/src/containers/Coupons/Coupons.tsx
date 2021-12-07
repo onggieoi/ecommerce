@@ -24,9 +24,9 @@ import {
 } from './Coupon.style';
 import NoResult from '../../components/NoResult/NoResult';
 import { useAppDispatch, useAppSelector } from '../../helpers/hooks';
-import { deleteCoupons, getCoupons } from '../../redux/coupon/couponReducer';
+import { deleteCoupons, getCoupons, setCoupons } from '../../redux/coupon/couponReducer';
 import { Coupon } from '../../models/order';
-import { notification } from '../../helpers';
+import { isEmptyOrUndefine, notification } from '../../helpers';
 import InlineLoader from '../../components/InlineLoader';
 
 const Col = withStyle(Column, () => ({
@@ -70,8 +70,13 @@ export default function Coupons() {
   const reduxDispatch = useAppDispatch();
 
   useEffect(() => {
-    getCouponsDispatch();
-  }, [reduxDispatch]);
+    if (isEmptyOrUndefine(search)) {
+      getCouponsDispatch();
+    } else {
+      const newCoupons = coupons.filter(c => c.code.toLowerCase().includes((search.toString()).toLowerCase()));
+      reduxDispatch(setCoupons(newCoupons));
+    }
+  }, [search]);
 
   const getCouponsDispatch = () => {
     reduxDispatch(getCoupons());
@@ -138,22 +143,10 @@ export default function Coupons() {
 
             <Col md={10}>
               <Row>
-                {/* <Col md={3}>
-                  <Select
-                    options={statusSelectOptions}
-                    labelKey='label'
-                    valueKey='value'
-                    placeholder='Status'
-                    value={status}
-                    searchable={false}
-                    onChange={handleSelect}
-                  />
-                </Col> */}
-
                 <Col md={6}>
                   <Input
                     value={search}
-                    placeholder='Ex: Search By Name'
+                    placeholder='Ex: Search By Code'
                     onChange={handleSearch}
                     clearable
                   />

@@ -21,6 +21,11 @@ import NoResult from '../../components/NoResult/NoResult';
 import { useAppDispatch, useAppSelector } from '../../helpers/hooks';
 import { getOrders } from '../../redux/order/orderReducer';
 import InlineLoader from '../../components/InlineLoader';
+import { FormFields, FormLabel } from '../../components/FormFields/FormFields';
+import moment from 'moment';
+import { Button } from 'baseui/button';
+import { exportReport } from '../../redux/report/reportReducer';
+import { notification } from '../../helpers';
 
 const Col = withStyle(Column, () => ({
   '@media only screen and (max-width: 767px)': {
@@ -41,15 +46,19 @@ const Row = withStyle(Rows, () => ({
 export default function Orders() {
   const [checkedId, setCheckedId] = useState([]);
   const [checked, setChecked] = useState(false);
-
+  const [exportQuery, setQuery] = useState({
+    createdFrom: moment().format('yyyy-MM-DD'),
+    createdTo: moment().format('yyyy-MM-DD'),
+  })
   const [search, setSearch] = useState([]);
 
   const { orders, loading } = useAppSelector(state => state.orderReducer);
   const reduxDispatch = useAppDispatch();
 
   useEffect(() => {
-    reduxDispatch(getOrders());
-  }, [reduxDispatch]);
+    reduxDispatch(getOrders(search.toString()));
+  }, [reduxDispatch, search]);
+
   function handleSearch(event) {
     const { value } = event.currentTarget;
     setSearch(value);
@@ -73,9 +82,78 @@ export default function Orders() {
       setCheckedId(prevState => prevState.filter(id => id !== name));
     }
   }
+
+  const handleChangeCreatedTo = (e) => {
+    e.preventDefault();
+    setQuery({ ...exportQuery, createdTo: e.target.value })
+  };
+
+  const handleChangeCreatedFrom = (e) => {
+    e.preventDefault();
+    setQuery({ ...exportQuery, createdFrom: e.target.value })
+  };
+
+  const handleSubmitExport = (e) => {
+    e.preventDefault();
+
+    reduxDispatch(exportReport({
+      request: exportQuery as any,
+      callback,
+    }));
+  };
+
+  const callback = (type = 'success' || 'error', message: string = '') => {
+    notification(type, message);
+  };
+
   return (
     <Grid fluid={true}>
       {loading && <InlineLoader />}
+
+      <Row>
+        <form
+          onSubmit={handleSubmitExport}
+          style={{
+            display: 'flex',
+            width: '100%',
+            justifyItems: 'center',
+            alignItems: 'center',
+            alignContent: 'center',
+            gap: '0.5rem'
+          }}
+        >
+          <FormFields style={{
+            margin: 0
+          }}>
+            <FormLabel>Start Date</FormLabel>
+            <Input value={exportQuery.createdFrom} onChange={handleChangeCreatedFrom} type="date" />
+          </FormFields>
+
+          <FormFields style={{
+            margin: 0,
+          }}>
+            <FormLabel>End Date</FormLabel>
+            <Input value={exportQuery.createdTo} onChange={handleChangeCreatedTo} type="date" />
+          </FormFields>
+
+          <Button
+            type="submit"
+            overrides={{
+              BaseButton: {
+                style: ({ $theme }) => ({
+                  width: '50%',
+                  borderTopLeftRadius: '3px',
+                  borderTopRightRadius: '3px',
+                  borderBottomRightRadius: '3px',
+                  borderBottomLeftRadius: '3px',
+                }),
+              },
+            }}
+          >
+            Export
+          </Button>
+        </form>
+      </Row>
 
       <Row>
         <Col md={12}>
@@ -93,7 +171,7 @@ export default function Orders() {
               <Row>
                 <Input
                   value={search}
-                  placeholder='Ex: Search By Address'
+                  placeholder='Searching ...'
                   onChange={handleSearch}
                   clearable
                 />
@@ -118,7 +196,6 @@ export default function Orders() {
                 <StyledHeadCell>Amount</StyledHeadCell>
                 <StyledHeadCell>Payment Method</StyledHeadCell>
                 <StyledHeadCell>Contact</StyledHeadCell>
-                {/* <StyledHeadCell>Status</StyledHeadCell> */}
 
                 {orders ? (
                   orders.length ? (
@@ -140,23 +217,6 @@ export default function Orders() {
                           <StyledCell>${item.totalPrice}</StyledCell>
                           <StyledCell>{item.card && <>{item.card.name} - {item.card.cardType}: **** **** **** {item.card.lastFourDigit}</>}</StyledCell>
                           <StyledCell>{item.contact && item.contact.number}</StyledCell>
-                          {/* <StyledCell style={{ justifyContent: 'center' }}>
-                            <Status
-                              className={
-                                row[7].toLowerCase() === 'delivered'
-                                  ? sent
-                                  : row[7].toLowerCase() === 'pending'
-                                    ? paid
-                                    : row[7].toLowerCase() === 'processing'
-                                      ? processing
-                                      : row[7].toLowerCase() === 'failed'
-                                        ? failed
-                                        : ''
-                              }
-                            >
-                              {row[7]}
-                            </Status>
-                          </StyledCell> */}
                         </React.Fragment>
                       ))
                   ) : (

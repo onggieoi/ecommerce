@@ -1,6 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useCallback, useEffect, useState } from 'react';
 import { withStyle } from 'baseui';
+import _ from 'lodash';
+
 import {
   Grid,
   Row as Rows,
@@ -21,10 +23,11 @@ import {
 
 import NoResult from '../../components/NoResult/NoResult';
 import { useAppDispatch, useAppSelector } from '../../helpers/hooks';
-import { deleteCategories, getCategories } from '../../redux/category/categoryReducer';
+import { deleteCategories, getCategories, setCategories } from '../../redux/category/categoryReducer';
 import { Category as CategoryModel } from '../../models/category';
 import { Minus, Plus } from '../../components/AllSvgIcon';
 import InlineLoader from '../../components/InlineLoader';
+import { isEmptyOrUndefine } from '../../helpers';
 
 const Col = withStyle(Column, () => ({
   '@media only screen and (max-width: 767px)': {
@@ -65,17 +68,20 @@ export default function Category() {
   const { categories, loading } = useAppSelector(state => state.categoryReducer);
   const reduxDispatch = useAppDispatch();
 
-  // if (error) {
-  //   return <div>Error! {error.message}</div>;
-  // }
-
   useEffect(() => {
-    getCategoryDispatch();
-  }, []);
+    if (isEmptyOrUndefine(search)) {
+      getCategoryDispatch();
+    } else {
+      const newCategories = categories.filter(c => c.name.toLowerCase().includes(search.toLowerCase()));
+      reduxDispatch(setCategories(newCategories));
+    }
+  }, [search]);
 
   function handleSearch(event) {
     const value = event.currentTarget.value;
     setSearch(value);
+
+
   }
 
   function onAllCheck(event) {

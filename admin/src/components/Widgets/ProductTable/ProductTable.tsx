@@ -1,8 +1,6 @@
 import React from "react";
 import { styled, withStyle } from "baseui";
 import { Col } from "../../FlexBox/FlexBox";
-import gql from "graphql-tag";
-import { useQuery } from "@apollo/react-hooks";
 import { Wrapper, Header, Heading } from "../../WrapperStyle";
 
 import {
@@ -14,19 +12,7 @@ import {
   StyledCell as BaseStyledCell
 } from "baseui/table";
 
-const GET_PRODUCTS = gql`
-  {
-    products {
-      id
-      image
-      name
-      type
-      # views
-      # sales
-      price
-    }
-  }
-`;
+
 
 const ImageWrapper = styled("div", ({ $theme }) => ({
   width: "40px",
@@ -85,7 +71,7 @@ const SmallCell = withStyle(StyledCell, () => ({
 }));
 
 export default function Products() {
-  const { data, error } = useQuery(GET_PRODUCTS);
+  const { data, error }: any = {};
   if (error) {
     return <div>Error! {error.message}</div>;
   }

@@ -1,7 +1,6 @@
 import React, { useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import uuidv4 from 'uuid/v4';
-import gql from 'graphql-tag';
 import { useMutation } from '@apollo/react-hooks';
 import { Scrollbars } from 'react-custom-scrollbars';
 import { useDrawerDispatch } from '../../context/DrawerContext';
@@ -21,34 +20,6 @@ import {
 } from '../DrawerItems/DrawerItems.style';
 import { FormFields, FormLabel } from '../../components/FormFields/FormFields';
 
-const GET_STUFFS = gql`
-  query getStuffs($role: String, $searchBy: String) {
-    stuffs(role: $role, searchBy: $searchBy) {
-      id
-      name
-      email
-      contact_number
-      creation_date
-      role
-    }
-  }
-`;
-
-const CREATE_STUFF = gql`
-  mutation createStuff($stuff: AddStuffInput!) {
-    createStuff(stuff: $stuff) {
-      id
-      first_name
-      last_name
-      name
-      email
-      contact_number
-      creation_date
-      role
-    }
-  }
-`;
-
 type Props = any;
 
 const StuffMemberForm: React.FC<Props> = props => {
@@ -61,18 +32,7 @@ const StuffMemberForm: React.FC<Props> = props => {
   const [checked, setChecked] = React.useState(true);
   const [text, setText] = React.useState('');
 
-  const [createStuff] = useMutation(CREATE_STUFF, {
-    update(cache, { data: { createStuff } }) {
-      const { stuffs } = cache.readQuery({
-        query: GET_STUFFS,
-      });
 
-      cache.writeQuery({
-        query: GET_STUFFS,
-        data: { stuffs: stuffs.concat([createStuff]) },
-      });
-    },
-  });
   const onSubmit = data => {
     const newStuff = {
       id: uuidv4(),
@@ -81,7 +41,6 @@ const StuffMemberForm: React.FC<Props> = props => {
       creation_date: new Date(),
     };
     console.log(data);
-    createStuff({ variables: { stuff: newStuff } });
     closeDrawer();
   };
 

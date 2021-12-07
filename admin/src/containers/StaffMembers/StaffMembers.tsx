@@ -10,12 +10,7 @@ import { useDrawerDispatch } from '../../context/DrawerContext';
 import Select from '../../components/Select/Select';
 import Input from '../../components/Input/Input';
 import Button from '../../components/Button/Button';
-
 import { Plus } from '../../components/AllSvgIcon';
-
-import gql from 'graphql-tag';
-import { useQuery } from '@apollo/react-hooks';
-
 import { Wrapper, Header, Heading } from '../../components/WrapperStyle';
 
 import {
@@ -26,18 +21,7 @@ import {
 } from './StaffMembers.style';
 import NoResult from '../../components/NoResult/NoResult';
 
-const GET_STUFFS = gql`
-  query getStuffs($role: String, $searchBy: String) {
-    stuffs(role: $role, searchBy: $searchBy) {
-      id
-      name
-      email
-      contact_number
-      creation_date
-      role
-    }
-  }
-`;
+
 
 const Col = withStyle(Column, () => ({
   '@media only screen and (max-width: 767px)': {
@@ -73,7 +57,7 @@ export default function StuffMembers() {
   const [role, setRole] = useState([]);
   const [search, setSearch] = useState('');
 
-  const { data, error, refetch } = useQuery(GET_STUFFS);
+  const { data, error, refetch }: any = {};
   if (error) {
     return <div>Error! {error.message}</div>;
   }

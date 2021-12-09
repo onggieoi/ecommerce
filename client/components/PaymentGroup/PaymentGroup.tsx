@@ -10,6 +10,7 @@ import {
   SavedCard,
   OtherPayOption,
 } from './PaymentGroup.style';
+import _ from 'lodash';
 
 interface PaymentCardType {
   id: number | string;
@@ -40,7 +41,7 @@ interface PaymentGroupProps {
   onChange: Function;
   items: any;
   onEditDeleteField: any;
-  handleAddNewCard: any;
+  handleAddNewCard?: any;
 }
 
 const PaymentGroup: React.FunctionComponent<PaymentGroupProps> = ({
@@ -67,7 +68,7 @@ const PaymentGroup: React.FunctionComponent<PaymentGroupProps> = ({
             <FormattedMessage id='savedCardsId' defaultMessage='Saved Cards' />
           </SavedCard>
         )}
-        <Button
+        {!_.isUndefined(handleAddNewCard) && <Button
           title='Add Card'
           colors='primary'
           size='small'
@@ -77,7 +78,7 @@ const PaymentGroup: React.FunctionComponent<PaymentGroupProps> = ({
           iconPosition='left'
           onClick={handleAddNewCard}
           intlButtonId='addCardBtn'
-        />
+        />}
       </Header>
       <PaymentCardList>
         <Carousel

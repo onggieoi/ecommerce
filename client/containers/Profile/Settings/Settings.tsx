@@ -20,6 +20,9 @@ import UpdateContact from '../../Checkout/Update/UpdateContact';
 import Button from 'components/Button/Button';
 import { FormattedMessage } from 'react-intl';
 import { Account } from 'models/account';
+import { useAppDispatch } from 'helper/hooks';
+import { upsertUser } from 'redux/account/accountReducer';
+import { useRouter } from 'next/router';
 
 type SettingsContentProps = {
   deviceType?: {
@@ -32,9 +35,11 @@ type SettingsContentProps = {
 const SettingsContent: React.FC<SettingsContentProps> = ({ deviceType }) => {
   const { state, dispatch } = useContext(ProfileContext);
 
-  const { addresses, contacts, cards, name, email } = state as Account;
-  // const addressList =
-  //   address && address.length ? modifyaddressData(address) : [];
+  const router = useRouter();
+
+  const reduxDispatch = useAppDispatch();
+
+  const { addresses, contacts, cards, name, contactNumber, id } = state as Account;
 
   const handleChange = (value: string, field: string) => {
     dispatch({ type: 'HANDLE_ON_INPUT_CHANGE', payload: { value, field } });
@@ -65,41 +70,38 @@ const SettingsContent: React.FC<SettingsContentProps> = ({ deviceType }) => {
       const modalComponent = name === 'address' ? UpdateAddress : UpdateContact;
       handleModal(modalComponent, item);
     } else {
-      console.log(name, item, type, 'delete');
-      // switch (name) {
-      //   case 'payment':
-      //     dispatch({ type: 'DELETE_CARD', payload: item.id });
+      switch (name) {
+        case 'payment':
+          dispatch({ type: 'DELETE_CARD', payload: item.id });
 
-      //     return await deletePaymentCardMutation({
-      //       variables: { cardId: JSON.stringify(item.id) },
-      //     });
-      //   case 'contact':
-      //     dispatch({ type: 'DELETE_CONTACT', payload: item.id });
+        case 'contact':
+          dispatch({ type: 'DELETE_CONTACT', payload: item.id });
 
-      //     return await deleteContactMutation({
-      //       variables: { contactId: JSON.stringify(item.id) },
-      //     });
-      //   case 'address':
-      //     dispatch({ type: 'DELETE_ADDRESS', payload: item.id });
+        case 'address':
+          dispatch({ type: 'DELETE_ADDRESS', payload: item.id });
 
-      //     return await deleteAddressMutation({
-      //       variables: { addressId: JSON.stringify(item.id) },
-      //     });
-      //   default:
-      //     return false;
-      // }
+        default:
+          return false;
+      }
     }
   };
 
   const handleSave = async () => {
-    const { name, email } = state;
-    // await updateMeMutation({
-    //   variables: { meInput: JSON.stringify({ name, email }) },
-    // });
+    reduxDispatch(upsertUser({
+      request: {
+        id,
+        name,
+        addresses,
+        contactNumber,
+        contacts,
+        cards
+      },
+      callback
+    }));
   };
 
-  const handleData = (data: any) => {
-    console.log(data);
+  const callback = () => {
+    router.push('/');
   };
 
   return (
@@ -113,8 +115,9 @@ const SettingsContent: React.FC<SettingsContentProps> = ({ deviceType }) => {
             />
           </Title>
         </HeadingSection>
+
         <Row style={{ alignItems: 'flex-end', marginBottom: '50px' }}>
-          <Col xs={12} sm={5} md={5} lg={5}>
+          <Col xs={12} sm={6} md={6} lg={6}>
             <Input
               type='text'
               label='Name'
@@ -124,27 +127,19 @@ const SettingsContent: React.FC<SettingsContentProps> = ({ deviceType }) => {
               intlInputLabelId='profileNameField'
             />
           </Col>
-
-          <Col xs={12} sm={5} md={5} lg={5}>
+          <Col xs={12} sm={6} md={6} lg={6}>
             <Input
-              type='email'
-              label='Email Address'
-              value={email}
-              onUpdate={(value: string) => handleChange(value, 'email')}
+              type='text'
+              label='Contact Number'
+              value={contactNumber}
+              onUpdate={(value: string) => handleChange(value, 'contactNumber')}
               style={{ backgroundColor: '#F7F7F7' }}
-              intlInputLabelId='profileEmailField'
-            />
-          </Col>
-
-          <Col xs={12} sm={2} md={2} lg={2}>
-            <Button
-              title='Save'
-              onClick={handleSave}
-              style={{ width: '100%' }}
-              intlButtonId='profileSaveBtn'
+              intlInputLabelId='nul'
+              defaultMessage="Contact Number"
             />
           </Col>
         </Row>
+
         <Row>
           <Col xs={12} sm={12} md={12} lg={12}>
             <SettingsFormContent>
@@ -198,6 +193,7 @@ const SettingsContent: React.FC<SettingsContentProps> = ({ deviceType }) => {
             </SettingsFormContent>
           </Col>
         </Row>
+
         <Row>
           <Col xs={12} sm={12} md={12} lg={12} style={{ position: 'relative' }}>
             <SettingsFormContent>
@@ -286,6 +282,15 @@ const SettingsContent: React.FC<SettingsContentProps> = ({ deviceType }) => {
               />
             </SettingsFormContent>
           </Col>
+        </Row>
+
+        <Row>
+          <Button
+            title='Save'
+            onClick={handleSave}
+            style={{ width: '100%' }}
+            intlButtonId='profileSaveBtn'
+          />
         </Row>
       </SettingsFormContent>
     </SettingsForm>

@@ -41,6 +41,8 @@ import { Product, ProductCart } from 'models/product';
 import { useAppDispatch } from 'helper/hooks';
 import { createOrder } from 'redux/order/orderReducer';
 import { Address, Card, Contact as ContactModel, Schedule } from 'models/account';
+import { getCoupon as getCouponRedux } from 'redux/coupon/couponReducer';
+import { Coupon } from 'models/order';
 
 // The type of props Checkout Form receives
 interface MyFormProps {
@@ -89,7 +91,8 @@ const Checkout: React.FC<MyFormProps & any> = ({ token, deviceType }) => {
           orderDetails: items.map(i => ({
             quantity: i.quantity,
             productId: i.id
-          }))
+          })),
+          couponId: coupon.id,
         },
         callback: createOrderCallback,
       }));
@@ -149,48 +152,43 @@ const Checkout: React.FC<MyFormProps & any> = ({ token, deviceType }) => {
   }
 
   const handleEditDelete = async (item: any, type: string, name: string) => {
-    // if (type === 'edit') {
-    //   const modalComponent = name === 'address' ? UpdateAddress : UpdateContact;
-    //   handleModal(modalComponent, item);
-    // } else {
-    //   switch (name) {
-    //     case 'payment':
-    //       dispatch({ type: 'DELETE_CARD', payload: item.id });
+    if (type === 'edit') {
+      const modalComponent = name === 'address' ? UpdateAddress : UpdateContact;
+      handleModal(modalComponent, item);
+    } else {
+      switch (name) {
+        case 'payment':
+          dispatch({ type: 'DELETE_CARD', payload: item.id });
 
-    //       return await deletePaymentCardMutation({
-    //         variables: { cardId: JSON.stringify(item.id) },
-    //       });
-    //     case 'contact':
-    //       dispatch({ type: 'DELETE_CONTACT', payload: item.id });
+        case 'contact':
+          dispatch({ type: 'DELETE_CONTACT', payload: item.id });
 
-    //       return await deleteContactMutation({
-    //         variables: { contactId: JSON.stringify(item.id) },
-    //       });
-    //     case 'address':
-    //       dispatch({ type: 'DELETE_ADDRESS', payload: item.id });
+        case 'address':
+          dispatch({ type: 'DELETE_ADDRESS', payload: item.id });
 
-    //       return await deleteAddressMutation({
-    //         variables: { addressId: JSON.stringify(item.id) },
-    //       });
-    //     default:
-    //       return false;
-    //   }
-    // }
+        default:
+          return false;
+      }
+    }
   };
 
-  const handleApplyCoupon = async () => {
-    // const {
-    //   data: { applyCoupon },
-    // }: any = await applyedCoupon({
-    //   variables: { code: couponCode },
-    // });
-    // if (applyCoupon && applyCoupon.discountInPercent) {
-    //   addCoupon(applyCoupon);
-    //   setCouponCode('');
-    // } else {
-    //   setError('Invalid Coupon');
-    // }
+  const handleApplyCoupon = () => {
+    reduxDispatch(getCouponRedux({
+      request: couponCode,
+      callback: callbackApplyCoupon,
+    }));
   };
+
+  const callbackApplyCoupon = (applyCoupon: Coupon) => {
+    if (applyCoupon && applyCoupon.discount) {
+
+      setError('');
+      addCoupon(applyCoupon);
+      setCouponCode(applyCoupon.code);
+    } else {
+      setError('Invalid Coupon');
+    }
+  }
 
   const handleOnUpdate = (couponCode: any) => {
     setCouponCode(couponCode);
@@ -339,27 +337,28 @@ const Checkout: React.FC<MyFormProps & any> = ({ token, deviceType }) => {
                         payload: item.id.toString(),
                       })
                     }
-                    onEdit={() => handleEditDelete(item, 'edit', 'address')}
-                    onDelete={() => handleEditDelete(item, 'delete', 'address')}
+                    onEdit={() => { }}
+                    onDelete={() => { }}
                   />
                 )}
-                secondaryComponent={
-                  <Button
-                    title='Add Adderss'
-                    iconPosition='right'
-                    colors='primary'
-                    size='small'
-                    variant='outlined'
-                    type='button'
-                    intlButtonId='addAddressBtn'
-                    onClick={() =>
-                      handleModal(UpdateAddress, 'add-address-modal')
-                    }
-                  />
-                }
+              // secondaryComponent={
+              //   <Button
+              //     title='Add Adderss'
+              //     iconPosition='right'
+              //     colors='primary'
+              //     size='small'
+              //     variant='outlined'
+              //     type='button'
+              //     intlButtonId='addAddressBtn'
+              //     onClick={() =>
+              //       handleModal(UpdateAddress, 'add-address-modal')
+              //     }
+              //   />
+              // }
               />
             </ButtonGroup>
           </DeliveryAddress>
+
           {/* Contact number */}
           <Contact>
             <Heading>
@@ -385,27 +384,28 @@ const Checkout: React.FC<MyFormProps & any> = ({ token, deviceType }) => {
                       })
                     }
                     name='contact'
-                    onEdit={() => handleEditDelete(item, 'edit', 'contact')}
-                    onDelete={() => handleEditDelete(item, 'delete', 'contact')}
+                  // onEdit={() => handleEditDelete(item, 'edit', 'contact')}
+                  // onDelete={() => handleEditDelete(item, 'delete', 'contact')}
                   />
                 )}
-                secondaryComponent={
-                  <Button
-                    title='Add Contact'
-                    iconPosition='right'
-                    colors='primary'
-                    size='small'
-                    variant='outlined'
-                    type='button'
-                    intlButtonId='addContactBtn'
-                    onClick={() =>
-                      handleModal(UpdateContact, 'add-contact-modal')
-                    }
-                  />
-                }
+              // secondaryComponent={
+              //   <Button
+              //     title='Add Contact'
+              //     iconPosition='right'
+              //     colors='primary'
+              //     size='small'
+              //     variant='outlined'
+              //     type='button'
+              //     intlButtonId='addContactBtn'
+              //     onClick={() =>
+              //       handleModal(UpdateContact, 'add-contact-modal')
+              //     }
+              //   />
+              // }
               />
             </ButtonGroup>
           </Contact>
+
           {/* PaymentOption */}
           <PaymentOption>
             <Heading>
@@ -418,8 +418,8 @@ const Checkout: React.FC<MyFormProps & any> = ({ token, deviceType }) => {
               name='payment'
               deviceType={deviceType}
               items={cards}
-              onEditDeleteField={(item: any, type: string) =>
-                handleEditDelete(item, type, 'payment')
+              onEditDeleteField={(item: any, type: string) => { }
+                // handleEditDelete(item, type, 'payment')
               }
               onChange={(item: any) =>
                 dispatch({
@@ -427,15 +427,16 @@ const Checkout: React.FC<MyFormProps & any> = ({ token, deviceType }) => {
                   payload: item.id.toString(),
                 })
               }
-              handleAddNewCard={() => {
-                handleModal(
-                  StripePaymentForm,
-                  { totalPrice },
-                  'add-address-modal stripe-modal'
-                );
-              }}
+            // handleAddNewCard={() => {
+            //   // handleModal(
+            //   //   StripePaymentForm,
+            //   //   { totalPrice },
+            //   //   'add-address-modal stripe-modal'
+            //   // );
+            // }}
             />
           </PaymentOption>
+
           {/* CheckoutSubmit */}
           <CheckoutSubmit>
             <Button

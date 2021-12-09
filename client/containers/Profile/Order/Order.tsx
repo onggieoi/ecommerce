@@ -20,6 +20,7 @@ import OrderCard from './OrderCard/OrderCard';
 import OrderCardMobile from './OrderCard/orderCardMobile';
 import useComponentSize from 'helper/useComponentSize';
 import { FormattedMessage } from 'react-intl';
+import InlineLoader from 'components/InlineLoader';
 
 const progressData = ['Order Received', 'Order On The Way', 'Order Delivered'];
 
@@ -94,9 +95,6 @@ const OrdersContent: React.FC<OrderTableProps> = ({
     }
   }, [data.orders]);
 
-  if (loading) {
-    return <div>loading...</div>;
-  }
 
   if (error) return <div>{error.message}</div>;
 
@@ -111,6 +109,8 @@ const OrdersContent: React.FC<OrderTableProps> = ({
     <OrderBox>
       {desktop && (
         <>
+          {loading && <InlineLoader />}
+
           <OrderListWrapper style={{ height: size.height }}>
             <Title style={{ padding: '0 20px' }}>
               <FormattedMessage

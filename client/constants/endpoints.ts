@@ -11,4 +11,7 @@ export const endpoints = {
   user: 'users',
   login: 'users/token',
   me: 'users/me',
+
+  coupon: 'coupons',
+  couponCode: (code: string) => `coupons/${code}`,
 }

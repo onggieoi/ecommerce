@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Account } from "models/account";
+import { Account, Address, Card, Contact } from "models/account";
 
 import { Category } from "models/category";
 
@@ -8,8 +8,19 @@ export type LoginRequest = {
   password: string,
 }
 
-export type LoginRequestPayload = {
-  request: LoginRequest,
+export type UpsertRequest = {
+  id?: string,
+  name: string,
+  contactNumber: string,
+  addresses: Address[],
+  cards: Card[],
+  contacts: Contact[],
+  userName?: string,
+  password?: string,
+}
+
+export type LoginRequestPayload<T> = {
+  request: T,
   callback: Function;
 }
 
@@ -26,7 +37,11 @@ const AccountSlice = createSlice({
   name: 'account',
   initialState,
   reducers: {
-    login: (state: AccountState, action: PayloadAction<LoginRequestPayload>): AccountState => ({
+    upsertUser: (state: AccountState, action: PayloadAction<LoginRequestPayload<UpsertRequest>>): AccountState => ({
+      ...state,
+      loading: true,
+    }),
+    login: (state: AccountState, action: PayloadAction<LoginRequestPayload<LoginRequest>>): AccountState => ({
       ...state,
       loading: true,
     }),
@@ -39,7 +54,7 @@ const AccountSlice = createSlice({
 
       return {
         ...state,
-        laoding: false,
+        loading: false,
         me,
       }
     },
@@ -47,7 +62,7 @@ const AccountSlice = createSlice({
 });
 
 export const {
-  login, setMe, getMe,
+  login, setMe, getMe, upsertUser,
 } = AccountSlice.actions;
 
 const AccountReducer = AccountSlice.reducer;

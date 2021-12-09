@@ -14,6 +14,7 @@ export type Order = {
   addressId: string,
   address: Address,
   createAt: Date,
+  coupon?: Coupon,
 }
 
 export type OrderDetail = {

@@ -54,7 +54,7 @@ export default function SignInModal() {
     authDispatch({ type: 'SIGNIN_SUCCESS' });
     closeModal();
 
-    return axiosRequest.setAuthentication(token);
+    axiosRequest.setAuthentication(token);
   };
 
   return (

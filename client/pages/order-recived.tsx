@@ -4,6 +4,7 @@ import OrderRecivedPage from "containers/OrderReceived/OrderReceived";
 import { useAppDispatch, useAppSelector } from "helper/hooks";
 import { useRouter } from "next/router";
 import { getOrderDetail } from "redux/order/orderReducer";
+import InlineLoader from "components/InlineLoader";
 
 const OrderRecived = () => {
   const { query } = useRouter();
@@ -27,6 +28,8 @@ const OrderRecived = () => {
       <Head>
         <title>Invoice - SNKR</title>
       </Head>
+      {loading && <InlineLoader />}
+
       {orderDetail && <OrderRecivedPage orderDetail={orderDetail} />}
     </>
   );

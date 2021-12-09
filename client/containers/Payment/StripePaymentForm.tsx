@@ -6,12 +6,15 @@ import {
   StripeProvider,
   ReactStripeElements,
 } from 'react-stripe-elements';
+
 import { closeModal } from '@redq/reuse-modal';
+
 import StripeFormWrapper, {
   Heading,
   FieldWrapper,
 } from './StripePaymentForm.style';
 import { ProfileContext } from 'contexts/profile/profile.context';
+
 type StripeFormProps = ReactStripeElements.InjectedStripeProps & {
   getToken: any;
   buttonText: string;
@@ -19,15 +22,18 @@ type StripeFormProps = ReactStripeElements.InjectedStripeProps & {
 const StripeForm = injectStripe(
   ({ getToken, buttonText, stripe }: StripeFormProps) => {
     const { state, dispatch } = useContext(ProfileContext);
+
     const handleSubmit = async () => {
       let { token } = await stripe.createToken({ name: 'Name' });
       getToken(token);
       if (token) {
+        console.log(token);
+
         dispatch({ type: 'ADD_CARD', payload: token.card });
         closeModal();
       }
-      console.log(token, 'token');
     };
+
     return (
       <StripeFormWrapper>
         <Heading>Enter card info</Heading>
@@ -41,23 +47,24 @@ const StripeForm = injectStripe(
     );
   }
 );
+
 type Item = {
   item: {
     price: any;
     buttonText: string;
   };
 };
+
 const StripePaymentForm = ({ item: { price, buttonText } }: Item) => {
   const sendTokenToServer = async (token: any) => {
     // const payment_info = await getPayment({
     //   variables: { paymentInput: JSON.stringify({ token, amount: price }) },
     // });
-    // console.log(payment_info, 'payment_info');
   };
 
   return (
     process.browser && (
-      <StripeProvider apiKey={process.env.STRIPE_PUBLIC_KEY}>
+      <StripeProvider apiKey={process.env.STRIPE_TOKEN}>
         <div className="example">
           <Elements>
             <StripeForm

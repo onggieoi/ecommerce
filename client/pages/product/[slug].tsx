@@ -11,6 +11,7 @@ import ProductSingleWrapper, {
 import CartPopUp from 'containers/Cart/CartPopUp';
 import { useAppDispatch, useAppSelector } from 'helper/hooks';
 import { getProductDetail } from 'redux/product/productReducer';
+import InlineLoader from 'components/InlineLoader';
 
 type Props = {
   deviceType?: {
@@ -48,6 +49,8 @@ const ProductPage: NextPage<Props> = ({ deviceType }) => {
       <Head>
         <title>{productDetail?.title} - SNKR</title>
       </Head>
+      {loading && <InlineLoader />}
+
       <Modal>
         <ProductSingleWrapper ref={targetRef}>
           <ProductSingleContainer>

@@ -1,5 +1,8 @@
 import React, { useContext, useState } from 'react';
 import Link from 'next/link';
+import { openModal } from '@redq/reuse-modal';
+import _ from "lodash";
+
 import { CartContext } from 'contexts/cart/cart.context';
 import {
   CartPopupBody,
@@ -36,6 +39,11 @@ import CouponBox from 'components/CouponBox/CouponBox';
 
 import { Scrollbars } from 'react-custom-scrollbars';
 import { Product, ProductCart } from 'models/product';
+import { AuthContext } from 'contexts/auth/auth.context';
+import AuthenticationForm from 'containers/SignInOutForm/Form';
+import { useAppDispatch } from 'helper/hooks';
+import { getCoupon, getCoupons } from 'redux/coupon/couponReducer';
+import { Coupon } from 'models/order';
 
 type CartItemProps = {
   product: ProductCart;
@@ -102,20 +110,27 @@ const Cart: React.FC<CartPropsType> = ({
   const [displayCoupon, showCoupon] = useState(false);
   const [error, setError] = useState('');
 
-  const handleApplyCoupon = async () => {
-    // const {
-    //   data: { applyCoupon },
-    // }: any = await applyedCoupon({
-    //   variables: { code: couponText },
-    // });
-    // if (applyCoupon && applyCoupon.discountInPercent) {
-    //   setError('');
-    //   addCoupon(applyCoupon);
-    //   setCoupon('');
-    // } else {
-    //   setError('Invalid Coupon');
-    // }
+  const { authState, authDispatch } = useContext<any>(AuthContext);
+
+  const reduxDispatch = useAppDispatch();
+
+  const handleApplyCoupon = () => {
+    reduxDispatch(getCoupon({
+      request: couponText,
+      callback,
+    }));
   };
+
+  const callback = (applyCoupon: Coupon) => {
+    if (applyCoupon && applyCoupon.discount) {
+
+      setError('');
+      addCoupon(applyCoupon);
+      setCoupon('');
+    } else {
+      setError('Invalid Coupon');
+    }
+  }
 
   const handleChange = (value: string) => {
     setCoupon(value);
@@ -123,6 +138,27 @@ const Cart: React.FC<CartPropsType> = ({
 
   const toggleCoupon = () => {
     showCoupon(true);
+  };
+
+  const signInOutForm = () => {
+    authDispatch({
+      type: 'SIGNIN',
+    });
+
+    openModal({
+      show: true,
+      overlayClassName: 'quick-view-overlay',
+      closeOnClickOutside: true,
+      component: AuthenticationForm,
+      closeComponent: '',
+      config: {
+        enableResizing: false,
+        disableDragging: true,
+        className: 'quick-view-modal',
+        width: 458,
+        height: 'auto',
+      },
+    });
   };
 
   return (
@@ -190,7 +226,7 @@ const Cart: React.FC<CartPropsType> = ({
                       boxShadow: '0 3px 6px rgba(0, 0, 0, 0.06)',
                     }}
                   />
-                  {error ? <ErrorMsg>{error}</ErrorMsg> : ''}
+                  {_ ? <ErrorMsg>{error}</ErrorMsg> : ''}
                 </CouponBoxWrapper>
               )}
             </>
@@ -205,7 +241,7 @@ const Cart: React.FC<CartPropsType> = ({
           )}
         </PromoCode>
 
-        {products.length !== 0 ? (
+        {products.length !== 0 && authState.isAuthenticated ? (
           <Link href='/checkout'>
             <CheckoutButton onClick={onCloseBtnClick}>
               <>
@@ -223,7 +259,7 @@ const Cart: React.FC<CartPropsType> = ({
             </CheckoutButton>
           </Link>
         ) : (
-          <CheckoutButton>
+          <CheckoutButton onClick={signInOutForm}>
             <>
               <Title>
                 <FormattedMessage

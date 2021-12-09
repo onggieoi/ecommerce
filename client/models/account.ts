@@ -24,12 +24,14 @@ export type Card = {
   type: 'primary' | 'secondary',
   cardType: 'visa' | 'paypal' | 'master',
   lastFourDigit: string,
+  userId: string,
 }
 
 export type Contact = {
   id: string,
   number: string,
   type: 'primary' | 'secondary',
+  userId: string,
 }
 
 export type Schedule = {
@@ -37,4 +39,5 @@ export type Schedule = {
   title: string,
   type: 'primary' | 'secondary',
   time_slot: string,
+  userId: string,
 }

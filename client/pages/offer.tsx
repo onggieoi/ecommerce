@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { NextPage } from 'next';
 import Head from 'next/head';
 
@@ -14,6 +14,9 @@ import {
 } from 'styled/pages.style';
 import GiftCard from 'components/GiftCard/GiftCard';
 import SiteFooter from 'components/SiteFooter/SiteFooter';
+import { useAppDispatch, useAppSelector } from 'helper/hooks';
+import { getCoupons } from 'redux/coupon/couponReducer';
+import InlineLoader from 'components/InlineLoader';
 
 type GiftCardProps = {
   deviceType: {
@@ -24,23 +27,29 @@ type GiftCardProps = {
 };
 
 const GiftCardPage: NextPage<GiftCardProps> = ({ deviceType }) => {
-  const { data, error } = {} as any;
+  const { coupons, loading } = useAppSelector(state => state.couponReducer);
 
-  if (error) return <div>{error.message}</div>;
+  const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    dispatch(getCoupons())
+  }, []);
 
   return (
     <Modal>
       <Head>
         <title>Offer - SNKR</title>
       </Head>
+      {loading && <InlineLoader />}
+
       <OfferPageWrapper>
         <MainContentArea>
           <div style={{ width: '100%' }}>
             <ProductsRow>
-              {data && data.coupons
-                ? data.coupons.map(coupon => (
+              {coupons
+                ? coupons.map(coupon => (
                   <ProductsCol key={coupon.id}>
-                    <GiftCard image={coupon.image} code={coupon.code} />
+                    <GiftCard image="/image/offer-3.png" code={coupon.code} />
                   </ProductsCol>
                 ))
                 : null}

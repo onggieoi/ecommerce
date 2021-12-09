@@ -21,6 +21,7 @@ import { useAppDispatch, useAppSelector } from 'helper/hooks';
 import { getMore, getProducts, ProductQuery } from 'redux/product/productReducer';
 import { Product } from 'models/product';
 import { SearchContext } from 'contexts/search/search.context';
+import InlineLoader from 'components/InlineLoader';
 
 const QuickView = dynamic(() => import('../QuickView/QuickView'));
 
@@ -49,7 +50,7 @@ export const Products: React.FC<ProductsProps> = ({
 
   useEffect(() => {
     dispatch(getProducts(state));
-  }, [state]);
+  }, [state.category, state.search]);
 
   // Quick View Modal
   const handleModalClose = () => {
@@ -135,6 +136,8 @@ export const Products: React.FC<ProductsProps> = ({
 
   return (
     <>
+      {loading && <InlineLoader />}
+
       <ProductsRow>
         {data.items.map((item: Product, index: number) => (
           <ProductsCol key={index}>

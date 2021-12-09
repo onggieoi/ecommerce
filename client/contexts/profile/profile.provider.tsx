@@ -78,10 +78,10 @@ function reducer(state: Account, action: Action) {
       };
     case 'ADD_CARD':
       const newCard = {
-        id: action.payload.id,
+        id: uuidV4(),
         type: state.cards.length === 0 ? 'primary' : 'secondary',
         cardType: action.payload.brand.toLowerCase(),
-        name: state.name,
+        name: action.payload.name,
         lastFourDigit: action.payload.last4,
       };
       return {

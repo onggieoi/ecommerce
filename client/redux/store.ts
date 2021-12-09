@@ -5,6 +5,7 @@ import productReducer from './product/productReducer';
 import categoryReducer from './category/categoryReducer';
 import orderReducer from './order/orderReducer';
 import accountReducer from './account/accountReducer';
+import couponReducer from './coupon/couponReducer';
 
 import rootSaga from './sagas';
 
@@ -13,6 +14,7 @@ const reducer = combineReducers({
   categoryReducer,
   orderReducer,
   accountReducer,
+  couponReducer,
 });
 
 const sagaMiddleware = createSagaMiddleware();

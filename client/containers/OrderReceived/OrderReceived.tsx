@@ -72,7 +72,11 @@ const OrderRecived: React.FunctionComponent<OrderRecivedProps> = ({
               <Text bold className="title">
                 <FormattedMessage id="totalText" defaultMessage="Total" />
               </Text>
-              <Text>${orderDetail.totalPrice}</Text>
+              <Text>${
+                orderDetail.coupon
+                  ? (orderDetail.totalPrice * (100 - orderDetail.coupon.discount)) / 100
+                  : orderDetail.totalPrice
+              }</Text>
             </InfoBlock>
 
             <InfoBlock>
@@ -189,20 +193,6 @@ const OrderRecived: React.FunctionComponent<OrderRecivedProps> = ({
             </ListDes>
           </ListItem>
 
-          {/* <ListItem>
-            <ListTitle>
-              <Text bold>
-                <FormattedMessage
-                  id="paymentMethodName"
-                  defaultMessage="Delivery Charge"
-                />
-              </Text>
-            </ListTitle>
-            <ListDes>
-              <Text>10</Text>
-            </ListDes>
-          </ListItem> */}
-
           <ListItem>
             <ListTitle>
               <Text bold>
@@ -213,6 +203,21 @@ const OrderRecived: React.FunctionComponent<OrderRecivedProps> = ({
               <Text>${orderDetail.totalPrice}</Text>
             </ListDes>
           </ListItem>
+
+          {orderDetail.coupon && <ListItem>
+            <ListTitle>
+              <Text bold>
+                <FormattedMessage
+                  id="subText"
+                  defaultMessage="Discount"
+                />
+              </Text>
+            </ListTitle>
+            <ListDes>
+              <Text>{orderDetail.coupon ? orderDetail.coupon.discount : 0} %</Text>
+            </ListDes>
+          </ListItem>}
+
         </TotalAmount>
       </OrderRecivedContainer>
     </OrderRecivedWrapper>

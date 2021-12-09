@@ -15,6 +15,7 @@ import SiteFooter from "components/SiteFooter/SiteFooter";
 import { FormattedMessage } from "react-intl";
 import { useAppDispatch, useAppSelector } from "helper/hooks";
 import { getMe } from "redux/account/accountReducer";
+import InlineLoader from "components/InlineLoader";
 
 type Props = {
   deviceType?: {
@@ -43,6 +44,8 @@ const ProfilePage: NextPage<Props> = ({ deviceType }) => {
       <Head>
         <title>Profile - SNKR</title>
       </Head>
+      {loading && <InlineLoader />}
+
       <ProfileProvider initData={me}>
         <Modal>
           <PageWrapper>

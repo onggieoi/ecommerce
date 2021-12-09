@@ -277,7 +277,7 @@ const Header: React.FC<HeaderProps> = ({
         >
           <Link href={HOME_PAGE}>
             <a>
-              <img src={Logoimage} alt='snkr-admin' />
+              <img src="/image/snkr.png" alt='snkr-admin' />
             </a>
           </Link>
         </Logo>

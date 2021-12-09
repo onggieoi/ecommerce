@@ -3,6 +3,7 @@ import App from 'next/app';
 import { ThemeProvider } from 'styled-components';
 import { theme } from 'theme';
 import { Provider as ReduxProvider } from "react-redux";
+import NProgress from "nprogress";
 
 import { CartProvider } from 'contexts/cart/cart.provider';
 import { AuthProvider } from 'contexts/auth/auth.provider';
@@ -28,6 +29,7 @@ import 'rc-collapse/assets/index.css';
 import 'react-multi-carousel/lib/styles.css';
 import '@redq/reuse-modal/lib/index.css';
 import { GlobalStyle } from 'styled/global.style';
+import "nprogress/nprogress.css";
 
 import store from 'redux/store';
 
@@ -51,6 +53,7 @@ export default function ExtendedApp({
   userAgent,
 }) {
   const deviceType = useDeviceType(userAgent);
+  NProgress.configure({ minimum: 1 });
 
   return (
     <ThemeProvider theme={theme}>

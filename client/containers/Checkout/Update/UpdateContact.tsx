@@ -31,13 +31,9 @@ const CreateOrUpdateContact: React.FC<Props> = ({ item }) => {
   };
   const { state, dispatch } = useContext(ProfileContext);
   const handleSubmit = async (values: FormValues, { setSubmitting }: any) => {
-    // await addContactMutation({
-    //   variables: { contactInput: JSON.stringify(values) },
-    // });
-    // console.log(values, 'formik values');
-    // dispatch({ type: 'ADD_OR_UPDATE_CONTACT', payload: values });
-    // closeModal();
-    // setSubmitting(false);
+    dispatch({ type: 'ADD_OR_UPDATE_CONTACT', payload: values });
+    closeModal();
+    setSubmitting(false);
   };
   return (
     <Formik

@@ -9,7 +9,8 @@ import { useAppDispatch, useAppSelector } from "helper/hooks";
 import { getMe } from "redux/account/accountReducer";
 import { AuthContext } from "contexts/auth/auth.context";
 import { useRouter } from "next/router";
-import InlineLoader from "components/InlineLoader";
+import SignUp from "containers/SignInOutForm/SignUp";
+import { Account } from "models/account";
 
 type Props = {
   deviceType: {
@@ -23,34 +24,18 @@ const CheckoutPage: NextPage<Props> = ({ deviceType }) => {
 
   const { authState } = useContext<any>(AuthContext);
 
-  const { me, loading } = useAppSelector(state => state.accountReducer);
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(getMe());
-  }, []);
-
-  if (loading && !me) {
-    return <div>loading...</div>;
-  }
-
-  if (!authState.isAuthenticated) {
-    router.push("/");
-  }
-
   return (
     <>
       <Head>
         <title>Checkout - SNKR</title>
       </Head>
-
-      {loading && <InlineLoader />}
-      
-      <ProfileProvider initData={me}>
+      <ProfileProvider initData={{
+        addresses: [],
+        cards: [],
+        contacts: []
+      } as Account}>
         <Modal>
-          {me &&
-            <Checkout token={true} deviceType={deviceType} />
-          }
+          <SignUp deviceType={deviceType} />
         </Modal>
       </ProfileProvider>
     </>

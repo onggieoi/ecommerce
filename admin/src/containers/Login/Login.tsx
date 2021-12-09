@@ -12,7 +12,7 @@ import {
 import { Wrapper, FormWrapper, LogoImage, LogoWrapper } from "./Login.style";
 import Input from "../../components/Input/Input";
 import Button from "../../components/Button/Button";
-import Logoimage from "../../image/PickBazar.png";
+import Logoimage from "../../image/snkr.png";
 import { useAppDispatch, useAppSelector } from "../../helpers/hooks";
 import { login } from "../../redux/account/accountReducer";
 

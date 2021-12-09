@@ -35,7 +35,6 @@ public class CouponsController : BaseApiController<CouponsController>
   }
 
   [HttpGet]
-  [Authorize(RolePolicy.Admin)]
   public async Task<ActionResult<string>> GetCoupons()
   {
     var coupons = await _couponService.GetCouponsAsync();

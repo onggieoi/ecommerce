@@ -9,4 +9,5 @@ public class CardResponse
   public int LastFourDigit { get; set; }
   public string Name { get; set; }
   public string Type { get; set; }
+  public Guid UserId { get; set; }
 }

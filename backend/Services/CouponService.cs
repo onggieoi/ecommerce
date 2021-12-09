@@ -98,7 +98,7 @@ public class CouponService : ICouponService
 
     if (coupon is null)
     {
-      throw new NotFoundException($"Coupon {coupon.Code} is NotFound");
+      throw new NotFoundException($"Coupon {code} is NotFound");
     }
 
     return _mapper.Map<CouponResponse>(coupon);

@@ -65,6 +65,7 @@ public class OrderService : IOrderService
                                           .Include(o => o.Address)
                                           .Include(o => o.Card)
                                           .Include(o => o.Contact)
+                                          .Include(o => o.Coupon)
                                           .Include(o => o.OrderDetails)
                                             .ThenInclude(od => od.Product)
                                           .Where(o => o.Id.Equals(id))
